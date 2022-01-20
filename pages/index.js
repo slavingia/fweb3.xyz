@@ -21,7 +21,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <a href="https://forms.gle/CAmcLmTd6zwoaroy6">
+        <a href="https://discord.gg/wwXbpv2HAj">
           <h1 className={styles.title}>
             <Image src="/fweb3.svg" width="200" height="41" />
           </h1>
