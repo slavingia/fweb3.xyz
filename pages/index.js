@@ -7,14 +7,14 @@ export default function Home() {
     <div>
       <Head>
         <title>Fweb3</title>
-        <meta name="description" content="Learn and build Web3 in Fweb3" />
+        <meta name="description" content="Learn and build Web3 in February" />
         <link rel="icon" href="/icon.png" />
-        <meta content="Learn and build Web3 in Fweb3" name="description" />
+        <meta content="Learn and build Web3 in February" name="description" />
         <meta content="Fweb3" property="og:title" />
-        <meta content="Learn and build Web3 in Fweb3" property="og:description" />
+        <meta content="Learn and build Web3 in February" property="og:description" />
         <meta content="https://fweb3.xyz/fweb3.png" property="og:image" />
-        <meta content="Learn and build Web3 in Fweb3" property="twitter:title" />
-        <meta content="Learn and build Web3 in Fweb3" property="twitter:description" />
+        <meta content="Fweb3" property="twitter:title" />
+        <meta content="Learn and build Web3 in February" property="twitter:description" />
         <meta content="https://fweb3.xyz/fweb3.png" property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
