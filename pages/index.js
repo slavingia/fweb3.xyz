@@ -21,9 +21,11 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          <Image src="/fweb3.svg" width="200" height="41" />
-        </h1>
+        <a href="https://forms.gle/CAmcLmTd6zwoaroy6">
+          <h1 className={styles.title}>
+            <Image src="/fweb3.svg" width="200" height="41" />
+          </h1>
+        </a>
       </main>
     </div>
   )
