@@ -20,11 +20,27 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <a href="https://forms.gle/CAmcLmTd6zwoaroy6">
+        <section>
           <h1 className={styles.title}>
             <Image src="/fweb3.svg" width="200" height="41" />
           </h1>
-        </a>
+          <p>
+            Fweb3 begins on February 1.
+          </p>
+          <p>
+            <a href="https://forms.gle/CAmcLmTd6zwoaroy6">Provide your email and wallet address</a> to be airdropped 300 $FWEB3 tokens before launch.
+          </p>
+          <p>
+          </p>
+          <p>
+            Only 100 $FWEB3 tokens will be required to participate in <a href="https://discord.com/invite/dNvYpeg2RC">the Fweb3 community</a>, which will contain challenges that will help you learn about and build Web3.
+          </p>
+          <p>
+            If you complete them all by the end of February, you will get additional $FWEB3 tokens. You’ll need a certain amount of $FWEB3 tokens to participate next year, determined by the community.
+          </p>
+
+          <p>See you in the community soon!</p>
+        </section>
       </main>
     </div>
   )
