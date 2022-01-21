@@ -28,18 +28,16 @@ export default function Home() {
             Fweb3 begins on February 1.
           </p>
           <p>
-            <a href="https://forms.gle/CAmcLmTd6zwoaroy6">Provide your email and wallet address</a> to be airdropped 300 $FWEB3 tokens before launch.
+            <a href="https://forms.gle/CAmcLmTd6zwoaroy6">Provide your email and wallet address</a> to be airdropped 300 <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a">$FWEB3</a> tokens before launch.
           </p>
           <p>
+            Only 100 tokens will be required to participate in <a href="https://discord.com/invite/dNvYpeg2RC">the Fweb3 community</a>, which will contain challenges that will help you learn about and build Web3.
           </p>
           <p>
-            Only 100 $FWEB3 tokens will be required to participate in <a href="https://discord.com/invite/dNvYpeg2RC">the Fweb3 community</a>, which will contain challenges that will help you learn about and build Web3.
-          </p>
-          <p>
-            If you complete them all by the end of February, you will get additional $FWEB3 tokens. You’ll need a certain amount of $FWEB3 tokens to participate next year, determined by the community.
+            If you complete them all by the end of February, you will get additional tokens. You’ll need a certain amount of tokens to participate next year, determined by the community.
           </p>
 
-          <p>See you in the community soon!</p>
+          <p>See you in there soon!</p>
         </section>
       </main>
     </div>
