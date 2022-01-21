@@ -33,7 +33,7 @@ function App() {
       <main>
         <section>
           <h1>
-            <Image src="/fweb3.svg" width="200" height="41" />
+            <Image src="/fweb3.svg" width="200" height="41" alt="Fweb3" />
           </h1>
 
           <p>Welcome! If you're here to check how many $FWEB3 tokens you have, you've come to the right place.</p>

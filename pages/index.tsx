@@ -21,7 +21,7 @@ export default function Home() {
       <main>
         <section>
           <h1>
-            <Image src="/fweb3.svg" width="200" height="41" />
+            <Image src="/fweb3.svg" width="200" height="41" alt="Fweb3" />
           </h1>
           <p>
             Fweb3 begins on February 1.
