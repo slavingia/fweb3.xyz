@@ -70,7 +70,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
 
   return (
     <div>
-      You're logged in as {' '}
+      You&apos;re logged in as {' '}
       <a
         {...{
           href: formatEtherscanLink("Account", [chainId, account]),

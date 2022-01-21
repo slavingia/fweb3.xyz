@@ -36,7 +36,7 @@ function App() {
             <Image src="/fweb3.svg" width="200" height="41" alt="Fweb3" />
           </h1>
 
-          <p>Welcome! If you're here to check how many $FWEB3 tokens you have, you've come to the right place.</p>
+          <p>Welcome! If you&apos;re here to check how many $FWEB3 tokens you have, you&apos;ve come to the right place.</p>
 
           <p>
             <Account triedToEagerConnect={triedToEagerConnect} />

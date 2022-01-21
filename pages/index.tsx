@@ -33,7 +33,7 @@ export default function Home() {
             Only 100 tokens will be required to participate in <a href="https://discord.com/invite/dNvYpeg2RC">the Fweb3 community</a>, which will contain challenges that will help you learn about and build Web3.
           </p>
           <p>
-            If you complete them all by the end of February, you will get additional tokens. You’ll need a certain amount of tokens to participate next year, determined by the community.
+            If you complete them all by the end of February, you will get additional tokens. You&apos;ll need a certain amount of tokens to participate next year, determined by the community.
           </p>
 
           <p>See you in there soon!</p>
