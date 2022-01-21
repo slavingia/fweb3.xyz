@@ -13,8 +13,7 @@ export default function Home() {
         <meta content="Fweb3" property="og:title" />
         <meta content="Learn and build Web3 in February" property="og:description" />
         <meta content="https://fweb3.xyz/fweb3.png" property="og:image" />
-        <meta content="Fweb3" property="twitter:title" />
-        <meta content="Learn and build Web3 in February" property="twitter:description" />
+        <meta content="Fweb3 – Learn and build Web3 in February" property="twitter:title" />
         <meta content="https://fweb3.xyz/fweb3.png" property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
