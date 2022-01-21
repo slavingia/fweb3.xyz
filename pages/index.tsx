@@ -1,6 +1,5 @@
-import Head from 'next/head'
+import Head from "next/head";
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -19,9 +18,9 @@ export default function Home() {
         <meta content="summary_large_image" name="twitter:card" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <section>
-          <h1 className={styles.title}>
+          <h1>
             <Image src="/fweb3.svg" width="200" height="41" />
           </h1>
           <p>
