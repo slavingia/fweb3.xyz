@@ -1,6 +1,5 @@
-import Head from 'next/head'
+import Head from "next/head";
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -19,10 +18,10 @@ export default function Home() {
         <meta content="summary_large_image" name="twitter:card" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <section>
-          <h1 className={styles.title}>
-            <Image src="/fweb3.svg" width="200" height="41" />
+          <h1>
+            <Image src="/fweb3.svg" width="200" height="41" alt="Fweb3" />
           </h1>
           <p>
             Fweb3 begins on February 1.
@@ -34,7 +33,7 @@ export default function Home() {
             Only 100 tokens will be required to participate in <a href="https://discord.com/invite/dNvYpeg2RC">the Fweb3 community</a>, which will contain challenges that will help you learn about and build Web3.
           </p>
           <p>
-            If you complete them all by the end of February, you will get additional tokens. You’ll need a certain amount of tokens to participate next year, determined by the community.
+            If you complete them all by the end of February, you will get additional tokens. You&apos;ll need a certain amount of tokens to participate next year, determined by the community.
           </p>
 
           <p>See you in there soon!</p>
