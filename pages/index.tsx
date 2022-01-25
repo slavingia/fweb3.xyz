@@ -42,6 +42,9 @@ export default function Home() {
             <li>
               <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
             </li>
+            <li>
+              <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
+            </li>
           </ul>
         </section>
       </main>
