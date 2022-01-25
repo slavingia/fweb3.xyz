@@ -5,7 +5,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background: black;
-  color: white;
+  color: #999;
+  font-size: 28px;
+  line-height: 1.5;
 }
 
 a {
@@ -17,27 +19,72 @@ a {
   box-sizing: border-box;
 }
 
+main {
+  min-height: 100vh;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
 section {
   width: 100%;
   padding: 3rem;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 880px;
+  flex-direction: column;
+  display: flex;
+  gap: 1rem;
 }
 
-p {
+p, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  width: 100px;
+  height: 1px;
+  background: #333;
+  border: none;
+  width: 100%;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
   font-size: 28px;
   line-height: 1.5;
-  margin: 40px 0 0 0;
-  color: #999;
+  transition: all 0.2s ease-in-out;
+  color: white;
+  padding: 0;
+  text-decoration: underline;
 }
 
-p:first-of-type {
-  margin-top: 0;
+.links {
+  list-style: none;
+  margin-top: 1rem;
 }
 
+.links li {
+  display: inline-block;
+  padding: 0;
+  margin: 0 1rem 0 0;
+}
 
-@media only screen and (max-width: 600px) {
-  section {
-    padding: 1.5rem;
-  }
+.links li a {
+  background: #333;
+  color: #ccc;
+  border-radius: 999px;
+  padding: 8px 20px;
+  text-decoration: none;
 }

@@ -1,6 +1,5 @@
-import Head from 'next/head'
+import Head from "next/head";
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -20,26 +19,30 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <section>
-          <h1 className={styles.title}>
-            <Image src="/fweb3.svg" width="200" height="41" />
+          <h1>
+            <Image src="/fweb3.svg" width="200" height="41" alt="Fweb3" />
           </h1>
           <p>
-            Spend the month of February learning and building Web3 with me.
+            Spend the month of February learning and building Web3.
+          </p>
+          <p>Provide <a href="https://forms.gle/CAmcLmTd6zwoaroy6">your email and wallet address</a> to get 300 tokens–100 are required to enter the Discord.
           </p>
           <p>
-            To join <a href="https://discord.com/invite/dNvYpeg2RC">the Discord</a> where I'll be livestreaming as I go, you'll need 100 <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a">$FWEB3</a> tokens. Get them by <a href="https://forms.gle/CAmcLmTd6zwoaroy6">providing your email and wallet address</a>.
-          </p>
-          <p>
-            Inside, there will be challenges to help you learn about and build Web3 alongside me. If you complete them all by the end of Feb, you will receive additional tokens.
-          </p>
-          <p>
-            And we will do it all again next year!
+            In the Discord, there will be challenges to help you learn about and build Web3 alongside me. If you complete them all by the end of Feb, you will receive additional tokens.
           </p>
           <p>See you soon,
             <br /><a href="https://twitter.com/shl">@shl</a>
           </p>
+          <ul className="links">
+            <li>
+              <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a">Token smart contract</a>
+            </li>
+            <li>
+              <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
+            </li>
+          </ul>
         </section>
       </main>
     </div>
