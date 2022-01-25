@@ -27,7 +27,7 @@ export default function Home() {
           <p>
             Spend the month of February learning and building Web3.
           </p>
-          <p>Provide <a href="https://forms.gle/CAmcLmTd6zwoaroy6">your email and wallet address</a> to get 300 tokens–100 are required to enter the Discord.
+          <p>Provide <a href="https://forms.gle/CAmcLmTd6zwoaroy6">your email and wallet address</a> to get 300 $FWEB3 tokens–100 are required to enter the Discord.
           </p>
           <p>
             In the Discord, there will be challenges to help you learn about and build Web3 alongside me. If you complete them all by the end of Feb, you will receive additional tokens.
