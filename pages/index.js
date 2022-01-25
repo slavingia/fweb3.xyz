@@ -17,6 +17,7 @@ export default function Home() {
         <meta content="https://fweb3.xyz/fweb3.png" property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <main className={styles.main}>
@@ -25,19 +26,20 @@ export default function Home() {
             <Image src="/fweb3.svg" width="200" height="41" />
           </h1>
           <p>
-            Fweb3 begins on February 1.
+            Spend the month of February learning and building Web3 with me.
           </p>
           <p>
-            <a href="https://forms.gle/CAmcLmTd6zwoaroy6">Provide your email and wallet address</a> to be airdropped 300 <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a">$FWEB3</a> tokens before launch.
+            To join <a href="https://discord.com/invite/dNvYpeg2RC">the Discord</a> where I'll be livestreaming as I go, you'll need 100 <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a">$FWEB3</a> tokens. Get them by <a href="https://forms.gle/CAmcLmTd6zwoaroy6">providing your email and wallet address</a>.
           </p>
           <p>
-            Only 100 tokens will be required to participate in <a href="https://discord.com/invite/dNvYpeg2RC">the Fweb3 community</a>, which will contain challenges that will help you learn about and build Web3.
+            Inside, there will be challenges to help you learn about and build Web3 alongside me. If you complete them all by the end of Feb, you will receive additional tokens.
           </p>
           <p>
-            If you complete them all by the end of February, you will get additional tokens. You’ll need a certain amount of tokens to participate next year, determined by the community.
+            And we will do it all again next year!
           </p>
-
-          <p>See you in there soon!</p>
+          <p>See you soon,
+            <br /><a href="https://twitter.com/shl">@shl</a>
+          </p>
         </section>
       </main>
     </div>
