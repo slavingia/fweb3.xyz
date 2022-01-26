@@ -9,8 +9,16 @@ type TokenBalanceProps = {
 };
 
 const TokenBalance = ({ tokenAddress, symbol }: TokenBalanceProps) => {
-  const { account } = useWeb3React<Web3Provider>();
+  const { account, chainId } = useWeb3React<Web3Provider>();
   const { data } = useTokenBalance(account, tokenAddress);
+
+  if (chainId !== 1) {
+    return (
+      <p>
+        {`Switch to Ethereum Mainnet to see your ${symbol} tokens`}
+      </p>
+    )
+  }
 
   return (
     <p>
