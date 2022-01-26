@@ -22,7 +22,7 @@ export default function Home() {
       <main>
         <section>
           <h1>
-            <Image src="/fweb3.svg" width="200" height="41" alt="Fweb3" />
+            <Image src="/fweb3.svg" width="120" height="41" alt="Fweb3" />
           </h1>
           <p>
             Spend the month of February learning and building Web3.
