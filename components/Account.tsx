@@ -30,6 +30,29 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
     }
   }, [active, error, stopOnboarding]);
 
+  useEffect(() => {
+
+    async function switchToMainnet() {
+      try {
+        if (chainId !== 1) {
+          const error: null | Error = await (window as any).ethereum?.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x1' }]
+          })
+          if (error) {
+            throw error;
+          }
+        }
+      } catch (error) {
+        console.error("Failed to change chain", error)
+        return null;
+      }
+    }
+
+    switchToMainnet();
+
+  }, [chainId])
+
   const ENSName = useENSName(account);
 
   if (error) {
