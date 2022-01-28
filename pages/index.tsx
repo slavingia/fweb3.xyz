@@ -37,7 +37,7 @@ export default function Home() {
           </p>
           <ul className="links">
             <li>
-              <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a">Token smart contract</a>
+              <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a#code">Token smart contract</a>
             </li>
             <li>
               <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
