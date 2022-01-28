@@ -8,6 +8,11 @@
 # testing
 /coverage
 
+# deploying
+hardhat.config.js
+/cache
+/artifacts
+
 # next.js
 /.next/
 /out/
