@@ -85,22 +85,13 @@ export default function Home() {
           <button className="mint disabled">
             Get 1,000 additional FWEB3 tokens + NFT
           </button>
-
-          <hr />
-
-          <ul className="links">
-            <li>
-              <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a#code">Token smart contract</a>
-            </li>
-            <li>
-              <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
-            </li>
-            <li>
-              <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
-            </li>
-          </ul>
         </section>
       </main>
+      <footer>
+        <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a#code">Token smart contract</a>
+        <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
+        <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
+      </footer>
     </div>
   )
 }
