@@ -93,7 +93,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
 
   return (
     <div>
-      You&apos;re logged in as {' '}
+      Logged in as {' '}
       <a
         {...{
           href: formatEtherscanLink("Account", [chainId, account]),
@@ -102,7 +102,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
         }}
       >
         {ENSName || `${shortenHex(account, 4)}`}
-      </a>.
+      </a>
     </div>
   );
 };

@@ -2,11 +2,10 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   background: black;
   color: #999;
-  font-size: 28px;
+  font-size: 22px;
   line-height: 1.5;
 }
 
@@ -19,30 +18,46 @@ a {
   box-sizing: border-box;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+@media only screen and (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
 main {
   min-height: 100vh;
   padding: 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 h1 {
   margin: 0;
-  font-size: 3rem;
-  font-weight: normal;
-  text-transform: uppercase;
+  color: white;
 }
 
 section {
   width: 100%;
+  margin: 0 auto;
   padding: 3rem;
   max-width: 880px;
   flex-direction: column;
   display: flex;
   gap: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+  section {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
 }
 
 p, ul, ol {
@@ -72,7 +87,6 @@ button {
 
 .links {
   list-style: none;
-  margin-top: 1rem;
 }
 
 .links li {
@@ -87,4 +101,62 @@ button {
   border-radius: 999px;
   padding: 8px 20px;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .links li {
+    display: block;
+    margin: 1rem 0 0 0;
+  }
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  margin: 1rem auto;
+}
+
+.game-tile {
+  padding: 10px;
+  background: #454545;
+  border-radius: 99px;
+  position: relative;
+}
+
+.game-tile > .tooltip {
+  position: absolute;
+  background: white;
+  border-radius: 10px;
+  color: black;
+  box-shadow: 5px 5px 0 black;
+  display: none;
+  padding: 1rem;
+  font-weight: bold;
+  z-index: 1;
+  min-width: 200px;
+  max-width: 320px;
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+.game-tile:hover > .tooltip {
+  display: block;
+}
+
+.completed {
+  background: #FF95EE;
+}
+
+.empty {
+  padding-top: 100%;
+}
+
+button.disabled {
+  border-radius: 99px;
+  background: #222;
+  color: #333;
+  text-decoration: none;
+  display: inline-block;
+  padding: 15px;
 }
