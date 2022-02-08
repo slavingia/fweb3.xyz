@@ -41,4 +41,4 @@ export const parseBalanceToNum = (
   value: BigNumberish,
   decimals = 18,
   decimalsToDisplay = 0
-) => parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay);
+) => parseInt(parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay));
