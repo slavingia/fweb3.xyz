@@ -1,18 +1,20 @@
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
-import Image from 'next/image'
 import Account from "../components/Account";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
+import useTokenBalance from "../hooks/useTokenBalance";
+import { parseBalanceToNum } from "../util";
 
 const FWEB3_TOKEN_ADDRESS = "0x95cd50f9d591630db85d95c932bbc704dc0ae92a";
 
 export default function Home() {
-  const { account, library } = useWeb3React();
+  const { account, library, active } = useWeb3React();
 
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
+  const { data } = useTokenBalance(account, FWEB3_TOKEN_ADDRESS);
 
   return (
     <div>
@@ -53,12 +55,12 @@ export default function Home() {
           </p>
 
           <div className="game-grid">
-            <div className="game-tile">
+            <div className={"game-tile " + (isConnected ? "completed" : "")}>
               <div className="tooltip">
                 Connect your ETH wallet
               </div>
             </div>
-            <div className="game-tile">
+            <div className={"game-tile " + (parseBalanceToNum(data ?? 0) >= 100 ? "completed" : "")}>
               <div className="tooltip">
                 Get 100 Fweb3 tokens (on Ethereum mainnet or Polygon), needed to join the Discord
               </div>

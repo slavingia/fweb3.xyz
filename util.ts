@@ -36,3 +36,9 @@ export const parseBalance = (
   decimals = 18,
   decimalsToDisplay = 0
 ) => commify(parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay));
+
+export const parseBalanceToNum = (
+  value: BigNumberish,
+  decimals = 18,
+  decimalsToDisplay = 0
+) => parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay);
