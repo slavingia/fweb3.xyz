@@ -1,0 +1,38 @@
+.links {
+list-style: none;
+}
+
+.links li {
+display: block;
+text-align: center;
+padding: 2px;;
+margin: 5px;
+height: 60px;
+}
+
+.links li a {
+background: #333;
+color: #ccc;
+border-radius: 999px;
+padding: 8px 20px;
+text-decoration: none;
+}
+
+.button_img {
+    background-color: #333;
+    margin-left: 5px;
+    margin-right: 5px; 
+}
+
+.discord {
+
+}
+.github {
+
+}
+.etherscan {
+
+}
+.polygonscan {
+
+}

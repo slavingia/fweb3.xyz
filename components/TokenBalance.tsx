@@ -15,6 +15,7 @@ const TokenBalance = ({ tokenAddress, symbol }: TokenBalanceProps) => {
   return (
     <p>
       {`${parseBalance(data ?? 0)} ${symbol}`}
+      <img className='button_img' src='/fweb3_prism.gif' width='50' height='50' alt='' />
     </p>
   );
 };

@@ -35,7 +35,7 @@ export default function Home() {
 
       <nav>
         <h1>
-          fweb3
+          <img className="button_img" src="/fweb3_landing_logo.png" width="150" height="80" alt="" />
         </h1>
         <Account triedToEagerConnect={triedToEagerConnect} />
         {isConnected && (
@@ -90,9 +90,36 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a#code">Token smart contract</a>
-        <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
-        <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
+      <ul className="links">
+            <li className="discord">
+              <a href="https://discord.gg/dNvYpeg2RC">
+                <img className="button_img" src="/discord_logo.png" width="50" height="30" alt="discord" />
+                  Discord
+                <img className="button_img " src="/icon.png" width="50" height="30" alt="discord" />
+              </a>
+            </li>
+            <li className="github">
+              <a href="https://github.com/slavingia/fweb3.xyz/issues">
+                <img className="button_img" src="/Github_Logo.png" width="50" height="30" alt="github" />
+                  GitHub
+                <img className="button_img" src="/Github_Logo.png" width="50" height="30" alt="github" />
+              </a>
+            </li>
+            <li className="etherscan">
+              <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a#code">
+                <img className="button_img" src="/ENS_ETH_Breathe.gif" width="20" height="20" alt="Ethereum Mainnet ERC-20 Contract" />
+                  FWeb3 ERC-20 Contract
+                <img className="button_img" src="/ENS_ETH_Breathe.gif" width="20" height="20" alt="Ethereum Mainnet ERC-20 Contract" />
+              </a>
+            </li>
+            <li className="polygonscan">
+              <a href="https://polygonscan.com/address/0x4a14ac36667b574b08443a15093e417db909d7a3#code">
+                  <img className="button_img" src="/Polygon.png" width="20" height="20" alt="Polygon Mainnet ERC-20 Contract" />
+                  FWeb3 ERC-20 Contract
+                  <img className="button_img" src="/Polygon.png" width="20" height="20" alt="Polygon Mainnet ERC-20 Contract" />
+              </a>
+            </li>           
+        </ul>
       </footer>
     </div>
   )
