@@ -6,7 +6,7 @@ import useEagerConnect from "../hooks/useEagerConnect";
 import useTokenBalance from "../hooks/useTokenBalance";
 import { parseBalanceToNum } from "../util";
 
-const FWEB3_TOKEN_ADDRESS = "0x95cd50f9d591630db85d95c932bbc704dc0ae92a";
+const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
 export default function Home() {
   const { account, library, active } = useWeb3React();
