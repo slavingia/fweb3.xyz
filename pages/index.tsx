@@ -39,9 +39,7 @@ export default function Home() {
         </h1>
         <Account triedToEagerConnect={triedToEagerConnect} />
         {isConnected && (
-          <div>
-            <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
-          </div>
+          <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
         )}
       </nav>
 
@@ -57,30 +55,52 @@ export default function Home() {
           <div className="game-grid">
             <div className={"game-tile " + (isConnected ? "completed" : "")}>
               <div className="tooltip">
-                Connect your ETH wallet
+                Auth your wallet
               </div>
             </div>
-            <div className={"game-tile " + (parseBalanceToNum(data ?? 0) >= 100 ? "completed" : "")}>
+            <a href="https://discord.gg/XgqAHhUe">
+              <div className={"game-tile " + (parseBalanceToNum(data ?? 0) >= 100 ? "completed" : "")}>
+                <div className="tooltip">
+                  Get 100 $FWEB3 tokens
+                </div>
+              </div>
+            </a>
+            <a href="https://polygonscan.com/address/0x67806adca0fD8825DA9cddc69b9bA8837A64874b#writeContract">
+              <div className="game-tile">
+                <div className="tooltip">
+                  Use the faucet to get .1 $MATIC
+                </div>
+              </div>
+            </a>
+            <div className="game-tile">
               <div className="tooltip">
-                Get 100 Fweb3 tokens (on Ethereum mainnet or Polygon), needed to join the Discord
+                Send 100 $FWEB3 tokens to someone
               </div>
             </div>
             <div className="game-tile">
               <div className="tooltip">
-                Send 100 tokens to someone on Polygon
+                Mint a Fweb3 NFT
               </div>
             </div>
             <div className="game-tile">
+              <div className="tooltip">
+                Burn at least one $FWEB3 token
+              </div>
             </div>
             <div className="game-tile">
+              <div className="tooltip">
+                Vote on a Fweb3 proposal
+              </div>
             </div>
             <div className="game-tile">
+              <div className="tooltip">
+                Swap $FWEB3 tokens for something else
+              </div>
             </div>
             <div className="game-tile">
-            </div>
-            <div className="game-tile">
-            </div>
-            <div className="game-tile">
+              <div className="tooltip">
+                Mint your own money; ship your own ERC-20 token
+              </div>
             </div>
           </div>
 

@@ -138,10 +138,6 @@ footer a {
   background: #FF95EE;
 }
 
-.empty {
-  padding-top: 100%;
-}
-
 button.disabled {
   border-radius: 99px;
   background: #222;
