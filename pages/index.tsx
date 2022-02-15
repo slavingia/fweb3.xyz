@@ -110,7 +110,7 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a#code">Token smart contract</a>
+        <a href="https://polygonscan.com/address/0x4a14ac36667b574b08443a15093e417db909d7a3#code">Token smart contract</a>
         <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
         <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
       </footer>
