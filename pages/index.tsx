@@ -110,7 +110,7 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://polygonscan.com/address/0x4a14ac36667b574b08443a15093e417db909d7a3#code">Token smart contract</a>
+        <a href="https://s-h-l.notion.site/Fweb3-4929b587926b42ed966a53d9ac9bc6bf">Notion</a>
         <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
         <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
       </footer>
