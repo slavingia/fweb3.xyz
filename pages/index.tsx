@@ -37,7 +37,6 @@ export default function Home() {
         <h1>
           fweb3
         </h1>
-        <Account triedToEagerConnect={triedToEagerConnect} />
         {isConnected && (
           <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
         )}
@@ -53,11 +52,7 @@ export default function Home() {
           </p>
 
           <div className="game-grid">
-            <div className={"game-tile " + (isConnected ? "completed" : "")}>
-              <div className="tooltip">
-                Auth your wallet
-              </div>
-            </div>
+            <Account triedToEagerConnect={triedToEagerConnect} />
             <a href="https://discord.gg/XgqAHhUe">
               <div className={"game-tile " + (parseBalanceToNum(data ?? 0) >= 100 ? "completed" : "")}>
                 <div className="tooltip">

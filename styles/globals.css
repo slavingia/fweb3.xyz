@@ -12,6 +12,7 @@ body {
 a {
   color: white;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 * {
