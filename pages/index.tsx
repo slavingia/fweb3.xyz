@@ -37,8 +37,10 @@ export default function Home() {
         <h1>
           fweb3
         </h1>
-        {isConnected && (
+        {isConnected ? (
           <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
+        ) : (
+          <div>0 FWEB3</div>
         )}
       </nav>
 
