@@ -70,7 +70,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
 
   return (
     <div>
-      Logged in as {' '}
+      Logged in as{" "}
       <a
         {...{
           href: formatEtherscanLink("Account", [chainId, account]),
@@ -80,6 +80,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
       >
         {ENSName || `${shortenHex(account, 4)}`}
       </a>
+      {chainId !== 137 ? ` - Please switch to the Polygon Network` : null}
     </div>
   );
 };
