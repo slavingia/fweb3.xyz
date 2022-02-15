@@ -1,3 +1,4 @@
+import useSwr from 'swr';
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
 import Account from "../components/Account";
@@ -8,13 +9,17 @@ import { parseBalanceToNum } from "../util";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
+const fetcher = (url) => fetch(url).then((res) => res.json())
+
 export default function Home() {
   const { account, library, active } = useWeb3React();
 
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
-  const { data } = useTokenBalance(account, FWEB3_TOKEN_ADDRESS);
+  const { data: tokenBalance } = useTokenBalance(account, FWEB3_TOKEN_ADDRESS);
+
+  const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${account}`, fetcher);
 
   return (
     <div>
@@ -56,14 +61,14 @@ export default function Home() {
           <div className="game-grid">
             <Account triedToEagerConnect={triedToEagerConnect} />
             <a href="https://discord.gg/XgqAHhUe">
-              <div className={"game-tile " + (parseBalanceToNum(data ?? 0) >= 100 ? "completed" : "")}>
+              <div className={"game-tile " + (parseBalanceToNum(tokenBalance ?? 0) >= 100 ? "completed" : "")}>
                 <div className="tooltip">
                   Get 100 $FWEB3 tokens
                 </div>
               </div>
             </a>
             <a href="https://polygonscan.com/address/0x67806adca0fD8825DA9cddc69b9bA8837A64874b#writeContract">
-              <div className="game-tile">
+              <div className={"game-tile " + (polygonData && polygonData["hasUsedFaucet"] ? "completed" : "")}>
                 <div className="tooltip">
                   Use the faucet to get .1 $MATIC
                 </div>
