@@ -12,7 +12,7 @@ const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
-  const { account, library, active } = useWeb3React();
+  const { account, library, active, chainId } = useWeb3React();
 
   const triedToEagerConnect = useEagerConnect();
 
@@ -42,6 +42,11 @@ export default function Home() {
         <h1>
           fweb3
         </h1>
+
+        {chainId !== 137 && (
+            <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
+          )}
+
         {isConnected ? (
           <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
         ) : (
