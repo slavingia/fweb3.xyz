@@ -7,8 +7,10 @@ export default async function handler(req, res) {
   let hasUsedFaucet = false;
 
   for (let i = 0; i < json.result.length; i++) {
-    if (json.result[i]["to"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b") {
+    let transaction = json.result[i];
+    if (transaction["to"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" && transaction["isError"] == "0") {
       hasUsedFaucet = true;
+      break;
     }
   }
 
