@@ -114,6 +114,34 @@ export default function Home() {
           <button className="mint disabled">
             Get 1,000 additional FWEB3 tokens + NFT
           </button>
+
+          <button className="share-button" onClick={() => {
+            let gameTiles = document.getElementsByClassName("game-tile");
+            let completedGameTiles = [];
+            for (let i = 0; i < gameTiles.length; i++) {
+              completedGameTiles.push(gameTiles[i].classList.contains("completed"));
+            }
+
+            let shareText = `Fweb3 ${ completedGameTiles.reduce((a, b) => a + b) }/9\n\n`;
+
+            for (let i = 0; i < gameTiles.length; i++) {
+              shareText += completedGameTiles[i] ? "🟣" : "⚫️";
+
+              if (i % 3 == 2) {
+                shareText += "\n";
+              }
+            }
+
+            if (navigator.share) {
+              navigator.share({
+                text: shareText
+              });
+            } else {
+              window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText));
+            }
+          }}>
+            Share
+          </button>
         </section>
       </main>
       <footer>
