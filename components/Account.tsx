@@ -63,7 +63,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
   return (
     <div className="game-tile completed">
       <div className="tooltip">
-        Authed your wallet
+        You're authed! Keep going...
       </div>
     </div>
   );
