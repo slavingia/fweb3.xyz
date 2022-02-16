@@ -6,12 +6,15 @@ import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 import useTokenBalance from "../hooks/useTokenBalance";
 import { parseBalanceToNum } from "../util";
+import { useRouter } from "next/router";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
+  const { query } = useRouter();
+
   const { account, library, active, chainId } = useWeb3React();
 
   const triedToEagerConnect = useEagerConnect();
@@ -19,7 +22,7 @@ export default function Home() {
   const isConnected = typeof account === "string" && !!library;
   const { data: tokenBalance } = useTokenBalance(account, FWEB3_TOKEN_ADDRESS);
 
-  const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${account}`, fetcher);
+  const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`, fetcher);
 
   return (
     <div>
@@ -45,6 +48,10 @@ export default function Home() {
 
         {chainId !== 137 && (
           <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
+        )}
+
+        {query.wallet !== account && (
+          <p style={{color: "#fff"}}>{query.wallet}</p>
         )}
 
         {isConnected ? (
