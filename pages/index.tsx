@@ -1,3 +1,4 @@
+import useSwr from 'swr';
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
 import Account from "../components/Account";
@@ -8,13 +9,17 @@ import { parseBalanceToNum } from "../util";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
+const fetcher = (url) => fetch(url).then((res) => res.json())
+
 export default function Home() {
-  const { account, library, active } = useWeb3React();
+  const { account, library, active, chainId } = useWeb3React();
 
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
-  const { data } = useTokenBalance(account, FWEB3_TOKEN_ADDRESS);
+  const { data: tokenBalance } = useTokenBalance(account, FWEB3_TOKEN_ADDRESS);
+
+  const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${account}`, fetcher);
 
   return (
     <div>
@@ -37,11 +42,15 @@ export default function Home() {
         <h1>
           fweb3
         </h1>
-        <Account triedToEagerConnect={triedToEagerConnect} />
-        {isConnected && (
-          <div>
-            <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
-          </div>
+
+        {chainId !== 137 && (
+            <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
+          )}
+
+        {isConnected ? (
+          <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
+        ) : (
+          <div>0 FWEB3</div>
         )}
       </nav>
 
@@ -55,32 +64,50 @@ export default function Home() {
           </p>
 
           <div className="game-grid">
-            <div className={"game-tile " + (isConnected ? "completed" : "")}>
+            <Account triedToEagerConnect={triedToEagerConnect} />
+            <a href="https://discord.gg/XgqAHhUe">
+              <div className={"game-tile " + (parseBalanceToNum(tokenBalance ?? 0) >= 100 ? "completed" : "")}>
+                <div className="tooltip">
+                  Get 100 $FWEB3 tokens
+                </div>
+              </div>
+            </a>
+            <a href="https://polygonscan.com/address/0x67806adca0fD8825DA9cddc69b9bA8837A64874b#writeContract">
+              <div className={"game-tile " + (polygonData && polygonData["hasUsedFaucet"] ? "completed" : "")}>
+                <div className="tooltip">
+                  Use the faucet to get .1 $MATIC
+                </div>
+              </div>
+            </a>
+            <div className="game-tile">
               <div className="tooltip">
-                Connect your ETH wallet
+                Send 100 $FWEB3 tokens to someone
               </div>
             </div>
-            <div className={"game-tile " + (parseBalanceToNum(data ?? 0) >= 100 ? "completed" : "")}>
+            <div className="game-tile">
               <div className="tooltip">
-                Get 100 Fweb3 tokens (on Ethereum mainnet or Polygon), needed to join the Discord
+                Mint a Fweb3 NFT
               </div>
             </div>
             <div className="game-tile">
               <div className="tooltip">
-                Send 100 tokens to someone on Polygon
+                Burn at least one $FWEB3 token
               </div>
             </div>
             <div className="game-tile">
+              <div className="tooltip">
+                Vote on a Fweb3 proposal
+              </div>
             </div>
             <div className="game-tile">
+              <div className="tooltip">
+                Swap $FWEB3 tokens for something else
+              </div>
             </div>
             <div className="game-tile">
-            </div>
-            <div className="game-tile">
-            </div>
-            <div className="game-tile">
-            </div>
-            <div className="game-tile">
+              <div className="tooltip">
+                Mint your own money; ship your own ERC-20 token
+              </div>
             </div>
           </div>
 
@@ -90,7 +117,7 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://etherscan.io/address/0x95cd50f9d591630db85d95c932bbc704dc0ae92a#code">Token smart contract</a>
+        <a href="https://s-h-l.notion.site/Fweb3-4929b587926b42ed966a53d9ac9bc6bf">Notion</a>
         <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
         <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
       </footer>
