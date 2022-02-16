@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
   for (let i = 0; i < erc20json.result.length; i++) {
     let transaction = erc20json.result[i];
-    if (transaction["value"] !== undefined && (parseInt(transaction["value"]) >= 100 * 10 ** 18)) {
+    if (transaction["from"] == req.query.wallet_address.toLowerCase() && transaction["value"] !== undefined && (parseInt(transaction["value"]) >= 100 * 10 ** 18)) {
       hasSentTokens = true;
     }
   }
