@@ -15,7 +15,6 @@ export default async function handler(req, res) {
 
   const internalTxnResponse = await fetch("https://api.polygonscan.com/api?module=account&action=txlistinternal&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
   const internalTxnJson = await internalTxnResponse.json();
-  console.log(internalTxnJson);
 
   for (let i = 0; i < internalTxnJson.result.length; i++) {
     let transaction = internalTxnJson.result[i];
