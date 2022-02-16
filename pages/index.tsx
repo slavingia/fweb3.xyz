@@ -116,15 +116,14 @@ export default function Home() {
           </button>
 
           <button className="share-button" onClick={() => {
-            let shareText = "Fweb3 4/9 🟣🟣🟣\n⚫️⚫️🟣\n⚫️⚫️⚫️";
+            let shareText = "Fweb3 4/9\n\n🟣🟣🟣\n⚫️⚫️🟣\n⚫️⚫️⚫️";
 
             if (navigator.share) {
               navigator.share({
-                text: shareText,
-                url: 'https://fweb3.xyz'
+                text: shareText
               });
             } else {
-              window.location = "https://twitter.com/intent/tweet?text=" + shareText + "&url=https://fweb3.xyz";
+              window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText));
             }
           }}>
             Share
