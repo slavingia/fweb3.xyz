@@ -63,7 +63,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
   return (
     <div className="game-tile completed">
       <div className="tooltip">
-        You're authed! Keep going...
+        You are authed! Keep going...
       </div>
     </div>
   );
