@@ -13,6 +13,17 @@ export default async function handler(req, res) {
     }
   }
 
+  const internalTxnResponse = await fetch("https://api.polygonscan.com/api?module=account&action=txlistinternal&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
+  const internalTxnJson = await internalTxnResponse.json();
+  console.log(internalTxnJson);
+
+  for (let i = 0; i < internalTxnJson.result.length; i++) {
+    let transaction = internalTxnJson.result[i];
+    if (transaction["from"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" && transaction["isError"] == "0") {
+      hasUsedFaucet = true;
+    }
+  }
+
   const erc20response = await fetch("https://api.polygonscan.com/api?module=account&action=tokentx&contractaddress=0x4a14ac36667b574b08443a15093e417db909d7a3&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY)
   const erc20json = await erc20response.json();
 
