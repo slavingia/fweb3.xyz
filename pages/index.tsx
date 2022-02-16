@@ -44,8 +44,8 @@ export default function Home() {
         </h1>
 
         {chainId !== 137 && (
-            <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
-          )}
+          <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
+        )}
 
         {isConnected ? (
           <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
@@ -79,7 +79,7 @@ export default function Home() {
                 </div>
               </div>
             </a>
-            <div className="game-tile">
+            <div className={"game-tile " + (polygonData && polygonData["hasSentTokens"] ? "completed" : "")}>
               <div className="tooltip">
                 Send 100 $FWEB3 tokens to someone
               </div>
