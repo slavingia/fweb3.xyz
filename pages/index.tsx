@@ -127,7 +127,7 @@ export default function Home() {
             for (let i = 0; i < gameTiles.length; i++) {
               shareText += completedGameTiles[i] ? "🟣" : "⚫️";
 
-              if (i % 3 == 2) {
+              if (i % 3 == 2 && i != gameTiles.length - 1) {
                 shareText += "\n";
               }
             }
