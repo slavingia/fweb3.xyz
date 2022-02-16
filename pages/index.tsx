@@ -118,17 +118,11 @@ export default function Home() {
           <button className="share-button" onClick={() => {
             let gameTiles = document.getElementsByClassName("game-tile");
             let completedGameTiles = [];
-            let numCompletedGameTiles = 0;
             for (let i = 0; i < gameTiles.length; i++) {
-              if (gameTiles[i].classList.contains("completed")) {
-                numCompletedGameTiles++;
-                completedGameTiles.push(true);
-              } else {
-                completedGameTiles.push(false);
-              }
+              completedGameTiles.push(gameTiles[i].classList.contains("completed"));
             }
 
-            let shareText = `Fweb3 ${numCompletedGameTiles}/9\n\n`;
+            let shareText = `Fweb3 ${ completedGameTiles.reduce((a, b) => a + b) }/9\n\n`;
 
             for (let i = 0; i < gameTiles.length; i++) {
               shareText += completedGameTiles[i] ? "🟣" : "⚫️";
