@@ -9,6 +9,10 @@ body {
   line-height: 1.5;
 }
 
+button {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 a {
   color: white;
   text-decoration: underline;
@@ -146,4 +150,9 @@ button.disabled {
   text-decoration: none;
   display: inline-block;
   padding: 15px;
+}
+
+.share-button {
+  margin: 1rem;
+  color: #666;
 }
