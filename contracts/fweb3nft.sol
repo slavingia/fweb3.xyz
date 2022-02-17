@@ -37,10 +37,8 @@ contract Fweb3 is ERC721 {
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
       string[17] memory parts;
-      string memory hue = getHue(tokenId);
-      string memory saturation = getSaturation(tokenId);
+      string memory hueAndSaturation = string(abi.encodePacked(getHue(tokenId), ",", getSaturation(tokenId)));
       string memory backgroundColor = getBackgroundColor(tokenId);
-      string memory hueAndSaturation = hue + "," + saturation;
 
       parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512"><rect width="100%" height="100%" fill="';
       parts[1] = backgroundColor;
