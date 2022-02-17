@@ -1,6 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
+  if (req.query.wallet_address == "undefined") {
+    return res.status(500).json({
+      message: "Wallet address undefined"
+    });
+  }
+  
   const response = await fetch("https://api.polygonscan.com/api?module=account&action=txlist&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
   const json = await response.json();
 
