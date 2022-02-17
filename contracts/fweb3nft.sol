@@ -6,18 +6,37 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 contract Fweb3 is ERC721 {
     constructor() ERC721("Fweb3", "FWEB3") {}
 
+    function toString(uint256 value) internal pure returns (string memory) {
+      if (value == 0) {
+          return "0";
+      }
+      uint256 temp = value;
+      uint256 digits;
+      while (temp != 0) {
+          digits++;
+          temp /= 10;
+      }
+      bytes memory buffer = new bytes(digits);
+      while (value != 0) {
+          digits -= 1;
+          buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
+          value /= 10;
+      }
+      return string(buffer);
+    }
+
     function random(string memory input) internal pure returns (uint256) {
       return uint256(keccak256(abi.encodePacked(input)));
     }
 
     function getHue(uint256 tokenId) public view returns (string memory) {
-      uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
+      uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
       uint256 hue = rand % 360;
       return string(abi.encodePacked(hue));
     }
 
     function getSaturation(uint256 tokenId) public view returns (string memory) {
-      uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
+      uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
       uint256 saturation = rand % 100;
       return string(abi.encodePacked(saturation));
     }
