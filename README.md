@@ -1,5 +1,9 @@
 ### Website
 
+Get a Polygonscan API key and put it in `.env.local`:
+
+```POLYGON_API_KEY=```
+
 Run local server:
 
 ```npm run dev```
