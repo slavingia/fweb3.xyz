@@ -32,13 +32,13 @@ contract Fweb3 is ERC721 {
     function getHue(uint256 tokenId) public view returns (string memory) {
       uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
       uint256 hue = rand % 360;
-      return string(abi.encodePacked(hue));
+      return string(hue);
     }
 
     function getSaturation(uint256 tokenId) public view returns (string memory) {
       uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
       uint256 saturation = rand % 100;
-      return string(abi.encodePacked(saturation));
+      return string(saturation);
     }
 
     function getBackgroundColor(uint256 tokenId) public view returns (string memory) {
@@ -51,15 +51,15 @@ contract Fweb3 is ERC721 {
         str[1+i*2] = hx[uint(uint8(val[i + 12] & 0x0f))];
       }
 
-      return string(abi.encodePacked("#", str));
+      return string(str);
     }
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
       string[17] memory parts;
-      string memory hueAndSaturation = string(abi.encodePacked(getHue(tokenId), ",", getSaturation(tokenId)));
+      string memory hueAndSaturation = string(abi.encodePacked(getHue(tokenId), comma, getSaturation(tokenId)));
       string memory backgroundColor = getBackgroundColor(tokenId);
 
-      parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512"><rect width="100%" height="100%" fill="';
+      parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512"><rect width="100%" height="100%" fill="#';
       parts[1] = backgroundColor;
       parts[2] = '"><polygon style="fill:hsl(';
       parts[3] = hueAndSaturation;
