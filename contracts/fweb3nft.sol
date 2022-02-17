@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Fweb3 is ERC721 {
-    constructor() ERC721("Fweb3", "FW3") {}
+    constructor() ERC721("Fweb3", "FWEB3") {}
 
     function random(string memory input) internal pure returns (uint256) {
       return uint256(keccak256(abi.encodePacked(input)));
