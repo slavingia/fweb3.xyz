@@ -36,7 +36,7 @@ contract Fweb3 is ERC721 {
     }
 
     function tokenURI(uint256 tokenId) override public view returns (string memory) {
-      string[12] memory parts;
+      string[17] memory parts;
       string memory hue = getHue(tokenId);
       string memory saturation = getSaturation(tokenId);
       string memory backgroundColor = getBackgroundColor(tokenId);
