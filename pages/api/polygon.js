@@ -33,16 +33,30 @@ export default async function handler(req, res) {
   const erc20json = await erc20response.json();
 
   let hasSentTokens = false;
+  let hasBurnedTokens = false;
 
   for (let i = 0; i < erc20json.result.length; i++) {
     let transaction = erc20json.result[i];
-    if (transaction["from"] == req.query.wallet_address.toLowerCase() && transaction["value"] !== undefined && (parseInt(transaction["value"]) >= 100 * 10 ** 18)) {
+    if (
+      transaction["from"] == req.query.wallet_address.toLowerCase() &&
+      transaction["value"] !== undefined &&
+      parseInt(transaction["value"]) >= 100 * 10 ** 18
+    ) {
       hasSentTokens = true;
+    }
+    if (
+      transaction["from"] == req.query.wallet_address.toLowerCase() &&
+      transaction["to"] == "0x000000000000000000000000000000000000dead" &&
+      transaction["value"] != undefined &&
+      parseInt(transaction["value"]) > 0
+    ) {
+      hasBurnedTokens = true;
     }
   }
 
   res.status(200).json({
     hasUsedFaucet: hasUsedFaucet,
     hasSentTokens: hasSentTokens,
+    hasBurnedTokens: hasBurnedTokens,
   });
 }

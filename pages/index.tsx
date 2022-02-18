@@ -96,7 +96,7 @@ export default function Home() {
                 Mint a Fweb3 NFT
               </div>
             </div>
-            <div className="game-tile">
+            <div className={"game-tile " + (polygonData && polygonData["hasBurnedTokens"] ? "completed" : "")}>
               <div className="tooltip">
                 Burn at least one $FWEB3 token
               </div>
