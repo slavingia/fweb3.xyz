@@ -6,6 +6,18 @@ export default async function handler(req, res) {
       message: "Wallet address undefined"
     });
   }
+
+  const responseTokenBalance = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x4a14ac36667b574b08443a15093e417db909d7a3&address=" +
+      req.query.wallet_address +
+      "&tag=latest&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
+  const balanceJson = await responseTokenBalance.json();
+
+  let tokenBalance = 0;
+
+  tokenBalance = balanceJson.result;
   
   const response = await fetch("https://api.polygonscan.com/api?module=account&action=txlist&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
   const json = await response.json();
@@ -55,6 +67,7 @@ export default async function handler(req, res) {
   }
 
   res.status(200).json({
+    tokenBalance: tokenBalance,
     hasUsedFaucet: hasUsedFaucet,
     hasSentTokens: hasSentTokens,
     hasBurnedTokens: hasBurnedTokens,
