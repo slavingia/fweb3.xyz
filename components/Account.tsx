@@ -51,7 +51,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
           });
         }
       ) : startOnboarding}>
-        <div className="game-tile">
+        <div className="game-tile pulse">
           <div className="tooltip">
             Click to auth your wallet
           </div>
