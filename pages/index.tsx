@@ -71,7 +71,7 @@ export default function Home() {
           <div className="game-grid">
             <Account triedToEagerConnect={triedToEagerConnect} />
             <a href="https://discord.gg/XgqAHhUe">
-              <div className={"game-tile " + (parseBalanceToNum(polygonData && polygonData["tokenBalance"] ?? 0) >= 100 ? "completed" : "")}>
+              <div className={"game-tile " + (parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? "completed" : "")}>
                 <div className="tooltip">
                   Get 100 $FWEB3 tokens
                 </div>
