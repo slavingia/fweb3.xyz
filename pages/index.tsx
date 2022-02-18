@@ -46,7 +46,7 @@ export default function Home() {
           fweb3
         </h1>
 
-        {chainId !== 137 && (
+        {(chainId !== 137 && !query.wallet) && (
           <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
         )}
 
