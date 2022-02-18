@@ -2,9 +2,10 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Fweb3 is ERC721 {
+contract Fweb3 is ERC721, Ownable {
   constructor() ERC721("Fweb3 NFT", "FW3NFT") {}
 
   function toString(uint256 value) internal pure returns (string memory) {
@@ -85,6 +86,10 @@ contract Fweb3 is ERC721 {
     output = string(abi.encodePacked('data:application/json;base64,', json));
 
     return output;
+  }
+
+  function mint(uint256 tokenId) public {
+    _safeMint(_msgSender(), tokenId);
   }
 }
 
