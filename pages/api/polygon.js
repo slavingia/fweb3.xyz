@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     if (transaction["from"] == req.query.wallet_address.toLowerCase() && transaction["value"] !== undefined && (parseInt(transaction["value"]) >= 100 * 10 ** 18)) {
       hasSentTokens = true;
     }
-    if (transaction["to"] == "0x000000000000000000000000000000000000dead" && transaction["value"] != undefined && (parseInt(transaction["value"]) > 0)) {
+    if (transaction["from"] == req.query.wallet_address.toLowerCase() && transaction["to"] == "0x000000000000000000000000000000000000dead" && transaction["value"] != undefined && (parseInt(transaction["value"]) > 0)) {
       hasBurnedTokens = true;
     }
   }
