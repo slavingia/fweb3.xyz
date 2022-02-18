@@ -4,7 +4,6 @@ import Head from "next/head";
 import Account from "../components/Account";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
-import useTokenBalance from "../hooks/useTokenBalance";
 import { parseBalanceToNum } from "../util";
 import { useRouter } from "next/router";
 
@@ -20,7 +19,6 @@ export default function Home() {
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
-  const { data: tokenBalance } = useTokenBalance(account, FWEB3_TOKEN_ADDRESS);
 
   const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`, fetcher);
 
@@ -55,7 +53,7 @@ export default function Home() {
         )}
 
         {isConnected ? (
-          <TokenBalance tokenAddress={FWEB3_TOKEN_ADDRESS} symbol="FWEB3" />
+          <TokenBalance balance={polygonData && polygonData["tokenBalance"]} symbol="FWEB3" />
         ) : (
           <div>0 FWEB3</div>
         )}
@@ -73,7 +71,7 @@ export default function Home() {
           <div className="game-grid">
             <Account triedToEagerConnect={triedToEagerConnect} />
             <a href="https://discord.gg/XgqAHhUe">
-              <div className={"game-tile " + (parseBalanceToNum(tokenBalance ?? 0) >= 100 ? "completed" : "")}>
+              <div className={"game-tile " + (parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? "completed" : "")}>
                 <div className="tooltip">
                   Get 100 $FWEB3 tokens
                 </div>
