@@ -2,6 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Fweb3 is ERC721 {
   constructor() ERC721("Fweb3 NFT", "FW3NFT") {}
@@ -29,19 +30,19 @@ contract Fweb3 is ERC721 {
     return uint256(keccak256(abi.encodePacked(input)));
   }
 
-  function getHue(uint256 tokenId) public view returns (string memory) {
+  function getHue(uint256 tokenId) public pure returns (string memory) {
     uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
     uint256 hue = rand % 360;
-    return string(hue);
+    return Strings.toString(hue);
   }
 
-  function getSaturation(uint256 tokenId) public view returns (string memory) {
+  function getSaturation(uint256 tokenId) public pure returns (string memory) {
     uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
     uint256 saturation = rand % 100;
-    return string(saturation);
+    return Strings.toString(saturation);
   }
 
-  function getBackgroundColor(uint256 tokenId) public view returns (string memory) {
+  function getBackgroundColor(uint256 tokenId) public pure returns (string memory) {
     bytes32 val = bytes32(tokenId);
     bytes memory hx = "0123456789ABCDEF";
     bytes memory str = new bytes(51);
@@ -54,7 +55,7 @@ contract Fweb3 is ERC721 {
     return string(str);
   }
 
-  function tokenURI(uint256 tokenId) override public view returns (string memory) {
+  function tokenURI(uint256 tokenId) override public pure returns (string memory) {
     string[17] memory parts;
     string memory hueAndSaturation = string(abi.encodePacked(getHue(tokenId), ",", getSaturation(tokenId)));
     string memory backgroundColor = getBackgroundColor(tokenId);
