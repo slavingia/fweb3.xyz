@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Fweb3 is ERC721, Ownable {
-  constructor() ERC721("Fweb3 Diamond NFT", "FWEB3DIAMONDNFT") {}
+  constructor() ERC721("Fweb3 NFT", "FWEB3NFT") {}
 
   function toString(uint256 value) internal pure returns (string memory) {
     if (value == 0) {
@@ -47,7 +47,7 @@ contract Fweb3 is ERC721, Ownable {
     uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
     bytes32 val = bytes32(rand);
     bytes memory hx = "0123456789ABCDEF";
-    bytes memory str = new bytes(3);
+    bytes memory str = new bytes(51);
 
     for (uint i = 17; i < 20; i++) {
       str[i*2] = hx[uint(uint8(val[i + 12] >> 4))];
@@ -83,7 +83,7 @@ contract Fweb3 is ERC721, Ownable {
     string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
     output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
 
-    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 NFT", "description": "This NFT represents participation in Fweb3.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 NFT", "description": "This NFT represents your participation in Fweb3.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
     output = string(abi.encodePacked('data:application/json;base64,', json));
 
     return output;
