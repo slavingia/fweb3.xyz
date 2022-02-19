@@ -227,7 +227,7 @@ export default function Home() {
           <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win 1,000 $FWEB3 tokens and a commemorative NFT.</p>
           {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
-              <p>It's free to play. Login with MetaMask to get started (you'll be prompted to install it if you don't have it already):</p>
+              <p>It&apos;s free to play. Login with MetaMask to get started (you&apos;ll be prompted to install it if you don&apos;t have it already):</p>
               <p>
                 <Account triedToEagerConnect={triedToEagerConnect} />
               </p>
