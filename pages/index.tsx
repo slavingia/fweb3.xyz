@@ -101,13 +101,13 @@ export default function Home() {
     <div>
       <Head>
         <title>Fweb3</title>
-        <meta name="description" content="Learn and build web3 in February" />
+        <meta name="description" content="Learn and build web3" />
         <link rel="icon" href="/icon.png" />
-        <meta content="Learn and build web3 in February" name="description" />
+        <meta content="Learn and build web3" name="description" />
         <meta content="Fweb3" property="og:title" />
-        <meta content="Learn and build web3 in February" property="og:description" />
+        <meta content="Learn and build web3" property="og:description" />
         <meta content="https://fweb3.xyz/fweb3.png" property="og:image" />
-        <meta content="Fweb3 – Learn and build web3 in February" property="twitter:title" />
+        <meta content="Fweb3 – Learn and build web3" property="twitter:title" />
         <meta content="https://fweb3.xyz/fweb3.png" property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
@@ -223,7 +223,7 @@ export default function Home() {
           </a>
         </section>
         <section>
-          <h2>Spend the month of February learning and building web3.</h2>
+          <h2>Learn and build in web3.</h2>
           <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win 1,000 $FWEB3 tokens and a commemorative NFT.</p>
           {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
