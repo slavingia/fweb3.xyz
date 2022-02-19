@@ -48,7 +48,7 @@ export default async function handler(req, res) {
 
   for (let i = 0; i < nftJson.result.length; i++) {
     let transaction = nftJson.result[i];
-    if (transaction["from"] == "0x0000000000000000000000000000000000000000" && transaction["to"] == req.query.wallet_address.toLowerCase()) {
+    if (transaction["from"] == "0x0000000000000000000000000000000000000000") {
       hasMintedNFT = true;
     }
   }
