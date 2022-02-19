@@ -41,14 +41,14 @@ export default async function handler(req, res) {
     }
   }
 
-  const nftResponse = await fetch("https://api.polygonscan.com/api?module=account&action=txlist&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
+  const nftResponse = await fetch("https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x6a1e6221b8ba9cc77f2b9c7b2d175418b0e95262&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
   const nftJson = await nftResponse.json();
 
   let hasMintedNFT = false;
 
-  for (let i = 0; i < json.result.length; i++) {
-    let transaction = json.result[i];
-    if (transaction["to"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" && transaction["isError"] == "0") {
+  for (let i = 0; i < nftJson.result.length; i++) {
+    let transaction = nftJson.result[i];
+    if (transaction["from"] == "0x0000000000000000000000000000000000000000" && transaction["to"] == req.query.wallet_address.toLowerCase()) {
       hasMintedNFT = true;
     }
   }
