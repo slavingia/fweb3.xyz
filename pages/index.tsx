@@ -92,15 +92,24 @@ export default function Home() {
             <a href="https://polygonscan.com/address/0xdc58b1b2fa7569bb12d8a74f99437a5b3f6c7dea#writeContract">
               <div className={"game-tile " + (polygonData && polygonData["hasMintedNFT"] ? "completed" : "")}>
                 <div className="tooltip">
-                  Mint a Fweb3 diamond NFT
+                  Mint a Fweb3 NFT
                 </div>
               </div>
             </a>
-            <div className={"game-tile " + (polygonData && polygonData["hasBurnedTokens"] ? "completed" : "")}>
-              <div className="tooltip">
-                Burn at least one $FWEB3 token
+            <a href="https://s-h-l.notion.site/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0">
+              <div className={"game-tile " + (polygonData && polygonData["hasBurnedTokens"] ? "completed" : "")}>
+                <div className="tooltip">
+                  Burn at least one $FWEB3 token
+                </div>
               </div>
-            </div>
+            </a>
+            <a href="https://app.uniswap.org/#/swap?chain=polygon">
+              <div className={"game-tile " + (polygonData && polygonData["hasSwappedTokens"] ? "completed" : "")}>
+                <div className="tooltip">
+                  Swap a $FWEB3 token for some $MATIC
+                </div>
+              </div>
+            </a>
             <div className="game-tile">
               <div className="tooltip">
                 Vote on a Fweb3 proposal
@@ -108,12 +117,7 @@ export default function Home() {
             </div>
             <div className="game-tile">
               <div className="tooltip">
-                Swap $FWEB3 tokens for something else
-              </div>
-            </div>
-            <div className="game-tile">
-              <div className="tooltip">
-                Mint your own money; ship your own ERC-20 token
+                Create your own ERC-20 token
               </div>
             </div>
           </div>
@@ -147,12 +151,12 @@ export default function Home() {
               window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText));
             }
           }}>
-            Share
+            Share your progress
           </button>
         </section>
       </main>
       <footer>
-        <a href="https://s-h-l.notion.site/Fweb3-4929b587926b42ed966a53d9ac9bc6bf">Notion</a>
+        <a href="https://s-h-l.notion.site/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0">Walkthrough</a>
         <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
         <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
       </footer>
