@@ -91,11 +91,13 @@ export default function Home() {
                 Send 100 $FWEB3 tokens to someone
               </div>
             </div>
-            <div className="game-tile">
-              <div className="tooltip">
-                Mint a Fweb3 NFT
+            <a href="https://polygonscan.com/address/0xdc58b1b2fa7569bb12d8a74f99437a5b3f6c7dea#writeContract">
+            <div className={"game-tile " + (polygonData && polygonData["hasMintedNFT"] ? "completed" : "")}>
+                <div className="tooltip">
+                  Mint the Fweb3 NFT
+                </div>
               </div>
-            </div>
+            </a>
             <div className="game-tile">
               <div className="tooltip">
                 Burn at least one $FWEB3 token

@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Fweb3 is ERC721, Ownable {
-  constructor() ERC721("Fweb3 NFT", "FW3NFT") {}
+  constructor() ERC721("Fweb3 NFT", "FWEB3NFT") {}
 
   function toString(uint256 value) internal pure returns (string memory) {
     if (value == 0) {
@@ -44,7 +44,8 @@ contract Fweb3 is ERC721, Ownable {
   }
 
   function getBackgroundColor(uint256 tokenId) public pure returns (string memory) {
-    bytes32 val = bytes32(tokenId);
+    uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
+    bytes32 val = bytes32(rand);
     bytes memory hx = "0123456789ABCDEF";
     bytes memory str = new bytes(51);
 
@@ -63,21 +64,21 @@ contract Fweb3 is ERC721, Ownable {
 
     parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512"><rect width="100%" height="100%" fill="#';
     parts[1] = backgroundColor;
-    parts[2] = '"><polygon style="fill:hsl(';
+    parts[2] = '"/><path d="M256 372.057L378 203.686L331.4 140H180.6L134 203.686L256 372.057Z" fill="hsl(';
     parts[3] = hueAndSaturation;
-    parts[4] = '%,79%);" points="256,499.47 512,146.167 414.217,12.53 97.784,12.53 0.001,146.167 "/><g><polygon style="fill:hsl(';
+    parts[4] = '%,79%)"/><path d="M180.601 140L215.332 203.689H134L180.601 140Z" fill="hsl(';
     parts[5] = hueAndSaturation;
-    parts[6] = '%,82%);" points="97.786,12.53 170.663,146.172 0,146.172"/><polygon style="fill:hsl(';
+    parts[6] = '%,82%)"/><path d="M331.4 140L296.664 203.689L255.998 140H331.4Z" fill="hsl(';
     parts[7] = hueAndSaturation;
-    parts[8] = '%,82%);" points="414.217,12.53 341.327,146.172 255.995,12.53"/><polygon style="fill:hsl(';
+    parts[8] = '%,82%)"/><path d="M296.664 203.689L255.998 372.056L215.332 203.689H296.664Z" fill="hsl(';
     parts[9] = hueAndSaturation;
-    parts[10] = '%,82%);" points="341.327,146.172 255.995,499.467 170.663,146.172"/></g><g><polygon style="fill:hsl(';
+    parts[10] = '%,82%)"/><path d="M331.4 140L377.995 203.689H296.664L331.4 140Z" fill="hsl(';
     parts[11] = hueAndSaturation;
-    parts[12] = '%,94%);" points="414.217,12.53 511.99,146.172 341.327,146.172"/><polygon style="fill:hsl(';
+    parts[12] = '%,94%)"/><path d="M255.998 140L296.664 203.689H215.332L255.998 140Z" fill="hsl(';
     parts[13] = hueAndSaturation;
-    parts[14] = '%,94%);" points="255.995,12.53 341.327,146.172 170.663,146.172"/><polygon style="fill:hsl(';
+    parts[14] = '%,94%)"/><path d="M215.332 203.689L255.998 372.056L134 203.689H215.332Z" fill="hsl(';
     parts[15] = hueAndSaturation;
-    parts[16] = '%,94%);" points="170.663,146.172 255.995,499.467 0,146.172"/></g></svg>';
+    parts[16] = '%,94%)"/></svg>';
 
     string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
     output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
