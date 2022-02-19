@@ -7,6 +7,18 @@ export default async function handler(req, res) {
     });
   }
 
+  const responseTokenBalance = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x4a14ac36667b574b08443a15093e417db909d7a3&address=" +
+      req.query.wallet_address +
+      "&tag=latest&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
+  const balanceJson = await responseTokenBalance.json();
+
+  let tokenBalance = 0;
+
+  tokenBalance = balanceJson.result;
+
   const response = await fetch("https://api.polygonscan.com/api?module=account&action=txlist&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
   const json = await response.json();
 
@@ -33,11 +45,24 @@ export default async function handler(req, res) {
   const erc20json = await erc20response.json();
 
   let hasSentTokens = false;
+  let hasBurnedTokens = false;
 
   for (let i = 0; i < erc20json.result.length; i++) {
     let transaction = erc20json.result[i];
-    if (transaction["from"] == req.query.wallet_address.toLowerCase() && transaction["value"] !== undefined && (parseInt(transaction["value"]) >= 100 * 10 ** 18)) {
+    if (
+      transaction["from"] == req.query.wallet_address.toLowerCase() &&
+      transaction["value"] !== undefined &&
+      parseInt(transaction["value"]) >= 100 * 10 ** 18
+    ) {
       hasSentTokens = true;
+    }
+    if (
+      transaction["from"] == req.query.wallet_address.toLowerCase() &&
+      transaction["to"] == "0x000000000000000000000000000000000000dead" &&
+      transaction["value"] != undefined &&
+      parseInt(transaction["value"]) > 0
+    ) {
+      hasBurnedTokens = true;
     }
   }
 
@@ -55,8 +80,10 @@ export default async function handler(req, res) {
 
 
   res.status(200).json({
+    tokenBalance: tokenBalance,
     hasUsedFaucet: hasUsedFaucet,
     hasSentTokens: hasSentTokens,
     hasMintedNFT: hasMintedNFT,
+    hasBurnedTokens: hasBurnedTokens,
   });
 }

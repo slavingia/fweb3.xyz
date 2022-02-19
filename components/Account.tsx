@@ -2,6 +2,7 @@ import { useWeb3React } from "@web3-react/core";
 import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useEffect, useState } from "react";
 import { injected } from "../connectors";
+import { useRouter } from "next/router";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 
 type AccountProps = {
@@ -9,6 +10,8 @@ type AccountProps = {
 };
 
 const Account = ({ triedToEagerConnect }: AccountProps) => {
+  const { query } = useRouter();
+
   const { active, error, activate, chainId, account, setError } =
     useWeb3React();
 
@@ -35,7 +38,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
     return null;
   }
 
-  if (typeof account !== "string") {
+  if (typeof account !== "string" && !query.wallet) {
     return (
       <a onClick={isWeb3Available ? (
         () => {
@@ -51,7 +54,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
           });
         }
       ) : startOnboarding}>
-        <div className="game-tile">
+        <div className="game-tile pulse">
           <div className="tooltip">
             Click to auth your wallet
           </div>

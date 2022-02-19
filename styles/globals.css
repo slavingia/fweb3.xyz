@@ -119,6 +119,23 @@ footer a {
   position: relative;
 }
 
+.game-tile.pulse {
+  animation: pulse-animation 2.5s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 3px #454545;
+  }
+  60% {
+    box-shadow: 0 0 0 10px #FF95EE;
+    background: #ff95ee;
+  }
+  100% {
+    box-shadow: 0 0 0 3px #454545;
+  }
+}
+
 .game-tile > .tooltip {
   position: absolute;
   background: white;
