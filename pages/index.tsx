@@ -49,7 +49,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
 
   if (typeof account !== "string") {
     return (
-      <button onClick={isWeb3Available ? (
+      <button className="pulse" onClick={isWeb3Available ? (
         () => {
           setConnecting(true);
 
@@ -115,7 +115,7 @@ export default function Home() {
         </h1>
 
         <p>
-          {parseInt(gameTileCompletionStates.reduce((a, b) => a + b, 0) / 9 * 100)}% complete
+          <strong>{parseInt(gameTileCompletionStates.reduce((a, b) => a + b, 0) / 9 * 100)}%</strong> complete
         </p>
 
         {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
