@@ -34,6 +34,10 @@ nav {
   border-bottom: 1px solid #333;
 }
 
+nav strong {
+  color: #FF95EE;
+}
+
 footer {
   flex-direction: column;
   padding: 2rem;
@@ -142,30 +146,6 @@ footer a {
   position: relative;
 }
 
-.game-tile.pulse {
-  background:rgba(255, 149, 238, 0.5);
-  box-shadow: 0 0 0 0 rgba(255, 149, 238, 1);
-  transform: scale(1);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(255, 149, 238, 0.7);
-  }
-
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(255, 149, 238, 0);
-  }
-
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(255, 149, 238, 0);
-  }
-}
-
 .game-tile > .tooltip {
   position: absolute;
   background: white;
@@ -190,16 +170,48 @@ footer a {
   background: #FF95EE;
 }
 
-button.disabled {
+button {
   border-radius: 99px;
-  background: #222;
-  color: #333;
   text-decoration: none;
   display: inline;
-  padding: 15px;
+  padding: 15px 30px;
+  margin-top: 2rem;
+  background: #FF95EE;
+  color: black;
+}
+
+.pulse {
+  background:rgba(255, 149, 238, 1);
+  box-shadow: 0 0 0 0 rgba(255, 149, 238, 1);
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.99);
+    box-shadow: 0 0 0 0 rgba(255, 149, 238, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(255, 149, 238, 0);
+  }
+
+  100% {
+    transform: scale(0.99);
+    box-shadow: 0 0 0 0 rgba(255, 149, 238, 0);
+  }
+}
+
+.disabled {
+  background: #222;
+  color: #333;
 }
 
 .share-button {
   margin: 1rem;
   color: white;
+  display: block;
+  text-align: center;
 }

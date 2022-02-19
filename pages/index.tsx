@@ -1,15 +1,73 @@
 import useSwr from 'swr';
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
-import Account from "../components/Account";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 import { parseBalanceToNum } from "../util";
 import { useRouter } from "next/router";
+import { UserRejectedRequestError } from "@web3-react/injected-connector";
+import { useEffect, useState } from "react";
+import { injected } from "../connectors";
+import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
+
+type AccountProps = {
+  triedToEagerConnect: boolean;
+};
+
+const Account = ({ triedToEagerConnect }: AccountProps) => {
+  const { query } = useRouter();
+
+  const { active, error, activate, account, setError } =
+    useWeb3React();
+
+  const {
+    isWeb3Available,
+    startOnboarding,
+    stopOnboarding,
+  } = useMetaMaskOnboarding();
+
+  // manage connecting state for injected connector
+  const [connecting, setConnecting] = useState(false);
+  useEffect(() => {
+    if (active || error) {
+      setConnecting(false);
+      stopOnboarding();
+    }
+  }, [active, error, stopOnboarding]);
+
+  if (error) {
+    return null;
+  }
+
+  if (!triedToEagerConnect) {
+    return null;
+  }
+
+  if (typeof account !== "string") {
+    return (
+      <button className="pulse" onClick={isWeb3Available ? (
+        () => {
+          setConnecting(true);
+
+          activate(injected, undefined, true).catch((error) => {
+            // ignore the error if it is a user rejected request
+            if (error instanceof UserRejectedRequestError) {
+              setConnecting(false);
+            } else {
+              setError(error);
+            }
+          });
+        }
+      ) : startOnboarding}>
+        Connect your wallet
+      </button>
+    );
+  }
+};
 
 export default function Home() {
   const { query } = useRouter();
@@ -57,7 +115,7 @@ export default function Home() {
         </h1>
 
         <p>
-          {parseInt(gameTileCompletionStates.reduce((a, b) => a + b, 0) / 9 * 100)}% complete
+          <strong>{parseInt(gameTileCompletionStates.reduce((a, b) => a + b, 0) / 9 * 100)}%</strong> complete
         </p>
 
         {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
@@ -74,7 +132,11 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <Account triedToEagerConnect={triedToEagerConnect} />
+            <div className={"game-tile " + (gameTileCompletionStates[0] ? "completed" : "")}>
+              <div className="tooltip">
+                Connect your wallet
+              </div>
+            </div>
             <a href="https://discord.gg/XgqAHhUe">
               <div className={"game-tile " + (gameTileCompletionStates[1] ? "completed" : "")}>
                 <div className="tooltip">
@@ -127,7 +189,7 @@ export default function Home() {
             </div>
           </div>
 
-          <button className="share-button" onClick={() => {
+          <a className="share-button" onClick={() => {
             let gameTiles = document.getElementsByClassName("game-tile");
             let completedGameTiles = [];
             for (let i = 0; i < gameTiles.length; i++) {
@@ -153,15 +215,18 @@ export default function Home() {
             }
           }}>
             Share your progress
-          </button>
+          </a>
         </section>
         <section>
           <h2>Spend the month of February learning and building web3.</h2>
           <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win 1,000 $FWEB3 tokens and a commemorative NFT.</p>
-          {!gameTileCompletionStates[0] && (
+          {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
-              <p>It's free to play. Just click the pulsing dot to login with MetaMask (you'll be prompted to install it if you don't have it already).</p>
-              {(chainId !== 137 && !query.wallet) && (
+              <p>It's free to play. Login with MetaMask to get started (you'll be prompted to install it if you don't have it already):</p>
+              <p>
+                <Account triedToEagerConnect={triedToEagerConnect} />
+              </p>
+              {(chainId !== undefined && chainId !== 137 && !query.wallet) && (
                 <p style={{color: "#f55", marginTop: "1rem"}}>Switch to Polygon via MetaMask to play this game.</p>
               )}
             </div>
