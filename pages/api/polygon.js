@@ -41,8 +41,6 @@ export default async function handler(req, res) {
       hasUsedFaucet = true;
     }
 
-    console.log(transaction);
-
     if (transaction["from"] == "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45" && transaction["isError"] == "0") {
       hasSwappedTokens = true;
     }
@@ -63,6 +61,7 @@ export default async function handler(req, res) {
     ) {
       hasSentTokens = true;
     }
+
     if (
       transaction["from"] == req.query.wallet_address.toLowerCase() &&
       transaction["to"] == "0x000000000000000000000000000000000000dead" &&
