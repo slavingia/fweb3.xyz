@@ -90,9 +90,9 @@ export default function Home() {
               </div>
             </div>
             <a href="https://polygonscan.com/address/0xdc58b1b2fa7569bb12d8a74f99437a5b3f6c7dea#writeContract">
-            <div className={"game-tile " + (polygonData && polygonData["hasMintedNFT"] ? "completed" : "")}>
+              <div className={"game-tile " + (polygonData && polygonData["hasMintedNFT"] ? "completed" : "")}>
                 <div className="tooltip">
-                  Mint the Fweb3 NFT
+                  Mint a Fweb3 diamond NFT
                 </div>
               </div>
             </a>
