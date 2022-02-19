@@ -22,6 +22,18 @@ export default function Home() {
 
   const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`, fetcher);
 
+  let gameTileCompletionStates = [
+    isConnected ? 1 : 0,
+    parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? 1 : 0,
+    polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
+    polygonData && polygonData["hasSentTokens"] ? 1 : 0,
+    polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
+    polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
+    polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
+    0,
+    0
+  ];
+
   return (
     <div>
       <Head>
@@ -44,11 +56,11 @@ export default function Home() {
           fweb3
         </h1>
 
-        {(chainId !== 137 && !query.wallet) && (
-          <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
-        )}
+        <p>
+          {parseInt(gameTileCompletionStates.reduce((a, b) => a + b, 0) / 9 * 100)}% complete
+        </p>
 
-        {query.wallet !== account && (
+        {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
           <p style={{color: "#fff"}}>{query.wallet}</p>
         )}
 
@@ -61,70 +73,59 @@ export default function Home() {
 
       <main>
         <section>
-          <p>
-            Spend the month of February learning and building web3.
-          </p>
-          <p>
-            Complete these challenges by the end of Feb to receive additional tokens:
-          </p>
-
           <div className="game-grid">
             <Account triedToEagerConnect={triedToEagerConnect} />
             <a href="https://discord.gg/XgqAHhUe">
-              <div className={"game-tile " + (parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? "completed" : "")}>
+              <div className={"game-tile " + (gameTileCompletionStates[1] ? "completed" : "")}>
                 <div className="tooltip">
                   Get 100 $FWEB3 tokens
                 </div>
               </div>
             </a>
             <a href="https://polygonscan.com/address/0x67806adca0fD8825DA9cddc69b9bA8837A64874b#writeContract">
-              <div className={"game-tile " + (polygonData && polygonData["hasUsedFaucet"] ? "completed" : "")}>
+              <div className={"game-tile " + (gameTileCompletionStates[2] ? "completed" : "")}>
                 <div className="tooltip">
                   Use the faucet to get .1 $MATIC
                 </div>
               </div>
             </a>
-            <div className={"game-tile " + (polygonData && polygonData["hasSentTokens"] ? "completed" : "")}>
+            <div className={"game-tile " + (gameTileCompletionStates[3] ? "completed" : "")}>
               <div className="tooltip">
                 Send 100 $FWEB3 tokens to someone
               </div>
             </div>
             <a href="https://polygonscan.com/address/0xdc58b1b2fa7569bb12d8a74f99437a5b3f6c7dea#writeContract">
-              <div className={"game-tile " + (polygonData && polygonData["hasMintedNFT"] ? "completed" : "")}>
+              <div className={"game-tile " + (gameTileCompletionStates[4] ? "completed" : "")}>
                 <div className="tooltip">
                   Mint a Fweb3 NFT
                 </div>
               </div>
             </a>
             <a href="https://s-h-l.notion.site/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0">
-              <div className={"game-tile " + (polygonData && polygonData["hasBurnedTokens"] ? "completed" : "")}>
+              <div className={"game-tile " + (gameTileCompletionStates[5] ? "completed" : "")}>
                 <div className="tooltip">
                   Burn at least one $FWEB3 token
                 </div>
               </div>
             </a>
             <a href="https://app.uniswap.org/#/swap?chain=polygon">
-              <div className={"game-tile " + (polygonData && polygonData["hasSwappedTokens"] ? "completed" : "")}>
+              <div className={"game-tile " + (gameTileCompletionStates[6] ? "completed" : "")}>
                 <div className="tooltip">
                   Swap a $FWEB3 token for some $MATIC
                 </div>
               </div>
             </a>
-            <div className="game-tile">
+            <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
               <div className="tooltip">
                 Vote on a Fweb3 proposal
               </div>
             </div>
-            <div className="game-tile">
+            <div className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
               <div className="tooltip">
                 Create your own ERC-20 token
               </div>
             </div>
           </div>
-
-          <button className="mint disabled">
-            Get 1,000 additional FWEB3 tokens + NFT
-          </button>
 
           <button className="share-button" onClick={() => {
             let gameTiles = document.getElementsByClassName("game-tile");
@@ -153,6 +154,18 @@ export default function Home() {
           }}>
             Share your progress
           </button>
+        </section>
+        <section>
+          <h2>Spend the month of February learning and building web3.</h2>
+          <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win 1,000 $FWEB3 tokens and a commemorative NFT.</p>
+          {!gameTileCompletionStates[0] && (
+            <div>
+              <p>It's free to play. Just click the pulsing dot to login with MetaMask (you'll be prompted to install it if you don't have it already).</p>
+              {(chainId !== 137 && !query.wallet) && (
+                <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
+              )}
+            </div>
+          )}
         </section>
       </main>
       <footer>
