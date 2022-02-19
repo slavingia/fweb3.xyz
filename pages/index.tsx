@@ -92,6 +92,11 @@ export default function Home() {
     0
   ];
 
+  let completedTiles = 0;
+  for (let i = 0; i < gameTileCompletionStates.length; i++) {
+    completedTiles += gameTileCompletionStates[i];
+  }
+
   return (
     <div>
       <Head>
@@ -115,7 +120,7 @@ export default function Home() {
         </h1>
 
         <p>
-          <strong>{parseInt(gameTileCompletionStates.reduce((a, b) => a + b, 0) / 9 * 100)}%</strong> complete
+          <strong>{Math.round(completedTiles / 9 * 100)}%</strong> complete
         </p>
 
         {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
