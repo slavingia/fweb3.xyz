@@ -23,6 +23,7 @@ export default async function handler(req, res) {
   const json = await response.json();
 
   let hasUsedFaucet = false;
+  let hasSwappedTokens = false;
 
   for (let i = 0; i < json.result.length; i++) {
     let transaction = json.result[i];
@@ -38,6 +39,10 @@ export default async function handler(req, res) {
     let transaction = internalTxnJson.result[i];
     if (transaction["from"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" && transaction["isError"] == "0") {
       hasUsedFaucet = true;
+    }
+
+    if (transaction["from"] == "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45" && transaction["isError"] == "0") {
+      hasSwappedTokens = true;
     }
   }
 
@@ -56,6 +61,7 @@ export default async function handler(req, res) {
     ) {
       hasSentTokens = true;
     }
+
     if (
       transaction["from"] == req.query.wallet_address.toLowerCase() &&
       transaction["to"] == "0x000000000000000000000000000000000000dead" &&
@@ -84,5 +90,6 @@ export default async function handler(req, res) {
     hasSentTokens: hasSentTokens,
     hasMintedNFT: hasMintedNFT,
     hasBurnedTokens: hasBurnedTokens,
+    hasSwappedTokens: hasSwappedTokens,
   });
 }
