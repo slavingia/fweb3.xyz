@@ -162,7 +162,7 @@ export default function Home() {
             <div>
               <p>It's free to play. Just click the pulsing dot to login with MetaMask (you'll be prompted to install it if you don't have it already).</p>
               {(chainId !== 137 && !query.wallet) && (
-                <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
+                <p style={{color: "#f55", marginTop: "1rem"}}>Switch to Polygon via MetaMask to play this game.</p>
               )}
             </div>
           )}
