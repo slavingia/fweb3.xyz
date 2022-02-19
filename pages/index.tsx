@@ -161,7 +161,7 @@ export default function Home() {
                 Send 100 $FWEB3 tokens to someone
               </div>
             </div>
-            <a href="https://polygonscan.com/address/0xdc58b1b2fa7569bb12d8a74f99437a5b3f6c7dea#writeContract">
+            <a href="https://polygonscan.com/address/0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B#writeContract">
               <div className={"game-tile " + (gameTileCompletionStates[4] ? "completed" : "")}>
                 <div className="tooltip">
                   Mint a Fweb3 NFT
