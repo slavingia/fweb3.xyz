@@ -47,11 +47,10 @@ contract Fweb3Diamond is ERC721, Ownable {
     uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
     bytes32 val = bytes32(rand);
     bytes memory hx = "0123456789ABCDEF";
-    bytes memory str = new bytes(51);
+    bytes memory str = new bytes(6);
 
-    for (uint i = 17; i < 20; i++) {
-      str[i*2] = hx[uint(uint8(val[i + 12] >> 4))];
-      str[1+i*2] = hx[uint(uint8(val[i + 12] & 0x0f))];
+    for (uint i = 0; i < 6; i++) {
+      str[i] = hx[uint8(val[i]) & 0x0f];
     }
 
     return string(str);
@@ -83,7 +82,7 @@ contract Fweb3Diamond is ERC721, Ownable {
     string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
     output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
 
-    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 NFT", "description": "This NFT represents your participation in Fweb3.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 NFT", "description": "This NFT represents participation in Fweb3 2022.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
     output = string(abi.encodePacked('data:application/json;base64,', json));
 
     return output;
