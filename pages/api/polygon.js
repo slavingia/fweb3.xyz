@@ -72,7 +72,7 @@ export default async function handler(req, res) {
     }
   }
 
-  const nftResponse = await fetch("https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x6a1e6221b8ba9cc77f2b9c7b2d175418b0e95262&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
+  const nftResponse = await fetch("https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0xfdbf8ef53c426ff4d5f8870e74b73b0852b1a2e8&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
   const nftJson = await nftResponse.json();
 
   let hasMintedNFT = false;

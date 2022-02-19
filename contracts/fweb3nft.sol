@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Fweb3 is ERC721, Ownable {
+contract Fweb3Diamond is ERC721, Ownable {
   constructor() ERC721("Fweb3 NFT", "FWEB3NFT") {}
 
   function toString(uint256 value) internal pure returns (string memory) {
