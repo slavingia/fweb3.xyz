@@ -89,7 +89,7 @@ export default function Home() {
     polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
     polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
     0,
-    0
+    polygonData && polygonData["hasDeployedContract"] ? 1 : 0
   ];
 
   let completedTiles = 0;
@@ -189,7 +189,7 @@ export default function Home() {
             </div>
             <div className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
               <div className="tooltip">
-                Create your own ERC-20 token
+                Write and deploy a smart contract
               </div>
             </div>
           </div>

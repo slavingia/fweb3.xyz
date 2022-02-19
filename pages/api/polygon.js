@@ -24,11 +24,16 @@ export default async function handler(req, res) {
 
   let hasUsedFaucet = false;
   let hasSwappedTokens = false;
+  let hasDeployedContract = false;
 
   for (let i = 0; i < json.result.length; i++) {
     let transaction = json.result[i];
     if (transaction["to"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" && transaction["isError"] == "0") {
       hasUsedFaucet = true;
+    }
+
+    if (transaction["to"] == "" && transaction["isError"] == "0") {
+      hasDeployedContract = true;
     }
   }
 
@@ -91,5 +96,6 @@ export default async function handler(req, res) {
     hasMintedNFT: hasMintedNFT,
     hasBurnedTokens: hasBurnedTokens,
     hasSwappedTokens: hasSwappedTokens,
+    hasDeployedContract: hasDeployedContract,
   });
 }
