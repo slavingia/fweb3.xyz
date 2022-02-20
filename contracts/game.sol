@@ -43,6 +43,7 @@ contract Poll {
     require(hasVoted(msg.sender), "Need to have voted");
     // 8. Deploying a smart contract
     winners.push(payable(msg.sender));
+    // send 10,000 FWEB3 tokens
   }
 
   function getNumWinners() public view returns (uint) {
