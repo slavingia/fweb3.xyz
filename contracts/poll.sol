@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+contract ERC20Interface {
+  function balanceOf(address whom) view public returns (uint);
+}
 
 contract Poll {
+  address private tokenAddress;
   address public owner;
   address payable[] public yesVoters;
   address payable[] public noVoters;
@@ -12,9 +15,8 @@ contract Poll {
     owner = msg.sender;
   }
 
-  function hasTokens(address voter) private view returns(bool) {
-    ERC20 instance = ERC20("0x4a14ac36667b574b08443a15093e417db909d7a3");
-    return (instance.balanceOf(voter) >= 100 * 10**18);
+  function hasTokens(address voter) view public returns (bool) {
+    return ERC20Interface(voter).balanceOf(tokenAddress) >= 100 * 10**18;
   }
 
   function voteYes() public payable {
