@@ -20,7 +20,7 @@ contract Poll {
 
   function hasntVoted(address voter) view public returns (bool) {
     bool contains = false;
-    for (uint i=0; i < voters.length; i++) {
+    for (uint i = 0; i < voters.length; i++) {
       if (voter == voters[i]) {
         contains = true;
       }
