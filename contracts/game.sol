@@ -3,7 +3,7 @@ pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract Poll {
+contract Game {
   IERC20 private _token;
   IERC20 private _poll;
   address public owner;
