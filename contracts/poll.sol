@@ -18,7 +18,7 @@ contract Poll {
     return _token.balanceOf(voter) >= 100 * 10**18;
   }
 
-  function hasntVoted(address voter) view public returns (bool) {
+  function hasVoted(address voter) view public returns (bool) {
     bool contains = false;
     for (uint i = 0; i < voters.length; i++) {
       if (voter == voters[i]) {
@@ -29,14 +29,14 @@ contract Poll {
   }
 
   function voteYes() public {
-    require(hasntVoted(msg.sender), "You already voted");
+    require(!hasVoted(msg.sender), "You already voted");
     require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
     yesVoters.push(payable(msg.sender));
     voters.push(payable(msg.sender));
   }
 
   function voteNo() public {
-    require(hasntVoted(msg.sender), "You already voted");
+    require(!hasVoted(msg.sender), "You already voted");
     require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
     voters.push(payable(msg.sender));
   }
