@@ -13,7 +13,7 @@ describe("Dots Tests", () => {
     cy.get(".game-tile.completed").should("have.length", 0);
   });
 
-  xit("loads a wallet that is complete", () => {
+  it("loads a wallet that is complete", () => {
     cy.visit("/?wallet=0x2A9d8CfD86796E6A68AF9c83FD90F67CcaF1352c");
     cy.get(".game-tile.completed").should("have.length", 9);
   });
