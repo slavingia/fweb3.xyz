@@ -137,63 +137,69 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <div className={"game-tile " + (gameTileCompletionStates[0] ? "completed" : "")}>
-              <div className="tooltip">
-                Connect your wallet
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#191c2bd41ffc41b3a47a239d7cfa7346">
+              <div className={"game-tile " + (gameTileCompletionStates[0] ? "completed" : "")}>
+                <div className="tooltip">
+                  Connect your wallet
+                </div>
               </div>
-            </div>
-            <a href="https://discord.gg/XgqAHhUe">
+            </a>
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#33e99118e0ae497bac26e5b62f629684">
               <div className={"game-tile " + (gameTileCompletionStates[1] ? "completed" : "")}>
                 <div className="tooltip">
                   Get 100 $FWEB3 tokens
                 </div>
               </div>
             </a>
-            <a href="https://polygonscan.com/address/0x67806adca0fD8825DA9cddc69b9bA8837A64874b#writeContract">
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#b9f3a9b9f2c645fb82e9633a2e44ca19">
               <div className={"game-tile " + (gameTileCompletionStates[2] ? "completed" : "")}>
                 <div className="tooltip">
                   Use the faucet to get .1 $MATIC
                 </div>
               </div>
             </a>
-            <div className={"game-tile " + (gameTileCompletionStates[3] ? "completed" : "")}>
-              <div className="tooltip">
-                Send 100 $FWEB3 tokens to someone
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#dfbd8c7587504d72b93cfa9b1ed3d822">
+              <div className={"game-tile " + (gameTileCompletionStates[3] ? "completed" : "")}>
+                <div className="tooltip">
+                  Send 100 $FWEB3 tokens to someone
+                </div>
               </div>
-            </div>
-            <a href="https://polygonscan.com/address/0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B#writeContract">
+            </a>
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#1683ea6108ae41e49a6cfa3a30fdc0a7">
               <div className={"game-tile " + (gameTileCompletionStates[4] ? "completed" : "")}>
                 <div className="tooltip">
                   Mint a Fweb3 NFT
                 </div>
               </div>
             </a>
-            <a href="https://s-h-l.notion.site/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0">
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#50bdb9a3ed904aa58b0e71979e7f52d6">
               <div className={"game-tile " + (gameTileCompletionStates[5] ? "completed" : "")}>
                 <div className="tooltip">
                   Burn at least one $FWEB3 token
                 </div>
               </div>
             </a>
-            <a href="https://app.uniswap.org/#/swap?chain=polygon">
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#de8d1ab1d12f408b96b9f4d7156b3959">
               <div className={"game-tile " + (gameTileCompletionStates[6] ? "completed" : "")}>
                 <div className="tooltip">
                   Swap a $FWEB3 token for some $MATIC
                 </div>
               </div>
             </a>
-            <a href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract">
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#f9d992dc1327486eba0e417f53ac7753">
               <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
                 <div className="tooltip">
                   Vote on a Fweb3 poll
                 </div>
               </div>
             </a>
-            <div className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
-              <div className="tooltip">
-                Write and deploy a smart contract
+            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#034d12e44d9e4ee693a193dc4b1e7ab0">
+              <div className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
+                <div className="tooltip">
+                  Write and deploy a smart contract
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <a className="share-button" onClick={() => {
