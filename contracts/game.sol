@@ -15,18 +15,18 @@ contract Poll {
     _poll = poll;
   }
 
-  function hasTokens(address winner) view public returns (bool) {
-    return _token.balanceOf(winner) >= 100 * 10**18;
+  function hasTokens(address player) view public returns (bool) {
+    return _token.balanceOf(player) >= 100 * 10**18;
   }
 
-  function hasVoted(address winner) view public returns (bool) {
-    return _poll.hasVoted(winner) >= 100 * 10**18;
+  function hasVoted(address player) view public returns (bool) {
+    return _poll.hasVoted(player);
   }
 
-  function hasWon(address winner) view public returns (bool) {
+  function hasWon(address player) view public returns (bool) {
     bool contains = false;
     for (uint i = 0; i < winners.length; i++) {
-      if (winner == winners[i]) {
+      if (player == winners[i]) {
         contains = true;
       }
     }
