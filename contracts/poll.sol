@@ -28,7 +28,6 @@ contract Poll {
     return contains;
   }
 
-
   function voteYes() public {
     require(hasntVoted(msg.sender), "You already voted");
     require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
