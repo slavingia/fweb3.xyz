@@ -182,7 +182,7 @@ export default function Home() {
                 </div>
               </div>
             </a>
-            <a href="https://polygonscan.com/address/pending#writeContract">
+            <a href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract">
               <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
                 <div className="tooltip">
                   Vote on a Fweb3 poll

@@ -37,7 +37,7 @@ export default async function handler(req, res) {
       hasDeployedContract = true;
     }
 
-    if (transaction["to"] == "pending" && transaction["isError"] == "0") {
+    if (transaction["to"] == "0x718ad63821a6a3611Ceb706f15971ee029812365" && transaction["isError"] == "0") {
       hasVotedInPoll = true;
     }
   }
