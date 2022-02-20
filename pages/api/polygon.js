@@ -24,6 +24,7 @@ export default async function handler(req, res) {
 
   let hasUsedFaucet = false;
   let hasSwappedTokens = false;
+  let hasVotedInPoll = false;
   let hasDeployedContract = false;
 
   for (let i = 0; i < json.result.length; i++) {
@@ -34,6 +35,10 @@ export default async function handler(req, res) {
 
     if (transaction["to"] == "" && transaction["isError"] == "0") {
       hasDeployedContract = true;
+    }
+
+    if (transaction["to"] == "0x718ad63821a6a3611Ceb706f15971ee029812365".toLowerCase() && transaction["isError"] == "0") {
+      hasVotedInPoll = true;
     }
   }
 
@@ -96,6 +101,7 @@ export default async function handler(req, res) {
     hasMintedNFT: hasMintedNFT,
     hasBurnedTokens: hasBurnedTokens,
     hasSwappedTokens: hasSwappedTokens,
+    hasVotedInPoll: hasVotedInPoll,
     hasDeployedContract: hasDeployedContract,
   });
 }

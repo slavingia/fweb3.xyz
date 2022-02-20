@@ -88,7 +88,7 @@ export default function Home() {
     polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
     polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
     polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
-    0,
+    polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
     polygonData && polygonData["hasDeployedContract"] ? 1 : 0
   ];
 
@@ -182,11 +182,13 @@ export default function Home() {
                 </div>
               </div>
             </a>
-            <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
-              <div className="tooltip">
-                Vote on a Fweb3 proposal
+            <a href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract">
+              <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
+                <div className="tooltip">
+                  Vote on a Fweb3 poll
+                </div>
               </div>
-            </div>
+            </a>
             <div className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
               <div className="tooltip">
                 Write and deploy a smart contract
@@ -234,6 +236,12 @@ export default function Home() {
               {(chainId !== undefined && chainId !== 137 && !query.wallet) && (
                 <p style={{color: "#f55", marginTop: "1rem"}}>Switch to Polygon via MetaMask to play this game.</p>
               )}
+            </div>
+          )}
+          {completedTiles === 9 && !query.wallet && (
+            <div>
+              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
+              <button className="mint disabled">Get 10,000 FWEB3 tokens and a commemorative NFT</button>
             </div>
           )}
         </section>

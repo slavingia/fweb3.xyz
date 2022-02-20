@@ -207,6 +207,7 @@ button {
 .disabled {
   background: #222;
   color: #333;
+  cursor: not-allowed;
 }
 
 .share-button {
