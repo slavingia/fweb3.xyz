@@ -35,7 +35,13 @@ contract Poll {
 
   function win() public {
     require(hasTokens(msg.sender), "Need 100 FWEB3 tokens");
+    // 2. Using the MATIC faucet
+    // 3. Sending 100 tokens
+    // 4. Minting NFT
+    // 5. Burning
+    // 6. Swapping
     require(hasVoted(msg.sender), "Need to have voted");
+    // 8. Deploying a smart contract
     winners.push(payable(msg.sender));
   }
 
