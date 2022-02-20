@@ -46,7 +46,7 @@ contract Poll {
     return voters.length;
   }
 
-  function getYesPercentageByPoll() public view returns (uint) {
+  function getYesPercentage() public view returns (uint) {
     return yesVoters.length * 100 / getNumVoters();
   }
 }
