@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract Poll {
   IERC20 private _token;
   address public owner;
-  address payable[] public yesVoters;
-  address payable[] public voters;
+  address payable[] yesVoters;
+  address payable[] voters;
 
   constructor(IERC20 token) {
     owner = msg.sender;
