@@ -127,8 +127,11 @@ export default function Home() {
           <p style={{color: "#fff"}}>{query.wallet}</p>
         )}
 
-        {isConnected ? (
-          <TokenBalance balance={polygonData && polygonData["tokenBalance"]} symbol="FWEB3" />
+        {isConnected || query.wallet ? (
+          <TokenBalance
+            balance={polygonData && polygonData["tokenBalance"]}
+            symbol="FWEB3"
+          />
         ) : (
           <div>0 FWEB3</div>
         )}
