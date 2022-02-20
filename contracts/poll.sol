@@ -7,7 +7,7 @@ contract Poll {
   IERC20 private _token;
   address public owner;
   address payable[] public yesVoters;
-  address payable[] public noVoters;
+  address payable[] public voters;
 
   constructor(IERC20 token) {
     owner = msg.sender;
@@ -18,25 +18,35 @@ contract Poll {
     return _token.balanceOf(voter) >= 100 * 10**18;
   }
 
-  function voteYes() public payable {
-    require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
-    yesVoters.push(payable(msg.sender));
+  function hasntVoted(address voter) view public returns (bool) {
+    bool contains = false;
+    for (uint i=0; i < voters.length; i++) {
+      if (voter == voters[i]) {
+        contains = true;
+      }
+    }
+    return contains;
   }
 
-  function voteNo() public payable {
+
+  function voteYes() public {
+    require(hasntVoted(msg.sender), "You already voted");
     require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
-    noVoters.push(payable(msg.sender));
+    yesVoters.push(payable(msg.sender));
+    voters.push(payable(msg.sender));
+  }
+
+  function voteNo() public {
+    require(hasntVoted(msg.sender), "You already voted");
+    require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
+    voters.push(payable(msg.sender));
   }
 
   function getNumVoters() public view returns (uint) {
-    return yesVoters.length + noVoters.length;
+    return voters.length;
   }
 
   function getYesPercentageByPoll() public view returns (uint) {
     return yesVoters.length * 100 / getNumVoters();
-  }
-
-  function getNoPercentageByPoll() public view returns (uint) {
-    return noVoters.length * 100 / getNumVoters();
   }
 }
