@@ -97,6 +97,8 @@ export default function Home() {
     completedTiles += gameTileCompletionStates[i];
   }
 
+  console.log(gameTileCompletionStates);
+
   return (
     <div>
       <Head>
