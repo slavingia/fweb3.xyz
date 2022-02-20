@@ -81,7 +81,7 @@ export default function Home() {
   const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`, fetcher);
 
   let gameTileCompletionStates = [
-    isConnected ? 1 : 0,
+    (isConnected || query.wallet) ? 1 : 0,
     parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? 1 : 0,
     polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
     polygonData && polygonData["hasSentTokens"] ? 1 : 0,
