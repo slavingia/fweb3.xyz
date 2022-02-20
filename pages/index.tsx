@@ -88,7 +88,7 @@ export default function Home() {
     polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
     polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
     polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
-    0,
+    polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
     polygonData && polygonData["hasDeployedContract"] ? 1 : 0
   ];
 
@@ -182,11 +182,13 @@ export default function Home() {
                 </div>
               </div>
             </a>
-            <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
-              <div className="tooltip">
-                Vote on a Fweb3 proposal
+            <a href="https://polygonscan.com/address/pending#writeContract">
+              <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
+                <div className="tooltip">
+                  Vote on a Fweb3 proposal
+                </div>
               </div>
-            </div>
+            </a>
             <div className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
               <div className="tooltip">
                 Write and deploy a smart contract
