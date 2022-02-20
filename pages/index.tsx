@@ -97,8 +97,6 @@ export default function Home() {
     completedTiles += gameTileCompletionStates[i];
   }
 
-  console.log(gameTileCompletionStates);
-
   return (
     <div>
       <Head>
@@ -238,6 +236,12 @@ export default function Home() {
               {(chainId !== undefined && chainId !== 137 && !query.wallet) && (
                 <p style={{color: "#f55", marginTop: "1rem"}}>Switch to Polygon via MetaMask to play this game.</p>
               )}
+            </div>
+          )}
+          {completedTiles === 9 && !query.wallet && (
+            <div>
+              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
+              <button className="mint disabled">Get 10,000 FWEB3 tokens and a commemorative NFT</button>
             </div>
           )}
         </section>
