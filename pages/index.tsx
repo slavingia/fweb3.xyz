@@ -1,4 +1,4 @@
-import useSwr from 'swr';
+import useSwr from "swr";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
 import TokenBalance from "../components/TokenBalance";
@@ -12,7 +12,7 @@ import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 type AccountProps = {
   triedToEagerConnect: boolean;
@@ -78,7 +78,11 @@ export default function Home() {
 
   const isConnected = typeof account === "string" && !!library;
 
-  const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`, fetcher);
+  const { data: polygonData, error } = useSwr(
+    `/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`,
+    fetcher,
+    { revalidateOnFocus: false }
+  );
 
   let gameTileCompletionStates = [
     (isConnected || query.wallet) ? 1 : 0,
