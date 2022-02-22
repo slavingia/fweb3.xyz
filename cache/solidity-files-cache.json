@@ -261,8 +261,8 @@
       ]
     },
     "/Users/sahil/code/fweb3.xyz/contracts/game.sol": {
-      "lastModificationDate": 1645554180426,
-      "contentHash": "33bf7a7eab47dc75a366deb4c7831d3e",
+      "lastModificationDate": 1645555579852,
+      "contentHash": "1f5f629f8b2fe4b31044c4988ca9e767",
       "sourceName": "contracts/game.sol",
       "solcConfig": {
         "version": "0.8.11",

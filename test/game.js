@@ -39,20 +39,23 @@ describe("Game", function () {
       await expect(game.connect(player).seekVerification()).to.be.revertedWith("Not enough tokens");
     });
 
-    it("should not be able to seek verification if they have too many tokens", async function () {
-      await token.transfer(player.address, ethers.utils.parseEther("1000"));
-      await expect(game.connect(player).seekVerification()).to.be.revertedWith("Too many tokens");
-    });
-
     it("should not be able to win if they have not been verified by a judge", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("500"));
       await expect(game.connect(player).win()).to.be.revertedWith("Not verified by a judge");
     });
 
-    it("should be able to win", async function () {
+    it("should be able to win and receive tokens if they don't have enough", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("500"));
       await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
       await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
+      // TODO: check player balance
+    });
+
+    it("should be able to win but won't receive tokens if they already have enough", async function () {
+      await token.transfer(player.address, ethers.utils.parseEther("1000"));
+      await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
+      await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
+      // TODO: check player balance
     });
 
     it("should not be able to win if they have won before", async function () {

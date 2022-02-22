@@ -7,9 +7,14 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract Game is Ownable {
   IERC20 private _token;
   address [] judges;
-  address payable[] playersSeekingVerification;
-  address payable[] playersVerifiedToWin;
-  address payable[] winners;
+
+  struct playerDetails {
+    bool isSeekingVerification;
+    bool hasBeenVerifiedToWin;
+    bool hasWon;
+    address judgeApprovedBy;
+  }
+  mapping(address => playerDetails) private players;
 
   event PlayerSeeksVerification(address indexed _player);
   event PlayerVerifiedToWin(address indexed _player, address indexed _judge);
@@ -38,18 +43,12 @@ contract Game is Ownable {
     return _token.balanceOf(player) >= 100 * 10**18;
   }
 
-  function hasTooManyTokens(address player) view public returns (bool) {
+  function hasEnoughTokens(address player) view public returns (bool) {
     return _token.balanceOf(player) >= 1000 * 10**18;
   }
 
   function hasBeenVerifiedToWin(address player) view public returns (bool) {
-    bool contains = false;
-    for (uint i = 0; i < playersVerifiedToWin.length; i++) {
-      if (player == playersVerifiedToWin[i]) {
-        contains = true;
-      }
-    }
-    return contains;
+    return players[player].hasBeenVerifiedToWin;
   }
 
   function hasNotWonBefore(address player) view public returns (bool) {
@@ -58,25 +57,25 @@ contract Game is Ownable {
 
   function seekVerification() public {
     require(hasTokens(msg.sender), "Not enough tokens");
-    require(!hasTooManyTokens(msg.sender), "Too many tokens");
-    playersSeekingVerification.push(payable(msg.sender));
+    players[msg.sender].isSeekingVerification = true;
     emit PlayerSeeksVerification(msg.sender);
   }
 
   function win() public {
     require(hasTokens(msg.sender), "Not enough tokens");
-    require(!hasTooManyTokens(msg.sender), "Too many tokens");
     require(hasBeenVerifiedToWin(msg.sender), "Not verified by a judge");
     require(hasNotWonBefore(msg.sender), "Have won before");
-    (bool sent, ) = (msg.sender).call{ value: 1000 * (10*18) }("");
-    require(sent, "Failed to send Ether");
-    winners.push(payable(msg.sender));
+    if (!hasEnoughTokens(msg.sender)) {
+      (bool sent, ) = (msg.sender).call{ value: 1000 * (10*18) }("");
+      require(sent, "Failed to send Ether");
+    }
+    players[msg.sender].hasWon = true;
     emit PlayerWon(msg.sender);
   }
 
   function verifyPlayer(address player) public judgeOnly {
     removePlayerFromSeekingVerification(player);
-    playersVerifiedToWin.push(payable(player));
+    players[player].hasBeenVerifiedToWin = true;
     emit PlayerVerifiedToWin(player, msg.sender);
   }
 
@@ -97,33 +96,15 @@ contract Game is Ownable {
     }
   }
 
-  function getPlayersSeekingVerification() view public returns (address payable[] memory) {
-    return playersSeekingVerification;
-  }
-
-  function getNumWinners() view public returns (uint) {
-    return winners.length;
-  }
-
   function getJudges() view public returns(address [] memory) {
     return judges;
   }
 
   function hasWon(address player) view public returns (bool) {
-    bool contains = false;
-    for (uint i = 0; i < winners.length; i++) {
-      if (player == winners[i]) {
-        contains = true;
-      }
-    }
-    return contains;
+    return players[player].hasWon;
   }
 
   function removePlayerFromSeekingVerification(address player) internal {
-    for (uint i = 0; i < playersSeekingVerification.length; i++) {
-      if (player == playersSeekingVerification[i]) {
-        delete playersSeekingVerification[i];
-      }
-    }
+    players[player].isSeekingVerification = false;
   }
 }
