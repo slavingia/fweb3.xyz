@@ -6,11 +6,24 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 interface Game {
-  function isWinner(address player) view public returns (bool);
+  function isWinner(address player) view external returns (bool);
 }
 
-contract Fweb3CommemorativeNFT is ERC721, Game {
-  constructor() ERC721("Fweb3 2022 Commemorative NFT", "FWEB3COMMEMORATIVENFT") {}
+contract Fweb3CommemorativeNFT is ERC721 {
+  address private _gameAddress;
+
+  constructor(
+    string memory _name,
+    string memory _symbol,
+    address gameAddress
+  ) ERC721("Fweb3 2022 Commemorative NFT", "FWEB3COMMEMORATIVENFT") {
+    _gameAddress = gameAddress;
+  }
+
+  function isWinner(address player) view public returns (bool) {
+    Game game = Game(_gameAddress);
+    return game.isWinner(player);
+  }
 
   function toString(uint256 value) internal pure returns (string memory) {
     if (value == 0) {
@@ -35,18 +48,6 @@ contract Fweb3CommemorativeNFT is ERC721, Game {
     return uint256(keccak256(abi.encodePacked(input)));
   }
 
-  function getHue(uint256 tokenId) public pure returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
-    uint256 hue = rand % 360;
-    return Strings.toString(hue);
-  }
-
-  function getSaturation(uint256 tokenId) public pure returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
-    uint256 saturation = rand % 100;
-    return Strings.toString(saturation);
-  }
-
   function getBackgroundColor(uint256 tokenId) public pure returns (string memory) {
     uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
     bytes32 val = bytes32(rand);
@@ -61,38 +62,24 @@ contract Fweb3CommemorativeNFT is ERC721, Game {
   }
 
   function tokenURI(uint256 tokenId) override public pure returns (string memory) {
-    string[17] memory parts;
-    string memory hueAndSaturation = string(abi.encodePacked(getHue(tokenId), ",", getSaturation(tokenId)));
+    string[4] memory parts;
     string memory backgroundColor = getBackgroundColor(tokenId);
 
     parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512"><rect width="100%" height="100%" fill="#';
     parts[1] = backgroundColor;
-    parts[2] = '"/><path d="M256 372.057L378 203.686L331.4 140H180.6L134 203.686L256 372.057Z" fill="hsl(';
-    parts[3] = hueAndSaturation;
-    parts[4] = '%,79%)"/><path d="M180.601 140L215.332 203.689H134L180.601 140Z" fill="hsl(';
-    parts[5] = hueAndSaturation;
-    parts[6] = '%,82%)"/><path d="M331.4 140L296.664 203.689L255.998 140H331.4Z" fill="hsl(';
-    parts[7] = hueAndSaturation;
-    parts[8] = '%,82%)"/><path d="M296.664 203.689L255.998 372.056L215.332 203.689H296.664Z" fill="hsl(';
-    parts[9] = hueAndSaturation;
-    parts[10] = '%,82%)"/><path d="M331.4 140L377.995 203.689H296.664L331.4 140Z" fill="hsl(';
-    parts[11] = hueAndSaturation;
-    parts[12] = '%,94%)"/><path d="M255.998 140L296.664 203.689H215.332L255.998 140Z" fill="hsl(';
-    parts[13] = hueAndSaturation;
-    parts[14] = '%,94%)"/><path d="M215.332 203.689L255.998 372.056L134 203.689H215.332Z" fill="hsl(';
-    parts[15] = hueAndSaturation;
-    parts[16] = '%,94%)"/></svg>';
+    parts[2] = '"/>';
+    parts[3] = '</svg>';
 
-    string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]));
-    output = string(abi.encodePacked(output, parts[9], parts[10], parts[11], parts[12], parts[13], parts[14], parts[15], parts[16]));
+    string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3]));
 
-    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 Diamond NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
+    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
     output = string(abi.encodePacked('data:application/json;base64,', json));
 
     return output;
   }
 
-  function mint(uint256 tokenId) public winnerOnly {
+  function mint(uint256 tokenId) public {
+    require(isWinner(msg.sender), "Not a winner");
     _safeMint(_msgSender(), tokenId);
   }
 }

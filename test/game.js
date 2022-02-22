@@ -19,11 +19,11 @@ describe("Game", function () {
     Token = await ethers.getContractFactory("Fweb3");
     token = await Token.deploy();
 
-    Game = await ethers.getContractFactory("Game");
+    Game = await ethers.getContractFactory("contracts/game.sol:Game");
     game = await Game.deploy(token.address);
 
     Trophy = await ethers.getContractFactory("Fweb3CommemorativeNFT");
-    trophy = await Trophy.deploy();
+    trophy = await Trophy.deploy("Fweb3 2022 Commemorative NFT", "FWEB3COMMEMORATIVENFT", game.address);
 
     // Seed everyone with enough tokens
     await token.transfer(game.address, ethers.utils.parseEther("1000000"));
@@ -90,7 +90,15 @@ describe("Game", function () {
     expect(judges[0]).to.equal("0x0000000000000000000000000000000000000000");
   });
 
-  it.only("should allow winners to mint trophy", async function () {
+  it("should not allow non-winners to mint trophy", async function () {
+    await expect(trophy.connect(player).mint(1)).to.be.revertedWith("Not a winner");
+  });
+
+  it("should allow winners to mint trophy", async function () {
+    await token.transfer(player.address, ethers.utils.parseEther("500"));
+    await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
+    await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
+
     await trophy.connect(player).mint(1);
     expect(await trophy.connect(player).ownerOf(1)).to.equal(player.address);
   });
