@@ -51,7 +51,7 @@ describe("Game", function () {
       // TODO: check player balance
     });
 
-    it.only("should be able to win but won't receive tokens if they already have enough", async function () {
+    it("should be able to win but won't receive tokens if they already have enough", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("1000"));
       await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
       await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
