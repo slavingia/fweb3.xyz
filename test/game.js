@@ -1,4 +1,6 @@
-const { expect } = require("chai");
+var chai = require("chai");
+const { BigNumber } = require('ethers')
+var expect = chai.expect;
 
 describe("Game", function () {
   let Token;
@@ -44,18 +46,20 @@ describe("Game", function () {
       await expect(game.connect(player).win()).to.be.revertedWith("Not verified by a judge");
     });
 
-    it("should be able to win and receive tokens if they don't have enough", async function () {
+    it.only("should be able to win and receive tokens if they don't have enough", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("500"));
       await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
       await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
-      // TODO: check player balance
+      console.log(BigNumber.from(await token.balanceOf(player.address)));
+      console.log(BigNumber.from(1515).mul(10 ** 18));
+      expect(await token.balanceOf(player.address)).to.equal(BigNumber.from(1515).pow(18));
     });
 
     it("should be able to win but won't receive tokens if they already have enough", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("1000"));
       await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
       await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
-      // TODO: check player balance
+      expect(await token.balanceOf(player.address)).to.equal(BigNumber.from(1515).pow(18));
     });
 
     it("should not be able to win if they have won before", async function () {

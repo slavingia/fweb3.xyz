@@ -66,8 +66,7 @@ contract Game is Ownable {
     require(hasBeenVerifiedToWin(msg.sender), "Not verified by a judge");
     require(hasNotWonBefore(msg.sender), "Have won before");
     if (!hasEnoughTokens(msg.sender)) {
-      (bool sent, ) = (msg.sender).call{ value: 1000 * (10*18) }("");
-      require(sent, "Failed to send Ether");
+      _token.transfer(msg.sender, 1000 * (10 ** 18));
     }
     players[msg.sender].hasWon = true;
     emit PlayerWon(msg.sender);
