@@ -20,7 +20,7 @@ contract Game is Ownable {
   }
 
   modifier judgeOnly {
-    require(isJudge(msg.sender), "Must be a judge");
+    require(isJudge(msg.sender), "Not a judge");
     _;
   }
 
@@ -57,24 +57,24 @@ contract Game is Ownable {
   }
 
   function seekVerification() public {
-    require(hasTokens(msg.sender), "Need 100 FWEB3 tokens");
-    require(!hasTooManyTokens(msg.sender), "Need less than 1,000 FWEB3 tokens");
+    require(hasTokens(msg.sender), "Not enough tokens");
+    require(!hasTooManyTokens(msg.sender), "Too many tokens");
     playersSeekingVerification.push(payable(msg.sender));
     emit PlayerSeeksVerification(msg.sender);
   }
 
   function win() public {
-    require(hasTokens(msg.sender), "Need 100 FWEB3 tokens");
-    require(!hasTooManyTokens(msg.sender), "Need less than 1,000 FWEB3 tokens");
-    require(hasBeenVerifiedToWin(msg.sender), "Need to have been verified by a judge");
-    require(hasNotWonBefore(msg.sender), "Need to have not won before");
+    require(hasTokens(msg.sender), "Not enough tokens");
+    require(!hasTooManyTokens(msg.sender), "Too many tokens");
+    require(hasBeenVerifiedToWin(msg.sender), "Not verified by a judge");
+    require(hasNotWonBefore(msg.sender), "Have won before");
     (bool sent, ) = (msg.sender).call{ value: 1000 * (10*18) }("");
     require(sent, "Failed to send Ether");
     winners.push(payable(msg.sender));
     emit PlayerWon(msg.sender);
   }
 
-  function approveWinner(address player) public judgeOnly {
+  function verifyPlayer(address player) public judgeOnly {
     removePlayerFromSeekingVerification(player);
     playersVerifiedToWin.push(payable(player));
     emit PlayerVerifiedToWin(player, msg.sender);
@@ -103,6 +103,10 @@ contract Game is Ownable {
 
   function getNumWinners() view public returns (uint) {
     return winners.length;
+  }
+
+  function getJudges() view public returns(address [] memory) {
+    return judges;
   }
 
   function hasWon(address player) view public returns (bool) {

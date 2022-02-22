@@ -6,44 +6,85 @@ describe("Game", function () {
   let Game;
   let game;
   let owner;
-  let addr1;
-  let addr2;
-  let addr3;
-  let addr4;
-  let addr5;
-  let winner1;
-  let winner2;
+  let player;
+  let judge;
   let addrs;
 
   beforeEach(async function () {
-      [owner, addr1, addr2, addr3, addr4, addr5, winner1, winner2, ...addrs] = await ethers.getSigners();
+    [owner, player, judge, ...addrs] = await ethers.getSigners();
 
-      Token = await ethers.getContractFactory("Fweb3");
-      token = await Token.deploy();
+    Token = await ethers.getContractFactory("Fweb3");
+    token = await Token.deploy();
 
-      Game = await ethers.getContractFactory("Game");
-      game = await Game.deploy(token.address);
+    Game = await ethers.getContractFactory("Game");
+    game = await Game.deploy(token.address);
 
-      ///Seeding addr1, addr2 and addr3 with enough tokens
-      await token.transfer(addr1.address, ethers.utils.parseEther("15"));
-      await token.transfer(addr2.address, ethers.utils.parseEther("10"));
-      await token.transfer(addr3.address, ethers.utils.parseEther("10"));
-      await token.transfer(winner1.address, ethers.utils.parseEther("10"));
-      await token.transfer(winner2.address, ethers.utils.parseEther("10"));
+    // Seed everyone with enough tokens
+    await token.transfer(game.address, ethers.utils.parseEther("1000000"));
+    await token.transfer(owner.address, ethers.utils.parseEther("15"));
+    await token.transfer(player.address, ethers.utils.parseEther("15"));
+    await token.transfer(judge.address, ethers.utils.parseEther("15"));
+
+    // Turn judge into a judge
+    await game.connect(owner).addJudge(judge.address);
   });
 
-  xit("should allow the players to seek verification", async function () {
+  describe("players", function() {
+    it("should be able to seek verification if they meet all the criteria", async function () {
+      await token.transfer(player.address, ethers.utils.parseEther("500"));
+      await expect(game.connect(player).seekVerification()).to.emit(game, "PlayerSeeksVerification").withArgs(player.address);
+    });
+
+    it("should not be able to seek verification if they don't have enough tokens", async function () {
+      await expect(game.connect(player).seekVerification()).to.be.revertedWith("Not enough tokens");
+    });
+
+    it("should not be able to seek verification if they have too many tokens", async function () {
+      await token.transfer(player.address, ethers.utils.parseEther("1000"));
+      await expect(game.connect(player).seekVerification()).to.be.revertedWith("Too many tokens");
+    });
+
+    it("should not be able to win if they have not been verified by a judge", async function () {
+      await token.transfer(player.address, ethers.utils.parseEther("500"));
+      await expect(game.connect(player).win()).to.be.revertedWith("Not verified by a judge");
+    });
+
+    it("should be able to win", async function () {
+      await token.transfer(player.address, ethers.utils.parseEther("500"));
+      await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
+      await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
+    });
+
+    it("should not be able to win if they have won before", async function () {
+      await token.transfer(player.address, ethers.utils.parseEther("500"));
+      await game.connect(owner).addJudge(player.address);
+      await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
+      await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
+      await expect(game.connect(player).win()).to.be.revertedWith("Have won before");
+    });
   });
 
-  xit("should allow judges to approve players", async function () {
+  it("should allow judges to verify players as winners", async function () {
+    await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
   });
 
-  xit("should allow the owner to add judges", async function () {
+  it("should not allow non-judges to verify players as winners", async function () {
+    await expect(game.connect(player).verifyPlayer(judge.address)).to.be.revertedWith("Not a judge");
   });
 
-  xit("should allow the owner to remove judges", async function () {
+  it("should allow owner to add judges", async function () {
+    await game.connect(owner).addJudge(player.address);
+    let judges = await game.getJudges();
+
+    expect(judges.length).to.equal(2);
+    expect(judges[0]).to.equal(judge.address);
+    expect(judges[1]).to.equal(player.address);
   });
 
-  xit("should allow players to win", async function () {
+  it("should allow owner to remove judges", async function () {
+    await game.connect(owner).removeJudge(judge.address);
+    let judges = await game.getJudges();
+    expect(judges.length).to.equal(1);
+    expect(judges[0]).to.equal("0x0000000000000000000000000000000000000000");
   });
 });
