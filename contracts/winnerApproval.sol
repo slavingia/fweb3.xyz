@@ -40,7 +40,7 @@ contract WinnerApproval is Ownable {
         _;
     }
     
-    modifier hasTokens(address _user) {
+    modifier userHasTokens(address _user) {
         require(token.balanceOf(_user) >= minNumTokens * 10**18, "User does not have enough tokens");
         _;
     }
@@ -69,7 +69,7 @@ contract WinnerApproval is Ownable {
         emit WinnerVerified(_user, false, true);
     }
 
-    function addApproval(address _user) public onlyWinners nonWinnerUser(_user) hasTokens(_user) {
+    function addApproval(address _user) public onlyWinners nonWinnerUser(_user) userHasTokens(_user) {
         /// Adds senders approval to the approved list
         /// Throws an error if the approver is not on the winner list
         /// Throws an error if the approver is already on the approver list

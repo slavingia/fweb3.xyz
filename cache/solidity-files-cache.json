@@ -261,8 +261,8 @@
       ]
     },
     "E:\\Solidity Projects\\schuster_fweb3\\fweb3.xyz\\contracts\\winnerApproval.sol": {
-      "lastModificationDate": 1645501659510,
-      "contentHash": "2a471e7743a3e0f088bc651cfbe3b40e",
+      "lastModificationDate": 1645501804467,
+      "contentHash": "18ed59f2650b1b78becf935ea84e3cdf",
       "sourceName": "contracts/winnerApproval.sol",
       "solcConfig": {
         "version": "0.8.11",
