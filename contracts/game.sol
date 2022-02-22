@@ -43,10 +43,6 @@ contract Game is Ownable {
     return _token.balanceOf(player) >= 100 * 10**18;
   }
 
-  function hasEnoughTokens(address player) view public returns (bool) {
-    return _token.balanceOf(player) >= 1000 * 10**18;
-  }
-
   function hasBeenVerifiedToWin(address player) view public returns (bool) {
     return players[player].hasBeenVerifiedToWin;
   }
@@ -65,9 +61,7 @@ contract Game is Ownable {
     require(hasTokens(msg.sender), "Not enough tokens");
     require(hasBeenVerifiedToWin(msg.sender), "Not verified by a judge");
     require(hasNotWonBefore(msg.sender), "Have won before");
-    if (!hasEnoughTokens(msg.sender)) {
-      _token.transfer(msg.sender, 1000 * (10 ** 18));
-    }
+    _token.transfer(msg.sender, 1000 * (10 ** 18));
     players[msg.sender].hasWon = true;
     emit PlayerWon(msg.sender);
   }
