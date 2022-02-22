@@ -98,7 +98,7 @@ describe("Winner Approval", function () {
         it("Should not allow a non-winner to give approval", async function () { 
             //Failure (approver is not a winner)
             await expect(winnerApproval.connect(addr5).addApproval(addr1.address))
-                .to.be.revertedWith("Approver not on winner list");      
+                .to.be.revertedWith("Sender not on the winner list");      
         })
 
         it("Should show if I've given approval for a particular user", async function () {

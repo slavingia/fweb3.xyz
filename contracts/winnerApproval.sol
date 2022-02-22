@@ -31,7 +31,7 @@ contract WinnerApproval is Ownable {
 
     /// Modifer for onlyWinners
     modifier onlyWinners {
-        require(winners[msg.sender].winner, "You have not been verified a winner");
+        require(winners[msg.sender].winner, "Sender not on the winner list");
         _;
     }
 
@@ -40,8 +40,9 @@ contract WinnerApproval is Ownable {
         _;
     }
     
-    function hasTokens(address _user) view private returns (bool) {
-        return token.balanceOf(_user) >= minNumTokens * 10**18;
+    modifier hasTokens(address _user) {
+        require(token.balanceOf(_user) >= minNumTokens * 10**18, "User does not have enough tokens");
+        _;
     }
 
     function ownerAddWinner(address _user) external onlyOwner nonWinnerUser(_user) {
@@ -68,15 +69,12 @@ contract WinnerApproval is Ownable {
         emit WinnerVerified(_user, false, true);
     }
 
-    function addApproval(address _user) public nonWinnerUser(_user) {
+    function addApproval(address _user) public onlyWinners nonWinnerUser(_user) hasTokens(_user) {
         /// Adds senders approval to the approved list
         /// Throws an error if the approver is not on the winner list
         /// Throws an error if the approver is already on the approver list
         /// Throws an error if the user is already a winner
         /// Throws an error if the users does not have enough tokens
-
-        require(checkWinnerStatus(msg.sender), "Approver not on winner list");
-        require(hasTokens(_user), "User does not have enough tokens");
 
         /// Checking if approver has already approved
         bool alreadyApproved = false;
