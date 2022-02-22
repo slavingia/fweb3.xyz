@@ -51,6 +51,7 @@ describe("Game", function () {
       await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
       await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
       console.log(BigNumber.from(await token.balanceOf(player.address)));
+      console.log(BigNumber.from(1).mul(10 ** 18));
       console.log(BigNumber.from(1515).mul(10 ** 18));
       expect(await token.balanceOf(player.address)).to.equal(BigNumber.from(1515).pow(18));
     });
