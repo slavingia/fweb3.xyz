@@ -52,7 +52,7 @@ contract Game is Ownable {
   }
 
   function hasNotWonBefore(address player) view public returns (bool) {
-    return !hasWon(player);
+    return !players[player].hasWon;
   }
 
   function seekVerification() public {
@@ -98,10 +98,6 @@ contract Game is Ownable {
 
   function getJudges() view public returns(address [] memory) {
     return judges;
-  }
-
-  function hasWon(address player) view public returns (bool) {
-    return players[player].hasWon;
   }
 
   function removePlayerFromSeekingVerification(address player) internal {
