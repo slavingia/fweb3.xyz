@@ -24,9 +24,18 @@ contract Game is Ownable {
     _token = token;
   }
 
+  modifier winnerOnly {
+    require(isWinner(msg.sender), "Not a winner");
+    _;
+  }
+
   modifier judgeOnly {
     require(isJudge(msg.sender), "Not a judge");
     _;
+  }
+
+  function isWinner(address player) view public returns (bool) {
+    return players[player].hasWon;
   }
 
   function isJudge(address judge) view public returns (bool) {

@@ -1,5 +1,4 @@
 var chai = require("chai");
-const { BigNumber } = require('ethers')
 var expect = chai.expect;
 
 describe("Game", function () {
@@ -7,6 +6,8 @@ describe("Game", function () {
   let token;
   let Game;
   let game;
+  let Trophy;
+  let trophy;
   let owner;
   let player;
   let judge;
@@ -20,6 +21,9 @@ describe("Game", function () {
 
     Game = await ethers.getContractFactory("Game");
     game = await Game.deploy(token.address);
+
+    Trophy = await ethers.getContractFactory("Fweb3CommemorativeNFT");
+    trophy = await Trophy.deploy();
 
     // Seed everyone with enough tokens
     await token.transfer(game.address, ethers.utils.parseEther("1000000"));
@@ -84,5 +88,10 @@ describe("Game", function () {
     let judges = await game.getJudges();
     expect(judges.length).to.equal(1);
     expect(judges[0]).to.equal("0x0000000000000000000000000000000000000000");
+  });
+
+  it.only("should allow winners to mint trophy", async function () {
+    await trophy.connect(player).mint(1);
+    expect(await trophy.connect(player).ownerOf(1)).to.equal(player.address);
   });
 });

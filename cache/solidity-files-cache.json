@@ -261,8 +261,8 @@
       ]
     },
     "/Users/sahil/code/fweb3.xyz/contracts/game.sol": {
-      "lastModificationDate": 1645565014829,
-      "contentHash": "3ead04947f03727afde0bbfc3bb31ce8",
+      "lastModificationDate": 1645565390833,
+      "contentHash": "4b91fcbdeb5f701c92de9e9d88b6d135",
       "sourceName": "contracts/game.sol",
       "solcConfig": {
         "version": "0.8.11",
@@ -667,6 +667,47 @@
       ],
       "artifacts": [
         "IERC165"
+      ]
+    },
+    "/Users/sahil/code/fweb3.xyz/contracts/trophy.sol": {
+      "lastModificationDate": 1645565581923,
+      "contentHash": "2d55bf9b6b7c2054e5f46897067d8882",
+      "sourceName": "contracts/trophy.sol",
+      "solcConfig": {
+        "version": "0.8.11",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/Strings.sol",
+        "./game.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "Base64",
+        "Fweb3CommemorativeNFT"
       ]
     }
   }
