@@ -8,11 +8,11 @@ contract Game is Ownable {
   IERC20 private _token;
   address [] judges;
   address payable[] playersSeekingVerification;
-  address payable[] playersApprovedToWin;
+  address payable[] playersVerifiedToWin;
   address payable[] winners;
 
   event PlayerSeeksVerification(address indexed _player);
-  event PlayerApprovedToWin(address indexed _player, address indexed _judge);
+  event PlayerVerifiedToWin(address indexed _player, address indexed _judge);
   event PlayerWon(address indexed player);
 
   constructor(IERC20 token) {
@@ -42,10 +42,10 @@ contract Game is Ownable {
     return _token.balanceOf(player) >= 1000 * 10**18;
   }
 
-  function hasBeenApprovedToWin(address player) view public returns (bool) {
+  function hasBeenVerifiedToWin(address player) view public returns (bool) {
     bool contains = false;
-    for (uint i = 0; i < playersApprovedToWin.length; i++) {
-      if (player == playersApprovedToWin[i]) {
+    for (uint i = 0; i < playersVerifiedToWin.length; i++) {
+      if (player == playersVerifiedToWin[i]) {
         contains = true;
       }
     }
@@ -66,7 +66,7 @@ contract Game is Ownable {
   function win() public {
     require(hasTokens(msg.sender), "Need 100 FWEB3 tokens");
     require(!hasTooManyTokens(msg.sender), "Need less than 1,000 FWEB3 tokens");
-    require(hasBeenApprovedToWin(msg.sender), "Need to have been approved by a judge");
+    require(hasBeenVerifiedToWin(msg.sender), "Need to have been verified by a judge");
     require(hasNotWonBefore(msg.sender), "Need to have not won before");
     (bool sent, ) = (msg.sender).call{ value: 1000 * (10*18) }("");
     require(sent, "Failed to send Ether");
@@ -76,8 +76,8 @@ contract Game is Ownable {
 
   function approveWinner(address player) public judgeOnly {
     removePlayerFromSeekingVerification(player);
-    playersApprovedToWin.push(payable(player));
-    emit PlayerApprovedToWin(player, msg.sender);
+    playersVerifiedToWin.push(payable(player));
+    emit PlayerVerifiedToWin(player, msg.sender);
   }
 
   function rejectWinner(address player) public {
