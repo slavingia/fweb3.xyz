@@ -1,4 +1,4 @@
-import useSwr from 'swr';
+import useSwr from "swr";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
 import TokenBalance from "../components/TokenBalance";
@@ -12,7 +12,7 @@ import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 type AccountProps = {
   triedToEagerConnect: boolean;
@@ -78,10 +78,14 @@ export default function Home() {
 
   const isConnected = typeof account === "string" && !!library;
 
-  const { data: polygonData, error } = useSwr(`/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`, fetcher);
+  const { data: polygonData, error } = useSwr(
+    `/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`,
+    fetcher,
+    { revalidateOnFocus: false }
+  );
 
   let gameTileCompletionStates = [
-    isConnected ? 1 : 0,
+    (isConnected || query.wallet) ? 1 : 0,
     parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? 1 : 0,
     polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
     polygonData && polygonData["hasSentTokens"] ? 1 : 0,
@@ -127,8 +131,11 @@ export default function Home() {
           <p style={{color: "#fff"}}>{query.wallet}</p>
         )}
 
-        {isConnected ? (
-          <TokenBalance balance={polygonData && polygonData["tokenBalance"]} symbol="FWEB3" />
+        {isConnected || query.wallet ? (
+          <TokenBalance
+            balance={polygonData && polygonData["tokenBalance"]}
+            symbol="FWEB3"
+          />
         ) : (
           <div>0 FWEB3</div>
         )}
@@ -232,7 +239,7 @@ export default function Home() {
         </section>
         <section>
           <h2>Learn and build in web3.</h2>
-          <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win 1,000 $FWEB3 tokens and a commemorative NFT.</p>
+          <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win additional $FWEB3 tokens and a commemorative NFT.</p>
           {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
               <p>It&apos;s free to play. Login with MetaMask to get started (you&apos;ll be prompted to install it if you don&apos;t have it already):</p>
@@ -246,8 +253,7 @@ export default function Home() {
           )}
           {completedTiles === 9 && !query.wallet && (
             <div>
-              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
-              <button className="mint disabled">Get 10,000 FWEB3 tokens and a commemorative NFT</button>
+              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots! Paste your wallet address into #finish-line in Discord.</strong></p>
             </div>
           )}
         </section>
