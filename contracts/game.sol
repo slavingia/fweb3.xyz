@@ -80,7 +80,7 @@ contract Game is Ownable {
     emit PlayerVerifiedToWin(player, msg.sender);
   }
 
-  function rejectWinner(address player) public {
+  function rejectWinner(address player) public judgeOnly {
     removePlayerFromSeekingVerification(player);
   }
 
