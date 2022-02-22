@@ -49,8 +49,15 @@ describe("Winner Approval", function () {
         expect(await winnerApproval.connect(addr1).checkWinnerStatus(addr1.address)).to.equal(true);
     });
 
+    it("Should not allow the owner to add a user if they've already been verified", async function () {
+        await expect(winnerApproval.connect(owner).ownerAddWinner(winner1.address))
+            .to.be.revertedWith("Already verified as a winner")
+    })
+
     it("Should only allow the owner to use ownerAddWinner", async function () {
         await expect(winnerApproval.connect(addr1).ownerAddWinner(addr1.address))
+            .to.be.revertedWith("Ownable: caller is not the owner");
+        await expect(winnerApproval.connect(winner1).ownerAddWinner(addr1.address))
             .to.be.revertedWith("Ownable: caller is not the owner");
         expect(await winnerApproval.connect(owner).ownerAddWinner(addr1.address))
             .to.emit(winnerApproval, "WinnerVerified")
@@ -78,7 +85,7 @@ describe("Winner Approval", function () {
         it("Should not allow an approval if the user is already a winner", async function () {
             //Failure (user already added)
             await expect(winnerApproval.connect(winner2).addApproval(winner1.address))
-                .to.be.revertedWith("User already on winner list");     
+                .to.be.revertedWith("Already verified as a winner");     
         })
 
         it("Should not add approval if the approver already gave approval", async function () { 
