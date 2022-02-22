@@ -96,7 +96,7 @@ describe("Winner Approval", function () {
 
         it("Should show if I've given approval for a particular user", async function () {
             winnerApproval.connect(winner1).addApproval(addr1.address);
-            let approvals = await winnerApproval.checkTotalApprovals(addr1.address);
+            let approvals = await winnerApproval.checkApprovers(addr1.address);
             expect(approvals.includes(winner1.address)).to.equal(true);
             expect(approvals.includes(winner2.address)).to.equal(false);
         })

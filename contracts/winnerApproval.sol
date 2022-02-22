@@ -14,8 +14,8 @@ contract WinnerApproval is Ownable {
     IERC20 private token;
     uint private minNumTokens;
 
-    event WinnerVerified(address _user, bool _byOwner, bool _byApproval);
-    event ApprovalGranted(address _approver, address _approvee);
+    event WinnerVerified(address indexed _user, bool _byOwner, bool _byApproval);
+    event ApprovalGranted(address indexed _approver, address _approvee);
 
     struct winnerDetails {
         bool winner;
@@ -49,6 +49,10 @@ contract WinnerApproval is Ownable {
         return winners[_user].winner;
     }
 
+    function checkApprovers(address _user) public view returns (address [] memory) {
+        return winners[_user].winnerApprovals;
+    }
+
     function verifyWinner(address _user) public {
         /// Verifies if you have enough approvals and adds you as a winner
         /// Throws an error if you are already an approved winner
@@ -58,10 +62,6 @@ contract WinnerApproval is Ownable {
 
         winners[_user].winner = true;
         emit WinnerVerified(_user, false, true);
-    }
-
-    function checkTotalApprovals(address _user) public view returns (address [] memory) {
-        return winners[_user].winnerApprovals;
     }
 
     function addApproval(address _user) public {
@@ -89,6 +89,5 @@ contract WinnerApproval is Ownable {
 
         emit ApprovalGranted(msg.sender, _user);
     }
-
 
 }
