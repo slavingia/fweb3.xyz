@@ -255,7 +255,7 @@ export default function Home() {
             <div>
               <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
               <p>
-                Click <a href="https://polygonscan.com/address/0xc6c5f7b1a27528dd6f34ef164377965114bfa7d9#writeContract">here</a> and click "Write" under seekVerification.
+                Click <a href="https://polygonscan.com/address/0xc6c5f7b1a27528dd6f34ef164377965114bfa7d9#writeContract">here</a> and click Write under seekVerification.
               </p>
               <p>
                 Then, ping #finish-line in Discord with your Fweb3 profile URL:
