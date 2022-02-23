@@ -251,7 +251,7 @@ export default function Home() {
               )}
             </div>
           )}
-          {completedTiles === 8 && !query.wallet && (
+          {completedTiles === 9 && !query.wallet && (
             <div>
               <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
               <p>
