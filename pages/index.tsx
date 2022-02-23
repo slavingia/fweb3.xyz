@@ -149,85 +149,92 @@ export default function Home() {
             <div
               onClick={() => setActiveDot(0)}
               className={
-                "game-tile js-dot0 " + (gameTileCompletionStates[0] ? "completed" : "")
+                "game-tile js-dot0 " +
+                (gameTileCompletionStates[0] ? "completed" : "")
               }
             >
               <div className="tooltip">Connect your wallet</div>
-              </div>
-           
+            </div>
+
             <div
               onClick={() => setActiveDot(1)}
               className={
-                "game-tile js-dot1 " + (gameTileCompletionStates[1] ? "completed" : "")
+                "game-tile js-dot1 " +
+                (gameTileCompletionStates[1] ? "completed" : "")
               }
             >
               <div className="tooltip">Get 100 $FWEB3 tokens</div>
-              </div>
-           
+            </div>
+
             <div
               onClick={() => setActiveDot(2)}
               className={
-                "game-tile js-dot2 " + (gameTileCompletionStates[2] ? "completed" : "")
+                "game-tile js-dot2 " +
+                (gameTileCompletionStates[2] ? "completed" : "")
               }
             >
               <div className="tooltip">Use the faucet to get .1 $MATIC</div>
-              </div>
-           
+            </div>
+
             <div
               onClick={() => setActiveDot(3)}
               className={
-                "game-tile js-dot3 " + (gameTileCompletionStates[3] ? "completed" : "")
+                "game-tile js-dot3 " +
+                (gameTileCompletionStates[3] ? "completed" : "")
               }
             >
               <div className="tooltip">Send 100 $FWEB3 tokens to someone</div>
-              </div>
-            
+            </div>
+
             <div
               onClick={() => setActiveDot(4)}
               className={
-                "game-tile js-dot4 " + (gameTileCompletionStates[4] ? "completed" : "")
+                "game-tile js-dot4 " +
+                (gameTileCompletionStates[4] ? "completed" : "")
               }
             >
               <div className="tooltip">Mint a Fweb3 NFT</div>
-              </div>
-         
+            </div>
+
             <div
               onClick={() => setActiveDot(5)}
               className={
-                "game-tile js-dot5 " + (gameTileCompletionStates[5] ? "completed" : "")
+                "game-tile js-dot5 " +
+                (gameTileCompletionStates[5] ? "completed" : "")
               }
             >
               <div className="tooltip">Burn at least one $FWEB3 token</div>
-              </div>
-          
+            </div>
+
             <div
               onClick={() => setActiveDot(6)}
               className={
-                "game-tile js-dot6 " + (gameTileCompletionStates[6] ? "completed" : "")
+                "game-tile js-dot6 " +
+                (gameTileCompletionStates[6] ? "completed" : "")
               }
             >
               <div className="tooltip">Swap a $FWEB3 token for some $MATIC</div>
-              </div>
-           
+            </div>
+
             <div
               onClick={() => setActiveDot(7)}
               className={
-                "game-tile js-dot7 " + (gameTileCompletionStates[7] ? "completed" : "")
+                "game-tile js-dot7 " +
+                (gameTileCompletionStates[7] ? "completed" : "")
               }
             >
               <div className="tooltip">Vote on a Fweb3 poll</div>
-              </div>
-           
+            </div>
+
             <div
               onClick={() => setActiveDot(8)}
               className={
-                "game-tile js-dot8 " + (gameTileCompletionStates[8] ? "completed" : "")
+                "game-tile js-dot8 " +
+                (gameTileCompletionStates[8] ? "completed" : "")
               }
             >
               <div className="tooltip">Write and deploy a smart contract</div>
-                </div>
-            
-            
+            </div>
           </div>
 
           <a className="share-button" onClick={() => {
@@ -277,37 +284,37 @@ export default function Home() {
               <p>These are instructions for how to do dot 2.</p>
             </>
           )}
-            {activeDot === 3 && (
+          {activeDot === 3 && (
             <>
               <h2>This is dot 3.</h2>
               <p>These are instructions for how to do dot 3.</p>
             </>
           )}
-            {activeDot === 4 && (
+          {activeDot === 4 && (
             <>
               <h2>This is dot 4.</h2>
               <p>These are instructions for how to do dot 4.</p>
             </>
           )}
-            {activeDot === 5 && (
+          {activeDot === 5 && (
             <>
               <h2>This is dot 5.</h2>
               <p>These are instructions for how to do dot 5.</p>
             </>
           )}
-            {activeDot === 6 && (
+          {activeDot === 6 && (
             <>
               <h2>This is dot 6.</h2>
               <p>These are instructions for how to do dot 6.</p>
             </>
           )}
-            {activeDot === 7 && (
+          {activeDot === 7 && (
             <>
               <h2>This is dot 7.</h2>
               <p>These are instructions for how to do dot 7.</p>
             </>
           )}
-           {activeDot === 8 && (
+          {activeDot === 8 && (
             <>
               <h2>This is dot 8.</h2>
               <p>These are instructions for how to do dot 8.</p>
