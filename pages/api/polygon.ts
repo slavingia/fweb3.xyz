@@ -127,7 +127,6 @@ export default async function handler(req, res) {
 
   for (let i = 0; i < nftJson.result.length; i++) {
     let transaction = nftJson.result[i];
-    console.log("transaction: ", transaction); // debug
     if (transaction.from === "0x0000000000000000000000000000000000000000") {
       hasMintedNFT = true;
     }
