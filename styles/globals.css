@@ -32,6 +32,7 @@ nav, footer {
 
 nav {
   border-bottom: 1px solid #333;
+  background-color: #6D165D;
 }
 
 nav strong {
@@ -214,5 +215,30 @@ button {
   margin: 1rem;
   color: white;
   display: block;
+  text-align: center;
+}
+
+.progress-container {
+  background-color:#aaa;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width:40%;
+  height:1.5rem;
+  border-radius:1rem;
+}
+
+.progress-inner {
+  position: absolute;
+  height:100%;
+  background-color:#FF95EE;
+  transition: width 0.7s ease-out;
+}
+
+.progress-label {
+  position: relative;
+  color: white;
+  display: block;
+  width:100%;
   text-align: center;
 }

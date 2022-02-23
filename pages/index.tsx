@@ -1,6 +1,7 @@
 import useSwr from "swr";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
+import ProgressBar from "../components/ProgressBar";
 import TokenBalance from "../components/TokenBalance";
 import useEagerConnect from "../hooks/useEagerConnect";
 import { parseBalanceToNum } from "../util";
@@ -122,10 +123,13 @@ export default function Home() {
         <h1>
           fweb3
         </h1>
+        {/* progress={Math.round(completedTiles / 9 * 100)} */}
 
-        <p>
-          <strong>{Math.round(completedTiles / 9 * 100)}%</strong> complete
-        </p>
+        <ProgressBar
+          progress={Math.round(completedTiles / 9 * 100)}
+          showLabel={true}
+          appendLabelText="% complete"
+          />
 
         {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
           <p style={{color: "#fff"}}>{query.wallet}</p>
