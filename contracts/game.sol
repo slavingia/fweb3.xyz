@@ -78,7 +78,7 @@ contract Game is Ownable {
 
   function addJudge(address judge) public onlyOwner {
     require(!isJudge(judge), "Already a judge");
-    judges.push(payable(judge));
+    judges.push(judge);
   }
 
   function removeJudge(address judge) public onlyOwner {
