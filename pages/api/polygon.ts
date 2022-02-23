@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
-  if (req.query.wallet_address == "undefined") {
+  if (req.query.wallet_address === "undefined") {
     return res.status(500).json({
       message: "Wallet address undefined",
     });
@@ -35,20 +35,20 @@ export default async function handler(req, res) {
   for (let i = 0; i < json.result.length; i++) {
     let transaction = json.result[i];
     if (
-      transaction["to"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" &&
-      transaction["isError"] == "0"
+      transaction["to"] === "0x67806adca0fd8825da9cddc69b9ba8837a64874b" &&
+      transaction["isError"] === "0"
     ) {
       hasUsedFaucet = true;
     }
 
-    if (transaction["to"] == "" && transaction["isError"] == "0") {
+    if (transaction["to"] === "" && transaction["isError"] === "0") {
       hasDeployedContract = true;
     }
 
     if (
-      transaction["to"] ==
+      transaction["to"] ===
         "0x718ad63821a6a3611Ceb706f15971ee029812365".toLowerCase() &&
-      transaction["isError"] == "0"
+      transaction["isError"] === "0"
     ) {
       hasVotedInPoll = true;
     }
@@ -65,15 +65,15 @@ export default async function handler(req, res) {
   for (let i = 0; i < internalTxnJson.result.length; i++) {
     let transaction = internalTxnJson.result[i];
     if (
-      transaction["from"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" &&
-      transaction["isError"] == "0"
+      transaction["from"] === "0x67806adca0fd8825da9cddc69b9ba8837a64874b" &&
+      transaction["isError"] === "0"
     ) {
       hasUsedFaucet = true;
     }
 
     if (
-      transaction["from"] == "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45" &&
-      transaction["isError"] == "0"
+      transaction["from"] === "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45" &&
+      transaction["isError"] === "0"
     ) {
       hasSwappedTokens = true;
     }
@@ -93,7 +93,7 @@ export default async function handler(req, res) {
   for (let i = 0; i < erc20json.result.length; i++) {
     let transaction = erc20json.result[i];
     if (
-      transaction["from"] == req.query.wallet_address.toLowerCase() &&
+      transaction["from"] === req.query.wallet_address.toLowerCase() &&
       transaction["value"] !== undefined &&
       parseInt(transaction["value"]) >= 100 * 10 ** 18
     ) {
@@ -101,9 +101,9 @@ export default async function handler(req, res) {
     }
 
     if (
-      transaction["from"] == req.query.wallet_address.toLowerCase() &&
-      transaction["to"] == "0x000000000000000000000000000000000000dead" &&
-      transaction["value"] != undefined &&
+      transaction["from"] === req.query.wallet_address.toLowerCase() &&
+      transaction["to"] === "0x000000000000000000000000000000000000dead" &&
+      transaction["value"] !== undefined &&
       parseInt(transaction["value"]) > 0
     ) {
       hasBurnedTokens = true;
@@ -122,7 +122,7 @@ export default async function handler(req, res) {
 
   for (let i = 0; i < nftJson.result.length; i++) {
     let transaction = nftJson.result[i];
-    if (transaction["from"] == "0x0000000000000000000000000000000000000000") {
+    if (transaction["from"] === "0x0000000000000000000000000000000000000000") {
       hasMintedNFT = true;
     }
   }
