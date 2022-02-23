@@ -9,6 +9,7 @@ import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useEffect, useState } from "react";
 import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
+import * as React from 'react'
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
@@ -84,6 +85,8 @@ export default function Home() {
     { revalidateOnFocus: false }
   );
 
+  const [activeDot, setActiveDot] = React.useState(0)
+
   let gameTileCompletionStates = [
     (isConnected || query.wallet) ? 1 : 0,
     parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? 1 : 0,
@@ -144,27 +147,27 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#191c2bd41ffc41b3a47a239d7cfa7346">
-              <div className={"game-tile " + (gameTileCompletionStates[0] ? "completed" : "")}>
+            {/* <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#191c2bd41ffc41b3a47a239d7cfa7346"> */}
+              <div onClick={() => setActiveDot(0)} className={"game-tile " + (gameTileCompletionStates[0] ? "completed" : "")}>
                 <div className="tooltip">
                   Connect your wallet
                 </div>
               </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#33e99118e0ae497bac26e5b62f629684">
-              <div className={"game-tile " + (gameTileCompletionStates[1] ? "completed" : "")}>
+            {/* </a> */}
+            {/* <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#33e99118e0ae497bac26e5b62f629684"> */}
+              <div onClick={() => setActiveDot(1)} className={"game-tile " + (gameTileCompletionStates[1] ? "completed" : "")}>
                 <div className="tooltip">
                   Get 100 $FWEB3 tokens
                 </div>
               </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#b9f3a9b9f2c645fb82e9633a2e44ca19">
-              <div className={"game-tile " + (gameTileCompletionStates[2] ? "completed" : "")}>
+            {/* </a> */}
+            {/* <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#b9f3a9b9f2c645fb82e9633a2e44ca19"> */}
+              <div onClick={() => setActiveDot(2)}className={"game-tile " + (gameTileCompletionStates[2] ? "completed" : "")}>
                 <div className="tooltip">
                   Use the faucet to get .1 $MATIC
                 </div>
               </div>
-            </a>
+            {/* </a> */}
             <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#dfbd8c7587504d72b93cfa9b1ed3d822">
               <div className={"game-tile " + (gameTileCompletionStates[3] ? "completed" : "")}>
                 <div className="tooltip">
@@ -238,8 +241,24 @@ export default function Home() {
           </a>
         </section>
         <section>
-          <h2>Learn and build in web3.</h2>
-          <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win additional $FWEB3 tokens and a commemorative NFT.</p>
+          {activeDot === 0 && (
+            <>
+              <h2>Learn and build in web3.</h2>
+              <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win additional $FWEB3 tokens and a commemorative NFT.</p>
+            </>
+          )}
+          {activeDot === 1 && (
+            <>
+              <h2>This is dot 1.</h2>
+              <p>These are instructions for how to do dot 1.</p>
+            </>
+          )}
+          {activeDot === 2 && (
+            <>
+              <h2>This is dot 2.</h2>
+              <p>These are instructions for how to do dot 2.</p>
+            </>
+          )}
           {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
               <p>It&apos;s free to play. Login with MetaMask to get started (you&apos;ll be prompted to install it if you don&apos;t have it already):</p>
