@@ -160,43 +160,43 @@ export default function Home() {
                 </div>
               </div>
            
-              <div onClick={() => setActiveDot(2)}className={"game-tile " + (gameTileCompletionStates[2] ? "completed" : "")}>
+              <div onClick={() => setActiveDot(2)} className={"game-tile " + (gameTileCompletionStates[2] ? "completed" : "")}>
                 <div className="tooltip">
                   Use the faucet to get .1 $MATIC
                 </div>
               </div>
            
-              <div className={"game-tile " + (gameTileCompletionStates[3] ? "completed" : "")}>
+              <div onClick={() => setActiveDot(3)}  className={"game-tile " + (gameTileCompletionStates[3] ? "completed" : "")}>
                 <div className="tooltip">
                   Send 100 $FWEB3 tokens to someone
                 </div>
               </div>
             
-              <div className={"game-tile " + (gameTileCompletionStates[4] ? "completed" : "")}>
+              <div onClick={() => setActiveDot(4)}  className={"game-tile " + (gameTileCompletionStates[4] ? "completed" : "")}>
                 <div className="tooltip">
                   Mint a Fweb3 NFT
                 </div>
               </div>
          
-              <div className={"game-tile " + (gameTileCompletionStates[5] ? "completed" : "")}>
+              <div onClick={() => setActiveDot(5)}  className={"game-tile " + (gameTileCompletionStates[5] ? "completed" : "")}>
                 <div className="tooltip">
                   Burn at least one $FWEB3 token
                 </div>
               </div>
           
-              <div className={"game-tile " + (gameTileCompletionStates[6] ? "completed" : "")}>
+              <div onClick={() => setActiveDot(6)}  className={"game-tile " + (gameTileCompletionStates[6] ? "completed" : "")}>
                 <div className="tooltip">
                   Swap a $FWEB3 token for some $MATIC
                 </div>
               </div>
            
-              <div className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
+              <div onClick={() => setActiveDot(7)}  className={"game-tile " + (gameTileCompletionStates[7] ? "completed" : "")}>
                 <div className="tooltip">
                   Vote on a Fweb3 poll
                 </div>
               </div>
            
-              <div className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
+              <div onClick={() => setActiveDot(8)}  className={"game-tile " + (gameTileCompletionStates[8] ? "completed" : "")}>
                 <div className="tooltip">
                   Write and deploy a smart contract
                 </div>
