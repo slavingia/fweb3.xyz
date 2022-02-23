@@ -151,6 +151,7 @@ export default function Home() {
               onClick={() => setActiveDot(0)}
               className={
                 "game-tile js-dot0 " +
+                (activeDot === 0 ? "active " : "") +
                 (gameTileCompletionStates[0] ? "completed" : "")
               }
             >
@@ -161,6 +162,7 @@ export default function Home() {
               onClick={() => setActiveDot(1)}
               className={
                 "game-tile js-dot1 " +
+                (activeDot === 1 ? "active " : "") +
                 (gameTileCompletionStates[1] ? "completed" : "")
               }
             >
@@ -171,6 +173,7 @@ export default function Home() {
               onClick={() => setActiveDot(2)}
               className={
                 "game-tile js-dot2 " +
+                (activeDot === 2 ? "active " : "") +
                 (gameTileCompletionStates[2] ? "completed" : "")
               }
             >
@@ -181,6 +184,7 @@ export default function Home() {
               onClick={() => setActiveDot(3)}
               className={
                 "game-tile js-dot3 " +
+                (activeDot === 3 ? "active " : "") +
                 (gameTileCompletionStates[3] ? "completed" : "")
               }
             >
@@ -191,6 +195,7 @@ export default function Home() {
               onClick={() => setActiveDot(4)}
               className={
                 "game-tile js-dot4 " +
+                (activeDot === 4 ? "active " : "") +
                 (gameTileCompletionStates[4] ? "completed" : "")
               }
             >
@@ -201,6 +206,7 @@ export default function Home() {
               onClick={() => setActiveDot(5)}
               className={
                 "game-tile js-dot5 " +
+                (activeDot === 5 ? "active " : "") +
                 (gameTileCompletionStates[5] ? "completed" : "")
               }
             >
@@ -211,6 +217,7 @@ export default function Home() {
               onClick={() => setActiveDot(6)}
               className={
                 "game-tile js-dot6 " +
+                (activeDot === 6 ? "active " : "") +
                 (gameTileCompletionStates[6] ? "completed" : "")
               }
             >
@@ -221,6 +228,7 @@ export default function Home() {
               onClick={() => setActiveDot(7)}
               className={
                 "game-tile js-dot7 " +
+                (activeDot === 7 ? "active " : "") +
                 (gameTileCompletionStates[7] ? "completed" : "")
               }
             >
@@ -231,6 +239,7 @@ export default function Home() {
               onClick={() => setActiveDot(8)}
               className={
                 "game-tile js-dot8 " +
+                (activeDot === 8 ? "active " : "") +
                 (gameTileCompletionStates[8] ? "completed" : "")
               }
             >

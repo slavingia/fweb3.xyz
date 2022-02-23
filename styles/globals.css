@@ -180,7 +180,8 @@ button {
   color: black;
 }
 
-.pulse {
+.pulse, 
+.active {
   background:rgba(255, 149, 238, 1);
   box-shadow: 0 0 0 0 rgba(255, 149, 238, 1);
   transform: scale(1);
