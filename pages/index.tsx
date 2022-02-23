@@ -85,7 +85,7 @@ export default function Home() {
     { revalidateOnFocus: false }
   );
 
-  const [activeDot, setActiveDot] = useState(0)
+  const [activeDot, setActiveDot] = useState(-1)
 
   let gameTileCompletionStates = [
     (isConnected || query.wallet) ? 1 : 0,
@@ -267,10 +267,16 @@ export default function Home() {
           </a>
         </section>
         <section>
-          {activeDot === 0 && (
+          {activeDot === -1 && (
             <>
               <h2>Learn and build in web3.</h2>
               <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win additional $FWEB3 tokens and a commemorative NFT.</p>
+            </>
+          )}
+          {activeDot === 0 && (
+            <>
+              <h2>This is dot 0.</h2>
+              <p>These are instructions for how to do dot 0.</p>
             </>
           )}
           {activeDot === 1 && (
