@@ -277,6 +277,42 @@ export default function Home() {
               <p>These are instructions for how to do dot 2.</p>
             </>
           )}
+            {activeDot === 3 && (
+            <>
+              <h2>This is dot 3.</h2>
+              <p>These are instructions for how to do dot 3.</p>
+            </>
+          )}
+            {activeDot === 4 && (
+            <>
+              <h2>This is dot 4.</h2>
+              <p>These are instructions for how to do dot 4.</p>
+            </>
+          )}
+            {activeDot === 5 && (
+            <>
+              <h2>This is dot 5.</h2>
+              <p>These are instructions for how to do dot 5.</p>
+            </>
+          )}
+            {activeDot === 6 && (
+            <>
+              <h2>This is dot 6.</h2>
+              <p>These are instructions for how to do dot 6.</p>
+            </>
+          )}
+            {activeDot === 7 && (
+            <>
+              <h2>This is dot 7.</h2>
+              <p>These are instructions for how to do dot 7.</p>
+            </>
+          )}
+           {activeDot === 8 && (
+            <>
+              <h2>This is dot 8.</h2>
+              <p>These are instructions for how to do dot 8.</p>
+            </>
+          )}
           {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
               <p>It&apos;s free to play. Login with MetaMask to get started (you&apos;ll be prompted to install it if you don&apos;t have it already):</p>
