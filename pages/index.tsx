@@ -226,7 +226,7 @@ export default function Home() {
             >
               <div className="tooltip">Write and deploy a smart contract</div>
                 </div>
-              </div>
+            
             
           </div>
 
