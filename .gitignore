@@ -12,6 +12,7 @@
 hardhat.config.js
 /cache
 /artifacts
+cache/solidity-files-cache.json
 
 # next.js
 /.next/
