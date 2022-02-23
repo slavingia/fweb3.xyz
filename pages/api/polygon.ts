@@ -3,7 +3,7 @@
 export default async function handler(req, res) {
   if (req.query.wallet_address == "undefined") {
     return res.status(500).json({
-      message: "Wallet address undefined"
+      message: "Wallet address undefined",
     });
   }
 
@@ -19,7 +19,12 @@ export default async function handler(req, res) {
 
   tokenBalance = balanceJson.result;
 
-  const response = await fetch("https://api.polygonscan.com/api?module=account&action=txlist&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
+  const response = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=txlist&address=" +
+      req.query.wallet_address +
+      "&startblock=0&endblock=99999999&sort=asc&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
   const json = await response.json();
 
   let hasUsedFaucet = false;
@@ -29,7 +34,10 @@ export default async function handler(req, res) {
 
   for (let i = 0; i < json.result.length; i++) {
     let transaction = json.result[i];
-    if (transaction["to"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" && transaction["isError"] == "0") {
+    if (
+      transaction["to"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" &&
+      transaction["isError"] == "0"
+    ) {
       hasUsedFaucet = true;
     }
 
@@ -37,26 +45,46 @@ export default async function handler(req, res) {
       hasDeployedContract = true;
     }
 
-    if (transaction["to"] == "0x718ad63821a6a3611Ceb706f15971ee029812365".toLowerCase() && transaction["isError"] == "0") {
+    if (
+      transaction["to"] ==
+        "0x718ad63821a6a3611Ceb706f15971ee029812365".toLowerCase() &&
+      transaction["isError"] == "0"
+    ) {
       hasVotedInPoll = true;
     }
   }
 
-  const internalTxnResponse = await fetch("https://api.polygonscan.com/api?module=account&action=txlistinternal&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
+  const internalTxnResponse = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=txlistinternal&address=" +
+      req.query.wallet_address +
+      "&startblock=0&endblock=99999999&sort=asc&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
   const internalTxnJson = await internalTxnResponse.json();
 
   for (let i = 0; i < internalTxnJson.result.length; i++) {
     let transaction = internalTxnJson.result[i];
-    if (transaction["from"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" && transaction["isError"] == "0") {
+    if (
+      transaction["from"] == "0x67806adca0fd8825da9cddc69b9ba8837a64874b" &&
+      transaction["isError"] == "0"
+    ) {
       hasUsedFaucet = true;
     }
 
-    if (transaction["from"] == "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45" && transaction["isError"] == "0") {
+    if (
+      transaction["from"] == "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45" &&
+      transaction["isError"] == "0"
+    ) {
       hasSwappedTokens = true;
     }
   }
 
-  const erc20response = await fetch("https://api.polygonscan.com/api?module=account&action=tokentx&contractaddress=0x4a14ac36667b574b08443a15093e417db909d7a3&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&sort=asc&apikey=" + process.env.POLYGON_API_KEY)
+  const erc20response = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=tokentx&contractaddress=0x4a14ac36667b574b08443a15093e417db909d7a3&address=" +
+      req.query.wallet_address +
+      "&startblock=0&endblock=99999999&sort=asc&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
   const erc20json = await erc20response.json();
 
   let hasSentTokens = false;
@@ -82,7 +110,12 @@ export default async function handler(req, res) {
     }
   }
 
-  const nftResponse = await fetch("https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B&address=" + req.query.wallet_address + "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" + process.env.POLYGON_API_KEY);
+  const nftResponse = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B&address=" +
+      req.query.wallet_address +
+      "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
   const nftJson = await nftResponse.json();
 
   let hasMintedNFT = false;
