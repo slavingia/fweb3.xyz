@@ -76,10 +76,6 @@ contract Game is Ownable {
     emit PlayerVerifiedToWin(player, msg.sender);
   }
 
-  function rejectWinner(address player) public judgeOnly {
-    removePlayerFromSeekingVerification(player);
-  }
-
   function addJudge(address judge) public onlyOwner {
     require(!isJudge(judge), "Already a judge");
     judges.push(payable(judge));
