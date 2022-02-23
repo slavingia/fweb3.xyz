@@ -9,7 +9,6 @@ import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useEffect, useState } from "react";
 import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
-import * as React from 'react'
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
@@ -85,7 +84,7 @@ export default function Home() {
     { revalidateOnFocus: false }
   );
 
-  const [activeDot, setActiveDot] = React.useState(0)
+  const [activeDot, setActiveDot] = useState(0)
 
   let gameTileCompletionStates = [
     (isConnected || query.wallet) ? 1 : 0,
