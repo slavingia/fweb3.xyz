@@ -284,55 +284,55 @@ export default function Home() {
           )}
           {activeDot === 0 && (
             <>
-              <h2>This is dot 0.</h2>
+              <h2>Connect your wallet</h2>
               <p>These are instructions for how to do dot 0.</p>
             </>
           )}
           {activeDot === 1 && (
             <>
-              <h2>This is dot 1.</h2>
+              <h2>Receive tokens (for free!)</h2>
               <p>These are instructions for how to do dot 1.</p>
             </>
           )}
           {activeDot === 2 && (
             <>
-              <h2>This is dot 2.</h2>
+              <h2>Receive gas using tokens (for free!)</h2>
               <p>These are instructions for how to do dot 2.</p>
             </>
           )}
           {activeDot === 3 && (
             <>
-              <h2>This is dot 3.</h2>
+              <h2>Use gas to send tokens</h2>
               <p>These are instructions for how to do dot 3.</p>
             </>
           )}
           {activeDot === 4 && (
             <>
-              <h2>This is dot 4.</h2>
+              <h2>Mint an NFT</h2>
               <p>These are instructions for how to do dot 4.</p>
             </>
           )}
           {activeDot === 5 && (
             <>
-              <h2>This is dot 5.</h2>
+              <h2>Burn a token</h2>
               <p>These are instructions for how to do dot 5.</p>
             </>
           )}
           {activeDot === 6 && (
             <>
-              <h2>This is dot 6.</h2>
+              <h2>Swap a token</h2>
               <p>These are instructions for how to do dot 6.</p>
             </>
           )}
           {activeDot === 7 && (
             <>
-              <h2>This is dot 7.</h2>
+              <h2>Vote in a proposal with your tokens</h2>
               <p>These are instructions for how to do dot 7.</p>
             </>
           )}
           {activeDot === 8 && (
             <>
-              <h2>This is dot 8.</h2>
+              <h2>Create your own token</h2>
               <p>These are instructions for how to do dot 8.</p>
             </>
           )}
