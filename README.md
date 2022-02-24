@@ -1,6 +1,6 @@
 ### Website
 
-Get a [Polygonscan API key](https://polygonscan.com/apis) and put it in `.env.local`:
+Get a [PolygonScan API key](https://polygonscan.com/apis) and put it in `.env.local`:
 
 `POLYGON_API_KEY=`
 
