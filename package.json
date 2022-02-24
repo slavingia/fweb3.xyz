@@ -8,7 +8,8 @@
     "lint": "next lint",
     "compile-contract-types": "typechain --target ethers-v5 --out-dir './contracts/types' './contracts/*.json'",
     "postinstall": "yarn compile-contract-types",
-    "e2e": "cypress open"
+    "e2e": "cypress open",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@ethersproject/bignumber": "^5.5.0",
@@ -41,7 +42,14 @@
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.4",
     "hardhat": "^2.8.4",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "^2.5.1",
     "typechain": "^6.0.5",
     "typescript": "^4.5.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,css,md,json,jsx,ts,tsx}": "prettier --write"
   }
 }
