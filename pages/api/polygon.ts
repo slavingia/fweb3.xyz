@@ -34,6 +34,13 @@ export default async function handler(req, res) {
     });
   }
 
+  if (balanceJson.status === "0") {
+    return res.status(500).json({
+      message: balanceJson.message,
+      result: balanceJson.result,
+    });
+  }
+
   tokenBalance = balanceJson.result;
 
   const response = await fetch(
