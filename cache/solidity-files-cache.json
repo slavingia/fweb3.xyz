@@ -21,9 +21,7 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
@@ -32,12 +30,8 @@
         "@openzeppelin/contracts/token/ERC20/ERC20.sol",
         "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol"
       ],
-      "versionPragmas": [
-        "^0.8.2"
-      ],
-      "artifacts": [
-        "Fweb3"
-      ]
+      "versionPragmas": ["^0.8.2"],
+      "artifacts": ["Fweb3"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
       "lastModificationDate": 1645552515184,
@@ -59,9 +53,7 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
@@ -71,12 +63,8 @@
         "./extensions/IERC20Metadata.sol",
         "../../utils/Context.sol"
       ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC20"
-      ]
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["ERC20"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
       "lastModificationDate": 1645552515192,
@@ -98,23 +86,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
-      "imports": [
-        "../ERC20.sol",
-        "../../../utils/Context.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC20Burnable"
-      ]
+      "imports": ["../ERC20.sol", "../../../utils/Context.sol"],
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["ERC20Burnable"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
       "lastModificationDate": 1645552515392,
@@ -136,20 +115,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
       "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20"
-      ]
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["IERC20"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
       "lastModificationDate": 1645552515396,
@@ -171,22 +144,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
-      "imports": [
-        "../IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC20Metadata"
-      ]
+      "imports": ["../IERC20.sol"],
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["IERC20Metadata"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/utils/Context.sol": {
       "lastModificationDate": 1643395649167,
@@ -208,20 +173,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
       "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Context"
-      ]
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["Context"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
       "lastModificationDate": 1645552515560,
@@ -243,22 +202,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
-      "imports": [
-        "../utils/Context.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Ownable"
-      ]
+      "imports": ["../utils/Context.sol"],
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["Ownable"]
     },
     "/Users/sahil/code/fweb3.xyz/contracts/game.sol": {
       "lastModificationDate": 1645571860480,
@@ -280,9 +231,7 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
@@ -291,12 +240,8 @@
         "@openzeppelin/contracts/access/Ownable.sol",
         "@openzeppelin/contracts/token/ERC20/IERC20.sol"
       ],
-      "versionPragmas": [
-        "^0.8.2"
-      ],
-      "artifacts": [
-        "Game"
-      ]
+      "versionPragmas": ["^0.8.2"],
+      "artifacts": ["Game"]
     },
     "/Users/sahil/code/fweb3.xyz/contracts/poll.sol": {
       "lastModificationDate": 1645320235435,
@@ -318,22 +263,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC20/IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.2"
-      ],
-      "artifacts": [
-        "Poll"
-      ]
+      "imports": ["@openzeppelin/contracts/token/ERC20/IERC20.sol"],
+      "versionPragmas": ["^0.8.2"],
+      "artifacts": ["Poll"]
     },
     "/Users/sahil/code/fweb3.xyz/contracts/fweb3diamondnft.sol": {
       "lastModificationDate": 1645295635920,
@@ -355,9 +292,7 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
@@ -367,13 +302,8 @@
         "@openzeppelin/contracts/access/Ownable.sol",
         "@openzeppelin/contracts/utils/Strings.sol"
       ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Base64",
-        "Fweb3Diamond"
-      ]
+      "versionPragmas": ["^0.8.4"],
+      "artifacts": ["Base64", "Fweb3Diamond"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
       "lastModificationDate": 1645552515260,
@@ -395,9 +325,7 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
@@ -411,12 +339,8 @@
         "../../utils/Strings.sol",
         "../../utils/introspection/ERC165.sol"
       ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC721"
-      ]
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["ERC721"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
       "lastModificationDate": 1645552515634,
@@ -438,20 +362,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
       "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "Strings"
-      ]
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["Strings"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
       "lastModificationDate": 1645552515409,
@@ -473,22 +391,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721"
-      ]
+      "imports": ["../../utils/introspection/IERC165.sol"],
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["IERC721"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
       "lastModificationDate": 1645552515419,
@@ -510,20 +420,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
       "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Receiver"
-      ]
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["IERC721Receiver"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
       "lastModificationDate": 1645552515417,
@@ -545,22 +449,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
-      "imports": [
-        "../IERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Metadata"
-      ]
+      "imports": ["../IERC721.sol"],
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["IERC721Metadata"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/utils/Address.sol": {
       "lastModificationDate": 1645552514975,
@@ -582,20 +478,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
       "imports": [],
-      "versionPragmas": [
-        "^0.8.1"
-      ],
-      "artifacts": [
-        "Address"
-      ]
+      "versionPragmas": ["^0.8.1"],
+      "artifacts": ["Address"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
       "lastModificationDate": 1645552515129,
@@ -617,22 +507,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
-      "imports": [
-        "./IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC165"
-      ]
+      "imports": ["./IERC165.sol"],
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["ERC165"]
     },
     "/Users/sahil/code/fweb3.xyz/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
       "lastModificationDate": 1645552515380,
@@ -654,20 +536,14 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
       },
       "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC165"
-      ]
+      "versionPragmas": ["^0.8.0"],
+      "artifacts": ["IERC165"]
     },
     "/Users/sahil/code/fweb3.xyz/contracts/trophy.sol": {
       "lastModificationDate": 1645571912621,
@@ -689,9 +565,7 @@
                 "evm.methodIdentifiers",
                 "metadata"
               ],
-              "": [
-                "ast"
-              ]
+              "": ["ast"]
             }
           }
         }
@@ -701,14 +575,8 @@
         "@openzeppelin/contracts/access/Ownable.sol",
         "@openzeppelin/contracts/utils/Strings.sol"
       ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Base64",
-        "Fweb3CommemorativeNFT",
-        "Game"
-      ]
+      "versionPragmas": ["^0.8.4"],
+      "artifacts": ["Base64", "Fweb3CommemorativeNFT", "Game"]
     }
   }
 }
