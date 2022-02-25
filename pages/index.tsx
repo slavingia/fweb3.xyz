@@ -247,13 +247,19 @@ export default function Home() {
                 <Account triedToEagerConnect={triedToEagerConnect} />
               </p>
               {(chainId !== undefined && chainId !== 137 && !query.wallet) && (
-                <p style={{color: "#f55", marginTop: "1rem"}}>Switch to Polygon via MetaMask to play this game.</p>
+                <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
               )}
             </div>
           )}
           {completedTiles === 9 && !query.wallet && (
             <div>
-              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots! Paste your wallet address into #finish-line in Discord.</strong></p>
+              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
+              <p>
+                Click <a href="https://polygonscan.com/address/0xc6c5f7b1a27528dd6f34ef164377965114bfa7d9#writeContract">here</a> and click Write under seekVerification.
+              </p>
+              <p>
+                Then, ping #finish-line in Discord with your Fweb3 profile URL:
+                fweb3.xyz?wallet={ account }</p>
             </div>
           )}
         </section>
