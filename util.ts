@@ -5,10 +5,24 @@ export const parseBalance = (
   value: BigNumberish,
   decimals = 18,
   decimalsToDisplay = 0
-) => commify(parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay));
+) => {
+  if (typeof value !== "number") {
+    return null;
+  }
+  return commify(
+    parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay)
+  );
+};
 
 export const parseBalanceToNum = (
   value: BigNumberish,
   decimals = 18,
   decimalsToDisplay = 0
-) => parseInt(parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay));
+) => {
+  if (typeof value !== "number") {
+    return null;
+  }
+  return parseInt(
+    parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay)
+  );
+};
