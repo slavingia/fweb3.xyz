@@ -6,10 +6,9 @@ import useEagerConnect from "../hooks/useEagerConnect";
 import { parseBalanceToNum } from "../util";
 import { useRouter } from "next/router";
 import { UserRejectedRequestError } from "@web3-react/injected-connector";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
-import * as React from "react";
 import cn from "classnames";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
@@ -154,24 +153,29 @@ const orderedDots = Object.keys(dotContent).reduce((list, key) => {
   return list;
 }, []);
 
-type DotProps = DotContent & { gameTileCompletionStates: number[] };
+type DotProps = DotContent & {
+  gameTileCompletionStates: number[],
+  activeDot: number,
+  setActiveDot: (dot: number) => void,
+};
 
 const Dot: React.FC<DotProps> = ({
-  link,
   toolTip,
   position,
   gameTileCompletionStates,
+  activeDot,
+  setActiveDot,
 }) => {
   return (
-    <a href={link}>
-      <div
-        className={cn("game-tile", {
-          completed: !!gameTileCompletionStates[position],
-        })}
-      >
-        <div className="tooltip">{toolTip}</div>
-      </div>
-    </a>
+    <div
+      onClick={() => setActiveDot(0)}
+      className={cn("game-tile", {
+        completed: !!gameTileCompletionStates[position],
+        active: activeDot === position,
+      })}
+    >
+      <div className="tooltip">{toolTip}</div>
+    </div>
   );
 };
 
@@ -260,104 +264,6 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <div
-              onClick={() => setActiveDot(0)}
-              className={
-                "game-tile js-dot0 " +
-                (activeDot === 0 ? "active " : "") +
-                (gameTileCompletionStates[0] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Connect your wallet</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(1)}
-              className={
-                "game-tile js-dot1 " +
-                (activeDot === 1 ? "active " : "") +
-                (gameTileCompletionStates[1] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Get 100 $FWEB3 tokens</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(2)}
-              className={
-                "game-tile js-dot2 " +
-                (activeDot === 2 ? "active " : "") +
-                (gameTileCompletionStates[2] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Use the faucet to get .1 $MATIC</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(3)}
-              className={
-                "game-tile js-dot3 " +
-                (activeDot === 3 ? "active " : "") +
-                (gameTileCompletionStates[3] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Send 100 $FWEB3 tokens to someone</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(4)}
-              className={
-                "game-tile js-dot4 " +
-                (activeDot === 4 ? "active " : "") +
-                (gameTileCompletionStates[4] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Mint a Fweb3 NFT</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(5)}
-              className={
-                "game-tile js-dot5 " +
-                (activeDot === 5 ? "active " : "") +
-                (gameTileCompletionStates[5] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Burn at least one $FWEB3 token</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(6)}
-              className={
-                "game-tile js-dot6 " +
-                (activeDot === 6 ? "active " : "") +
-                (gameTileCompletionStates[6] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Swap a $FWEB3 token for some $MATIC</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(7)}
-              className={
-                "game-tile js-dot7 " +
-                (activeDot === 7 ? "active " : "") +
-                (gameTileCompletionStates[7] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Vote on a Fweb3 poll</div>
-            </div>
-
-            <div
-              onClick={() => setActiveDot(8)}
-              className={
-                "game-tile js-dot8 " +
-                (activeDot === 8 ? "active " : "") +
-                (gameTileCompletionStates[8] ? "completed" : "")
-              }
-            >
-              <div className="tooltip">Write and deploy a smart contract</div>
-            </div>
             {orderedDots.map(({ id, toolTip, link, position }) => {
               return (
                 <Dot
@@ -367,6 +273,8 @@ export default function Home() {
                   link={link}
                   position={position}
                   toolTip={toolTip}
+                  activeDot={activeDot}
+                  setActiveDot={setActiveDot}
                 />
               );
             })}
@@ -411,7 +319,7 @@ export default function Home() {
           </a>
         </section>
         <section>
-          {activeDot === -1 && (
+          {activeDot === -1 || activeDot === 0 && (
             <>
               <h2>Learn and build in web3.</h2>
               <p>
@@ -423,64 +331,76 @@ export default function Home() {
           )}
           {activeDot === 0 && (
             <>
-              <h2>Connect your wallet</h2>
-              <p>These are instructions for how to do dot 0.</p>
+              <p>To get started, click the pulsing button, install MetaMask if you haven&apos;t already, and login.</p>
+              <p>If you&apos;re new, I would recommend taking your seed phrase and sticking it in Apple Notes. It&apos;s good enough for now.</p>
             </>
           )}
           {activeDot === 1 && (
             <>
               <h2>Receive tokens (for free!)</h2>
-              <p>These are instructions for how to do dot 1.</p>
+              <p><a href="https://discord.gg/azzGB8MJB2">Join our Discord</a> and ask in #token-requests for 222 $FWEB3 tokens.</p>
+              <p>Please specify your wallet address when you do so! That&apos;s enough to complete all the tasks in the game.</p>
+              <p>Once you receive them, use the #collabland-join channel to verify your ownership and see the rest of the channels on Discord.</p>
             </>
           )}
           {activeDot === 2 && (
             <>
               <h2>Receive gas using tokens (for free!)</h2>
-              <p>These are instructions for how to do dot 2.</p>
+              <p>Use our faucet to receive .1 MATIC. You&apos;ll need at least 100 $FWEB3 tokens in order to do this.</p>
+              <p style={{color: "#f55"}}>Note that using the faucet directly will cost some gas, which you don&apos;t have yet! So...</p>
+              <p>Use this website we built to use it for free: <a href="https://fweb3-matic-faucet.netlify.app/">https://fweb3-matic-faucet.netlify.app/</a></p>
             </>
           )}
           {activeDot === 3 && (
             <>
               <h2>Use gas to send tokens</h2>
-              <p>These are instructions for how to do dot 3.</p>
+              <p>Use MetaMask to send tokens to someone.</p>
             </>
           )}
           {activeDot === 4 && (
             <>
               <h2>Mint an NFT</h2>
-              <p>These are instructions for how to do dot 4.</p>
+              <p>Go to our NFT smart contract and mint yourself a Diamond NFT that will last forever:</p>
+              <p><a href="https://polygonscan.com/address/0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B#writeContract">https://polygonscan.com/address/0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B#writeContract</a></p>
+              <p>To mint yourself a unique diamond, pick a number of your choice and enter it in the “mint” function.</p>
+              <p>This will show up in your OpenSea shortly, which you can see here: <a href="https://opensea.io/account">https://opensea.io/account</a></p>
             </>
           )}
           {activeDot === 5 && (
             <>
               <h2>Burn a token</h2>
-              <p>These are instructions for how to do dot 5.</p>
+              <p>Do this by sending at least 1 $FWEB3 token to <pre>0x000000000000000000000000000000000000dead</pre>.</p>
+              <p>This is kind of like throwing a dollar bill in a river. It won&apos;t be reflected in the totalSupply function universally, but there is a paper trail that you effectively destroyed one token. Deflation!</p>
             </>
           )}
           {activeDot === 6 && (
             <>
               <h2>Swap a token</h2>
-              <p>These are instructions for how to do dot 6.</p>
+              <p>Go to Uniswap to swap 1 $FWEB3 token for some more MATIC: <a href="https://app.uniswap.org/#/swap?chain=polygon">https://app.uniswap.org/#/swap?chain=polygon</a>.</p>
+              <p>If it doesn&apos;t appear, that means you need to import the FWEB3 token into Uniswap.</p>
             </>
           )}
           {activeDot === 7 && (
             <>
               <h2>Vote in a proposal with your tokens</h2>
-              <p>These are instructions for how to do dot 7.</p>
+              <p>Use our poll contract to vote yes or no. You&apos;ll need at least 100 $FWEB3 tokens in order to do this.</p>
+              <p><a href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract">https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract</a></p>
+              <p>What question are you answering? Who knows!</p>
             </>
           )}
           {activeDot === 8 && (
             <>
               <h2>Create your own token</h2>
-              <p>These are instructions for how to do dot 8.</p>
+              <p>This is the final step. You’re going to deploy your own code to the Polygon blockchain, just like we had to do to make this game.</p>
+              <p>So far, you have interfaced with **three** smart contracts we have deployed:</p>
+              <ol>
+                <li>1. The ERC20 token for the 10,000,000 FWEB3 tokens</li>
+                <li>2. The ERC721 token for the Diamond NFT</li>
+                <li>3. The scratch-made smart contract of the poll above</li>
+              </ol>
+              <p>Now you will deploy one of your own. Need help? Check out <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#669ca4319ed646c683f4098e71505ead">this video</a> we made.</p>
             </>
           )}
-          <h2>Learn and build in web3.</h2>
-          <p>
-            There are 9 dots to light up by doing things on a blockchain (in
-            this case, Polygon). Once you light them all up, you win additional
-            $FWEB3 tokens and a commemorative NFT.
-          </p>
           {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
               <p>
