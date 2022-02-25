@@ -153,6 +153,7 @@ footer a {
   background: #454545;
   border-radius: 99px;
   position: relative;
+  cursor: pointer;
 }
 
 .game-tile > .tooltip {
@@ -228,4 +229,12 @@ button {
   color: white;
   display: block;
   text-align: center;
+}
+
+pre {
+  margin: 2rem 0 0;
+  background: #333;
+  color: #999;
+  padding: 1rem;
+  border-radius: 10px;
 }

@@ -168,7 +168,7 @@ const Dot: React.FC<DotProps> = ({
 }) => {
   return (
     <div
-      onClick={() => setActiveDot(0)}
+      onClick={() => setActiveDot(position)}
       className={cn("game-tile", {
         completed: !!gameTileCompletionStates[position],
         active: activeDot === position,
@@ -319,7 +319,8 @@ export default function Home() {
           </a>
         </section>
         <section>
-          {activeDot === -1 || activeDot === 0 && (
+          {console.log(activeDot)}
+          {(activeDot === -1 || activeDot === 0) && (
             <>
               <h2>Learn and build in web3.</h2>
               <p>
@@ -369,7 +370,7 @@ export default function Home() {
           {activeDot === 5 && (
             <>
               <h2>Burn a token</h2>
-              <p>Do this by sending at least 1 $FWEB3 token to <pre>0x000000000000000000000000000000000000dead</pre>.</p>
+              <p>Do this by sending at least 1 $FWEB3 token to: <pre>0x000000000000000000000000000000000000dead</pre></p>
               <p>This is kind of like throwing a dollar bill in a river. It won&apos;t be reflected in the totalSupply function universally, but there is a paper trail that you effectively destroyed one token. Deflation!</p>
             </>
           )}
@@ -394,9 +395,9 @@ export default function Home() {
               <p>This is the final step. You’re going to deploy your own code to the Polygon blockchain, just like we had to do to make this game.</p>
               <p>So far, you have interfaced with **three** smart contracts we have deployed:</p>
               <ol>
-                <li>1. The ERC20 token for the 10,000,000 FWEB3 tokens</li>
-                <li>2. The ERC721 token for the Diamond NFT</li>
-                <li>3. The scratch-made smart contract of the poll above</li>
+                <li>The ERC20 token for the 10,000,000 FWEB3 tokens</li>
+                <li>The ERC721 token for the Diamond NFT</li>
+                <li>The scratch-made smart contract of the poll above</li>
               </ol>
               <p>Now you will deploy one of your own. Need help? Check out <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#669ca4319ed646c683f4098e71505ead">this video</a> we made.</p>
             </>
@@ -418,7 +419,7 @@ export default function Home() {
               )}
             </div>
           )}
-          {completedTiles === 9 && !query.wallet && (
+          {(completedTiles === 9 && !query.wallet && activeDot == -1) && (
             <div>
               <p>
                 <strong style={{ color: "white" }}>
