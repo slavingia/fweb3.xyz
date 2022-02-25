@@ -14,6 +14,7 @@ export default async function handler(req, res) {
   let hasSentTokens: boolean = false;
   let hasBurnedTokens: boolean = false;
   let hasMintedNFT: boolean = false;
+  const delay = (ms = 300) => new Promise(r => setTimeout(r, ms));
 
   const responseTokenBalance = await fetch(
     "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x4a14ac36667b574b08443a15093e417db909d7a3&address=" +
@@ -22,6 +23,7 @@ export default async function handler(req, res) {
       process.env.POLYGON_API_KEY
   );
   const balanceJson = await responseTokenBalance.json();
+  await delay();
 
   if (
     balanceJson.status === "0" &&
@@ -41,6 +43,7 @@ export default async function handler(req, res) {
       process.env.POLYGON_API_KEY
   );
   const json = await response.json();
+  await delay();
 
   for (let i = 0; i < json.result.length; i++) {
     let transaction = json.result[i];
@@ -71,6 +74,7 @@ export default async function handler(req, res) {
       process.env.POLYGON_API_KEY
   );
   const internalTxnJson = await internalTxnResponse.json();
+  await delay();
 
   for (let i = 0; i < internalTxnJson.result.length; i++) {
     let transaction = internalTxnJson.result[i];
@@ -96,6 +100,7 @@ export default async function handler(req, res) {
       process.env.POLYGON_API_KEY
   );
   const erc20json = await erc20response.json();
+  await delay();
 
   for (let i = 0; i < erc20json.result.length; i++) {
     let transaction = erc20json.result[i];
