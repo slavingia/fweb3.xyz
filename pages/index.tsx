@@ -22,14 +22,10 @@ type AccountProps = {
 const Account = ({ triedToEagerConnect }: AccountProps) => {
   const { query } = useRouter();
 
-  const { active, error, activate, account, setError } =
-    useWeb3React();
+  const { active, error, activate, account, setError } = useWeb3React();
 
-  const {
-    isWeb3Available,
-    startOnboarding,
-    stopOnboarding,
-  } = useMetaMaskOnboarding();
+  const { isWeb3Available, startOnboarding, stopOnboarding } =
+    useMetaMaskOnboarding();
 
   // manage connecting state for injected connector
   const [connecting, setConnecting] = useState(false);
@@ -50,20 +46,25 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
 
   if (typeof account !== "string") {
     return (
-      <button className="pulse" onClick={isWeb3Available ? (
-        () => {
-          setConnecting(true);
+      <button
+        className="pulse"
+        onClick={
+          isWeb3Available
+            ? () => {
+                setConnecting(true);
 
-          activate(injected, undefined, true).catch((error) => {
-            // ignore the error if it is a user rejected request
-            if (error instanceof UserRejectedRequestError) {
-              setConnecting(false);
-            } else {
-              setError(error);
-            }
-          });
+                activate(injected, undefined, true).catch((error) => {
+                  // ignore the error if it is a user rejected request
+                  if (error instanceof UserRejectedRequestError) {
+                    setConnecting(false);
+                  } else {
+                    setError(error);
+                  }
+                });
+              }
+            : startOnboarding
         }
-      ) : startOnboarding}>
+      >
         Connect your wallet
       </button>
     );
@@ -189,15 +190,17 @@ export default function Home() {
   );
 
   let gameTileCompletionStates = [
-    (isConnected || query.wallet) ? 1 : 0,
-    parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100 ? 1 : 0,
+    isConnected || query.wallet ? 1 : 0,
+    parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100
+      ? 1
+      : 0,
     polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
     polygonData && polygonData["hasSentTokens"] ? 1 : 0,
     polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
     polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
     polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
     polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
-    polygonData && polygonData["hasDeployedContract"] ? 1 : 0
+    polygonData && polygonData["hasDeployedContract"] ? 1 : 0,
   ];
 
   let completedTiles = 0;
@@ -223,12 +226,10 @@ export default function Home() {
       </Head>
 
       <nav>
-        <h1>
-          fweb3
-        </h1>
+        <h1>fweb3</h1>
 
         <p>
-          <strong>{Math.round(completedTiles / 9 * 100)}%</strong> complete
+          <strong>{Math.round((completedTiles / 9) * 100)}%</strong> complete
         </p>
 
         {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
@@ -266,40 +267,58 @@ export default function Home() {
             })}
           </div>
 
-          <a className="share-button" onClick={() => {
-            let gameTiles = document.getElementsByClassName("game-tile");
-            let completedGameTiles = [];
-            for (let i = 0; i < gameTiles.length; i++) {
-              completedGameTiles.push(gameTiles[i].classList.contains("completed"));
-            }
-
-            let shareText = `Fweb3 ${ completedGameTiles.reduce((a, b) => a + b) }/9\n\n`;
-
-            for (let i = 0; i < gameTiles.length; i++) {
-              shareText += completedGameTiles[i] ? "🟣" : "⚫️";
-
-              if (i % 3 == 2 && i != gameTiles.length - 1) {
-                shareText += "\n";
+          <a
+            className="share-button"
+            onClick={() => {
+              let gameTiles = document.getElementsByClassName("game-tile");
+              let completedGameTiles = [];
+              for (let i = 0; i < gameTiles.length; i++) {
+                completedGameTiles.push(
+                  gameTiles[i].classList.contains("completed")
+                );
               }
-            }
 
-            if (navigator.share) {
-              navigator.share({
-                text: shareText
-              });
-            } else {
-              window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareText));
-            }
-          }}>
+              let shareText = `Fweb3 ${completedGameTiles.reduce(
+                (a, b) => a + b
+              )}/9\n\n`;
+
+              for (let i = 0; i < gameTiles.length; i++) {
+                shareText += completedGameTiles[i] ? "🟣" : "⚫️";
+
+                if (i % 3 == 2 && i != gameTiles.length - 1) {
+                  shareText += "\n";
+                }
+              }
+
+              if (navigator.share) {
+                navigator.share({
+                  text: shareText,
+                });
+              } else {
+                window.open(
+                  "https://twitter.com/intent/tweet?text=" +
+                    encodeURIComponent(shareText)
+                );
+              }
+            }}
+          >
             Share your progress
           </a>
         </section>
         <section>
           <h2>Learn and build in web3.</h2>
-          <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win additional $FWEB3 tokens and a commemorative NFT.</p>
+          <p>
+            There are 9 dots to light up by doing things on a blockchain (in
+            this case, Polygon). Once you light them all up, you win additional
+            $FWEB3 tokens and a commemorative NFT.
+          </p>
           {!gameTileCompletionStates[0] && !query.wallet && (
             <div>
-              <p>It&apos;s free to play. Login with MetaMask to get started (you&apos;ll be prompted to install it if you don&apos;t have it already):</p>
+              <p>
+                It&apos;s free to play. Login with MetaMask to get started
+                (you&apos;ll be prompted to install it if you don&apos;t have it
+                already):
+              </p>
               <p>
                 <Account triedToEagerConnect={triedToEagerConnect} />
               </p>
@@ -322,10 +341,12 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://s-h-l.notion.site/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0">Walkthrough</a>
+        <a href="https://s-h-l.notion.site/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0">
+          Walkthrough
+        </a>
         <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
         <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
       </footer>
     </div>
-  )
+  );
 }

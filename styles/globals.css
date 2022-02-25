@@ -2,7 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   background: black;
   color: #999;
   font-size: 22px;
@@ -10,7 +10,7 @@ body {
 }
 
 button {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
 a {
@@ -23,7 +23,8 @@ a {
   box-sizing: border-box;
 }
 
-nav, footer {
+nav,
+footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -35,7 +36,7 @@ nav {
 }
 
 nav strong {
-  color: #FF95EE;
+  color: #ff95ee;
 }
 
 footer {
@@ -46,7 +47,8 @@ footer {
 }
 
 @media only screen and (max-width: 800px) {
-  nav, footer {
+  nav,
+  footer {
     flex-direction: column;
     gap: 1rem;
   }
@@ -97,7 +99,9 @@ section {
   gap: 1rem;
 }
 
-p, ul, ol {
+p,
+ul,
+ol {
   margin: 0;
   padding: 0;
 }
@@ -172,7 +176,7 @@ footer a {
 }
 
 .completed {
-  background: #FF95EE;
+  background: #ff95ee;
 }
 
 button {
@@ -181,12 +185,12 @@ button {
   display: inline;
   padding: 15px 30px;
   margin-top: 2rem;
-  background: #FF95EE;
+  background: #ff95ee;
   color: black;
 }
 
 .pulse {
-  background:rgba(255, 149, 238, 1);
+  background: rgba(255, 149, 238, 1);
   box-shadow: 0 0 0 0 rgba(255, 149, 238, 1);
   transform: scale(1);
   animation: pulse 2s infinite;

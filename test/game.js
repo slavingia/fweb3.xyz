@@ -23,7 +23,11 @@ describe("Game", function () {
     game = await Game.deploy(token.address);
 
     Trophy = await ethers.getContractFactory("Fweb3CommemorativeNFT");
-    trophy = await Trophy.deploy("Fweb3 2022 Commemorative NFT", "FWEB3COMMEMORATIVENFT", game.address);
+    trophy = await Trophy.deploy(
+      "Fweb3 2022 Commemorative NFT",
+      "FWEB3COMMEMORATIVENFT",
+      game.address
+    );
 
     // Seed everyone with enough tokens
     await token.transfer(game.address, ethers.utils.parseEther("1000000"));
@@ -35,43 +39,63 @@ describe("Game", function () {
     await game.connect(owner).addJudge(judge.address);
   });
 
-  describe("players", function() {
+  describe("players", function () {
     it("should be able to seek verification if they meet all the criteria", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("500"));
-      await expect(game.connect(player).seekVerification()).to.emit(game, "PlayerSeeksVerification").withArgs(player.address);
+      await expect(game.connect(player).seekVerification())
+        .to.emit(game, "PlayerSeeksVerification")
+        .withArgs(player.address);
     });
 
     it("should not be able to seek verification if they don't have enough tokens", async function () {
-      await expect(game.connect(player).seekVerification()).to.be.revertedWith("Not enough tokens");
+      await expect(game.connect(player).seekVerification()).to.be.revertedWith(
+        "Not enough tokens"
+      );
     });
 
     it("should not be able to win if they have not been verified by a judge", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("500"));
-      await expect(game.connect(player).win()).to.be.revertedWith("Not verified by a judge");
+      await expect(game.connect(player).win()).to.be.revertedWith(
+        "Not verified by a judge"
+      );
     });
 
     it("should be able to win and receive tokens if they don't have enough", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("500"));
-      await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
-      await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
-      expect(await token.balanceOf(player.address) / 10 ** 18).to.equal(1515); // 15 + 500 + 1,000
+      await expect(game.connect(judge).verifyPlayer(player.address))
+        .to.emit(game, "PlayerVerifiedToWin")
+        .withArgs(player.address, judge.address);
+      await expect(game.connect(player).win())
+        .to.emit(game, "PlayerWon")
+        .withArgs(player.address);
+      expect((await token.balanceOf(player.address)) / 10 ** 18).to.equal(1515); // 15 + 500 + 1,000
     });
 
     it("should not be able to win if they have won before", async function () {
       await token.transfer(player.address, ethers.utils.parseEther("500"));
       await game.connect(owner).addJudge(player.address);
-      await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
-      await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
-      await expect(game.connect(player).win()).to.be.revertedWith("Have won before");
+      await expect(game.connect(judge).verifyPlayer(player.address))
+        .to.emit(game, "PlayerVerifiedToWin")
+        .withArgs(player.address, judge.address);
+      await expect(game.connect(player).win())
+        .to.emit(game, "PlayerWon")
+        .withArgs(player.address);
+      await expect(game.connect(player).win()).to.be.revertedWith(
+        "Have won before"
+      );
     });
   });
 
   it("should allow judges to verify players as winners", async function () {
-    await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
+    await expect(game.connect(judge).verifyPlayer(player.address))
+      .to.emit(game, "PlayerVerifiedToWin")
+      .withArgs(player.address, judge.address);
   });
 
   it("should not allow non-judges to verify players as winners", async function () {
-    await expect(game.connect(player).verifyPlayer(judge.address)).to.be.revertedWith("Not a judge");
+    await expect(
+      game.connect(player).verifyPlayer(judge.address)
+    ).to.be.revertedWith("Not a judge");
   });
 
   it("should allow owner to add judges", async function () {
@@ -91,13 +115,19 @@ describe("Game", function () {
   });
 
   it("should not allow non-winners to mint trophy", async function () {
-    await expect(trophy.connect(player).mint(1)).to.be.revertedWith("Not a winner");
+    await expect(trophy.connect(player).mint(1)).to.be.revertedWith(
+      "Not a winner"
+    );
   });
 
   it("should allow winners to mint trophy", async function () {
     await token.transfer(player.address, ethers.utils.parseEther("500"));
-    await expect(game.connect(judge).verifyPlayer(player.address)).to.emit(game, "PlayerVerifiedToWin").withArgs(player.address, judge.address);
-    await expect(game.connect(player).win()).to.emit(game, "PlayerWon").withArgs(player.address);
+    await expect(game.connect(judge).verifyPlayer(player.address))
+      .to.emit(game, "PlayerVerifiedToWin")
+      .withArgs(player.address, judge.address);
+    await expect(game.connect(player).win())
+      .to.emit(game, "PlayerWon")
+      .withArgs(player.address);
 
     await trophy.connect(player).mint(1);
     expect(await trophy.connect(player).ownerOf(1)).to.equal(player.address);
