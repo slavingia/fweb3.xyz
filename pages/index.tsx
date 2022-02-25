@@ -319,7 +319,6 @@ export default function Home() {
           </a>
         </section>
         <section>
-          {console.log(activeDot)}
           {(activeDot === -1 || activeDot === 0) && (
             <>
               <h2>Learn and build in web3.</h2>
