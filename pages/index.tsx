@@ -9,7 +9,7 @@ import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useEffect, useState } from "react";
 import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
-import * as React from 'react'
+import * as React from "react";
 import cn from "classnames";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
@@ -190,7 +190,7 @@ export default function Home() {
     { revalidateOnFocus: false }
   );
 
-  const [activeDot, setActiveDot] = useState(-1)
+  const [activeDot, setActiveDot] = useState(-1);
 
   let gameTileCompletionStates = [
     isConnected || query.wallet ? 1 : 0,
@@ -235,13 +235,17 @@ export default function Home() {
           <strong>{Math.round((completedTiles / 9) * 100)}%</strong> complete
         </p>
 
-        {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
-          <a href={"https://polygonscan.com/address/" + query.wallet} target="_blank" rel="noreferrer">
-            <p style={{color: "#fff"}}>
-              {query.wallet}
-            </p>
-          </a>
-        )}
+        {query.wallet !== undefined &&
+          query.wallet !== account &&
+          query.wallet.length > 0 && (
+            <a
+              href={"https://polygonscan.com/address/" + query.wallet}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p style={{ color: "#fff" }}>{query.wallet}</p>
+            </a>
+          )}
 
         {isConnected || query.wallet ? (
           <TokenBalance
@@ -410,7 +414,11 @@ export default function Home() {
           {activeDot === -1 && (
             <>
               <h2>Learn and build in web3.</h2>
-              <p>There are 9 dots to light up by doing things on a blockchain (in this case, Polygon). Once you light them all up, you win additional $FWEB3 tokens and a commemorative NFT.</p>
+              <p>
+                There are 9 dots to light up by doing things on a blockchain (in
+                this case, Polygon). Once you light them all up, you win
+                additional $FWEB3 tokens and a commemorative NFT.
+              </p>
             </>
           )}
           {activeDot === 0 && (
@@ -483,20 +491,31 @@ export default function Home() {
               <p>
                 <Account triedToEagerConnect={triedToEagerConnect} />
               </p>
-              {(chainId !== undefined && chainId !== 137 && !query.wallet) && (
-                <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
+              {chainId !== undefined && chainId !== 137 && !query.wallet && (
+                <p style={{ color: "#f55" }}>
+                  Switch to Polygon via MetaMask to play this game.
+                </p>
               )}
             </div>
           )}
           {completedTiles === 9 && !query.wallet && (
             <div>
-              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
               <p>
-                Click <a href="https://polygonscan.com/address/0xc6c5f7b1a27528dd6f34ef164377965114bfa7d9#writeContract">here</a> and click Write under seekVerification.
+                <strong style={{ color: "white" }}>
+                  You&apos;ve completed all the dots!
+                </strong>
+              </p>
+              <p>
+                Click{" "}
+                <a href="https://polygonscan.com/address/0xc6c5f7b1a27528dd6f34ef164377965114bfa7d9#writeContract">
+                  here
+                </a>{" "}
+                and click Write under seekVerification.
               </p>
               <p>
                 Then, ping #finish-line in Discord with your Fweb3 profile URL:
-                fweb3.xyz?wallet={ account }</p>
+                fweb3.xyz?wallet={account}
+              </p>
             </div>
           )}
         </section>

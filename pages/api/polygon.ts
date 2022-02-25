@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   let hasSentTokens: boolean = false;
   let hasBurnedTokens: boolean = false;
   let hasMintedNFT: boolean = false;
-  const delay = (ms = 300) => new Promise(r => setTimeout(r, ms));
+  const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
 
   const responseTokenBalance = await fetch(
     "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=0x4a14ac36667b574b08443a15093e417db909d7a3&address=" +
