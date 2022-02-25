@@ -11,31 +11,31 @@ describe("Walkthrough Tests", () => {
 
     cy.get("h2").should("contain.text", "Learn and build in web3.");
 
-    cy.get(".js-dot0").click();
-    cy.get("h2").should("contain.text", "Connect your wallet");
+    cy.get(".game-tile").eq(0).click();
+    cy.get("h2").should("contain.text", "Learn and build in web3.");
 
-    cy.get(".js-dot1").click();
+    cy.get(".game-tile").eq(1).click();
     cy.get("h2").should("contain.text", "Receive tokens");
 
-    cy.get(".js-dot2").click();
+    cy.get(".game-tile").eq(2).click();
     cy.get("h2").should("contain.text", "Receive gas");
 
-    cy.get(".js-dot3").click();
+    cy.get(".game-tile").eq(3).click();
     cy.get("h2").should("contain.text", "Use gas to send tokens");
 
-    cy.get(".js-dot4").click();
+    cy.get(".game-tile").eq(4).click();
     cy.get("h2").should("contain.text", "Mint an NFT");
 
-    cy.get(".js-dot5").click();
+    cy.get(".game-tile").eq(5).click();
     cy.get("h2").should("contain.text", "Burn a token");
 
-    cy.get(".js-dot6").click();
+    cy.get(".game-tile").eq(6).click();
     cy.get("h2").should("contain.text", "Swap a token");
 
-    cy.get(".js-dot7").click();
+    cy.get(".game-tile").eq(7).click();
     cy.get("h2").should("contain.text", "Vote in a proposal");
 
-    cy.get(".js-dot8").click();
+    cy.get(".game-tile").eq(8).click();
     cy.get("h2").should("contain.text", "Create your own token");
   });
 });
