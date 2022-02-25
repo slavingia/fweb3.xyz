@@ -128,7 +128,7 @@ export default function Home() {
         </p>
 
         {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
-          <p style={{color: "#fff"}}>{query.wallet}</p>
+          <a href={"https://polygonscan.com/address/" + query.wallet} target="_blank" rel="noreferrer"><p style={{color: "#fff"}}>{query.wallet}</p></a>
         )}
 
         {isConnected || query.wallet ? (
