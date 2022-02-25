@@ -9,6 +9,7 @@ import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useEffect, useState } from "react";
 import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
+import cn from "classnames";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
@@ -162,9 +163,9 @@ const Dot: React.FC<DotProps> = ({
   return (
     <a href={link}>
       <div
-        className={`game-tile ${
-          gameTileCompletionStates[position] ? "completed" : ""
-        }`}
+        className={cn("game-tile", {
+          completed: !!gameTileCompletionStates[position],
+        })}
       >
         <div className="tooltip">{toolTip}</div>
       </div>
