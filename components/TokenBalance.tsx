@@ -10,11 +10,7 @@ type TokenBalanceProps = {
 const TokenBalance = ({ balance, symbol }: TokenBalanceProps) => {
   const { account } = useWeb3React<Web3Provider>();
 
-  return (
-    <p>
-      {`${parseBalance(balance ?? 0)} ${symbol}`}
-    </p>
-  );
+  return <p>{`${parseBalance(balance ?? 0)} ${symbol}`}</p>;
 };
 
 export default TokenBalance;

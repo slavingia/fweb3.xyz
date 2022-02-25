@@ -5,7 +5,7 @@ async function main() {
 
   const weiAmount = (await deployer.getBalance()).toString();
 
-  console.log("Account balance:", (await ethers.utils.formatEther(weiAmount)));
+  console.log("Account balance:", await ethers.utils.formatEther(weiAmount));
 
   const Token = await ethers.getContractFactory("Fweb3");
   const token = await Token.deploy();
@@ -18,4 +18,4 @@ main()
   .catch((error) => {
     console.error(error);
     process.exit(1);
-});
+  });
