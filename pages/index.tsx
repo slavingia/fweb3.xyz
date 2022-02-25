@@ -434,7 +434,7 @@ export default function Home() {
               </p>
               <p>
                 Then, ping #finish-line in Discord with your Fweb3 profile URL:
-                fweb3.xyz?wallet={account}
+                https://fweb3.xyz?wallet={account}
               </p>
             </div>
           )}
