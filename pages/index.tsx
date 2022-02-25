@@ -9,6 +9,7 @@ import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useEffect, useState } from "react";
 import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
+import cn from "classnames";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
@@ -70,6 +71,109 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
   }
 };
 
+type DotContent = {
+  id: string;
+  position: number;
+  toolTip: string;
+  link: string;
+};
+
+enum DotKey {
+  isConnected = "isConnected",
+  hasTokens = "hasTokens",
+  hasUsedFaucet = "hasUsedFaucet",
+  hasSentTokens = "hasSentTokens",
+  hasMintedNFT = "hasMintedNFT",
+  hasBurnedTokens = "hasBurnedTokens",
+  hasSwappedTokens = "hasSwappedTokens",
+  hasVotedInPoll = "hasVotedInPoll",
+  hasDeployedContract = "hasDeployedContract",
+}
+
+const dotContent: Record<DotKey, DotContent> = {
+  [DotKey.isConnected]: {
+    id: DotKey.isConnected,
+    position: 0,
+    toolTip: "Connect your wallet",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#191c2bd41ffc41b3a47a239d7cfa7346",
+  },
+  [DotKey.hasTokens]: {
+    id: DotKey.hasTokens,
+    position: 1,
+    toolTip: "Get 100 $FWEB3 tokens",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#33e99118e0ae497bac26e5b62f629684",
+  },
+  [DotKey.hasUsedFaucet]: {
+    id: DotKey.hasUsedFaucet,
+    position: 2,
+    toolTip: "Use the faucet to get .1 $MATIC",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#b9f3a9b9f2c645fb82e9633a2e44ca19",
+  },
+  [DotKey.hasSentTokens]: {
+    id: DotKey.hasSentTokens,
+    position: 3,
+    toolTip: "Send 100 $FWEB3 tokens to someone",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#dfbd8c7587504d72b93cfa9b1ed3d822",
+  },
+  [DotKey.hasMintedNFT]: {
+    id: DotKey.hasMintedNFT,
+    position: 4,
+    toolTip: "Mint a Fweb3 NFT",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#1683ea6108ae41e49a6cfa3a30fdc0a7",
+  },
+  [DotKey.hasBurnedTokens]: {
+    id: DotKey.hasBurnedTokens,
+    position: 5,
+    toolTip: "Burn at least one $FWEB3 token",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#50bdb9a3ed904aa58b0e71979e7f52d6",
+  },
+  [DotKey.hasSwappedTokens]: {
+    id: DotKey.hasSwappedTokens,
+    position: 6,
+    toolTip: "Swap a $FWEB3 token for some $MATIC",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#de8d1ab1d12f408b96b9f4d7156b3959",
+  },
+  [DotKey.hasVotedInPoll]: {
+    id: DotKey.hasVotedInPoll,
+    position: 7,
+    toolTip: "Vote on a Fweb3 poll",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#f9d992dc1327486eba0e417f53ac7753",
+  },
+  [DotKey.hasDeployedContract]: {
+    id: DotKey.hasDeployedContract,
+    position: 8,
+    toolTip: "Write and deploy a smart contract",
+    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#034d12e44d9e4ee693a193dc4b1e7ab0",
+  },
+};
+
+const orderedDots = Object.keys(dotContent).reduce((list, key) => {
+  const dot = dotContent[key];
+  list[dot.position] = dot;
+  return list;
+}, []);
+
+type DotProps = DotContent & { gameTileCompletionStates: number[] };
+
+const Dot: React.FC<DotProps> = ({
+  link,
+  toolTip,
+  position,
+  gameTileCompletionStates,
+}) => {
+  return (
+    <a href={link}>
+      <div
+        className={cn("game-tile", {
+          completed: !!gameTileCompletionStates[position],
+        })}
+      >
+        <div className="tooltip">{toolTip}</div>
+      </div>
+    </a>
+  );
+};
+
 export default function Home() {
   const { query } = useRouter();
 
@@ -128,11 +232,13 @@ export default function Home() {
           <strong>{Math.round((completedTiles / 9) * 100)}%</strong> complete
         </p>
 
-        {query.wallet !== undefined &&
-          query.wallet !== account &&
-          query.wallet.length > 0 && (
-            <p style={{ color: "#fff" }}>{query.wallet}</p>
-          )}
+        {query.wallet !== undefined && query.wallet !== account && query.wallet.length > 0 && (
+          <a href={"https://polygonscan.com/address/" + query.wallet} target="_blank" rel="noreferrer">
+            <p style={{color: "#fff"}}>
+              {query.wallet}
+            </p>
+          </a>
+        )}
 
         {isConnected || query.wallet ? (
           <TokenBalance
@@ -147,98 +253,18 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#191c2bd41ffc41b3a47a239d7cfa7346">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[0] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Connect your wallet</div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#33e99118e0ae497bac26e5b62f629684">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[1] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Get 100 $FWEB3 tokens</div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#b9f3a9b9f2c645fb82e9633a2e44ca19">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[2] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Use the faucet to get .1 $MATIC</div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#dfbd8c7587504d72b93cfa9b1ed3d822">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[3] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Send 100 $FWEB3 tokens to someone</div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#1683ea6108ae41e49a6cfa3a30fdc0a7">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[4] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Mint a Fweb3 NFT</div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#50bdb9a3ed904aa58b0e71979e7f52d6">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[5] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Burn at least one $FWEB3 token</div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#de8d1ab1d12f408b96b9f4d7156b3959">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[6] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">
-                  Swap a $FWEB3 token for some $MATIC
-                </div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#f9d992dc1327486eba0e417f53ac7753">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[7] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Vote on a Fweb3 poll</div>
-              </div>
-            </a>
-            <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#034d12e44d9e4ee693a193dc4b1e7ab0">
-              <div
-                className={
-                  "game-tile " +
-                  (gameTileCompletionStates[8] ? "completed" : "")
-                }
-              >
-                <div className="tooltip">Write and deploy a smart contract</div>
-              </div>
-            </a>
+            {orderedDots.map(({ id, toolTip, link, position }) => {
+              return (
+                <Dot
+                  key={id}
+                  id={id}
+                  gameTileCompletionStates={gameTileCompletionStates}
+                  link={link}
+                  position={position}
+                  toolTip={toolTip}
+                />
+              );
+            })}
           </div>
 
           <a
@@ -296,21 +322,20 @@ export default function Home() {
               <p>
                 <Account triedToEagerConnect={triedToEagerConnect} />
               </p>
-              {chainId !== undefined && chainId !== 137 && !query.wallet && (
-                <p style={{ color: "#f55", marginTop: "1rem" }}>
-                  Switch to Polygon via MetaMask to play this game.
-                </p>
+              {(chainId !== undefined && chainId !== 137 && !query.wallet) && (
+                <p style={{color: "#f55"}}>Switch to Polygon via MetaMask to play this game.</p>
               )}
             </div>
           )}
           {completedTiles === 9 && !query.wallet && (
             <div>
+              <p><strong style={{color: "white"}}>You&apos;ve completed all the dots!</strong></p>
               <p>
-                <strong style={{ color: "white" }}>
-                  You&apos;ve completed all the dots! Paste your wallet address
-                  into #finish-line in Discord.
-                </strong>
+                Click <a href="https://polygonscan.com/address/0xc6c5f7b1a27528dd6f34ef164377965114bfa7d9#writeContract">here</a> and click Write under seekVerification.
               </p>
+              <p>
+                Then, ping #finish-line in Discord with your Fweb3 profile URL:
+                fweb3.xyz?wallet={ account }</p>
             </div>
           )}
         </section>
