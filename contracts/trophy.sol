@@ -48,8 +48,11 @@ contract Fweb3CommemorativeNFT is ERC721 {
     return uint256(keccak256(abi.encodePacked(input)));
   }
 
-  function baseTokenURI() public pure returns (string memory) {
-    return "https://ipfs.io/ipfs/QmeB87321i121xN88bXZzmjSUXqS46B8bU3H9ocyTb8tJf";
+  function tokenURI(uint256 tokenId) override public pure returns (string memory) {
+    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "https://ipfs.io/ipfs/QmYSbJd7ivjrRteXygXiGWck2JHJqPTcAfourK5D6bL7zZ"}'))));
+    string memory output = string(abi.encodePacked('data:application/json;base64,', json));
+
+    return output;
   }
 
   function mint(uint256 tokenId) public {
