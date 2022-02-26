@@ -30,14 +30,14 @@ contract Poll {
 
   function voteYes() public {
     require(!hasVoted(msg.sender), "You already voted");
-    require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
+    require(hasTokens(msg.sender), "Need 100 $FWEB3 tokens to vote");
     yesVoters.push(payable(msg.sender));
     voters.push(payable(msg.sender));
   }
 
   function voteNo() public {
     require(!hasVoted(msg.sender), "You already voted");
-    require(hasTokens(msg.sender), "Need 100 FWEB3 tokens to vote");
+    require(hasTokens(msg.sender), "Need 100 $FWEB3 tokens to vote");
     voters.push(payable(msg.sender));
   }
 

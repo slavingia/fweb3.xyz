@@ -471,7 +471,7 @@ export default function Home() {
                 have deployed:
               </p>
               <ol>
-                <li>The ERC20 token for the 10,000,000 FWEB3 tokens</li>
+                <li>The ERC20 token for the 10,000,000 $FWEB3 tokens</li>
                 <li>The ERC721 token for the Diamond NFT</li>
                 <li>The scratch-made smart contract of the poll above</li>
               </ol>

@@ -32,7 +32,7 @@ const GameFinish = () => {
         } catch (error) {
             console.log(error);
         }
-        
+
     }
 
     const getJudge = async (account: string) => {
@@ -104,7 +104,7 @@ const GameFinish = () => {
             <>
                 <p>Click on the button below to seek verification. A judge will verify you before you can win and collect rewards!</p>
                 <p>Once a judge verifies you, the button will turn into a win button. Go to #finish-line in Discord to remind judges.</p>
-                <button onClick={seekVerification} className="pulse">Seek Verification</button>
+                <button onClick={seekVerification} className="pulse">Seek verification</button>
             </>
         )
     // User is a judge and page account is not verified
@@ -121,19 +121,23 @@ const GameFinish = () => {
     // User is verified and is not a winner and is on their own page
     } else if (isVerified && !isWinner && (!query.wallet || query.wallet === account)) {
         if (transactionFinished) {
-            return <p>Congratulations, again! Your rewards should be arriving in your wallet shortly.</p>
+            return (
+                <>
+                    <p>Coming soon: a trophy NFT to prove you won Fweb3 2022.</p>
+                    <p>Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
+                </>
+            )
         }
         return (
             <>
-                <p>Click the button below to claim your rewards. Congratulations!</p>
-                <button onClick={win} className="pulse">Win!</button>
+                <button onClick={win} className="pulse">Claim 1,000 $FWEB3 tokens</button>
             </>
         )
     } else if (isWinner) {
         return (
             <>
-                <p>You have claimed your prize already.</p>
-                <p>Congratulations, winner!</p>
+                <p>Coming soon: a trophy NFT to prove you won Fweb3 2022.</p>
+                <p>Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
             </>
         )
     } else {
