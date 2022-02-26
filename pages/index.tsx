@@ -320,7 +320,18 @@ export default function Home() {
           </a>
         </section>
         <section>
-          {(activeDot === -1 || activeDot === 0) && (
+          {completedTiles === 9 && activeDot == -1 && (
+            <div>
+              <h2>You&apos;ve learnt and built in web3!</h2>
+              <p>
+                <strong style={{ color: "white" }}>
+
+                </strong>
+              </p>
+              <GameFinish />
+            </div>
+          )}
+          {(activeDot === -1 || activeDot === 0) && completedTiles !== 9 && (
             <>
               <h2>Learn and build in web3.</h2>
               <p>
@@ -499,16 +510,6 @@ export default function Home() {
                   Switch to Polygon via MetaMask to play this game.
                 </p>
               )}
-            </div>
-          )}
-          {completedTiles === 9 && activeDot == -1 && (
-            <div>
-                  <p>
-                  <strong style={{ color: "white" }}>
-                      You&apos;ve completed all the dots!
-                  </strong>
-                  </p>
-                  <GameFinish />
             </div>
           )}
         </section>

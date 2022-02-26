@@ -136,8 +136,9 @@ const GameFinish = () => {
     } else if (isWinner) {
         return (
             <>
-                <p>Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
-                <p>Or help us build! Up next: a trophy NFT to prove you've won Fweb3 2022.</p>
+                <p>For your efforts, you've received 1,000 FWEB3 tokens and will soon be getting a trophy NFT.</p>
+                <p>Enjoyed yourself? Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
+                <p>Or help us build by chiming into the #building channel on Discord.</p>
             </>
         )
     } else {
