@@ -16,8 +16,6 @@ contract Fweb3CommemorativeNFT is ERC721 {
   address private _gameAddress;
 
   constructor(
-    string memory _name,
-    string memory _symbol,
     address gameAddress
   ) ERC721("Fweb3 2022 Commemorative NFT", "FWEB3COMMEMORATIVENFT") {
     _gameAddress = gameAddress;
