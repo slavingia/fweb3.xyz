@@ -98,23 +98,23 @@ const GameFinish = () => {
     // User is not verified and on their own page
     } else if (!isVerified && (!query.wallet || query.wallet === account)) {
         if (transactionFinished) {
-            return <p>Transaction has finished! Please wait for judge to verify or remind them in Discord.</p>
+            return <p>Please wait for a judge to verify you. Ping #finish-line in Discord to remind them.</p>
         }
         return (
             <>
-                <p>Click on the button below to seek verification. A judge will verify you before you can win and collect rewards!</p>
-                <p>Once a judge verifies you, the button will turn into a win button. Go to #finish-line in Discord to remind judges.</p>
+                <p>Please click the button below to seek verification from a judge.</p>
+                <p>Once a judge verifies you, you'll be able to claim your 1,000 $FWEB3 tokens.</p>
                 <button onClick={seekVerification} className="pulse">Seek verification</button>
             </>
         )
     // User is a judge and page account is not verified
     } else if (!isVerified && isJudge) {
         if (transactionFinished) {
-            return <p>Transaction has finished! Please remind the player to claim rewards.</p>
+            return <p>You can remind this player to claim their tokens.</p>
         }
         return (
             <>
-                <p>Please double check this person has completed all the dots before verifying.</p>
+                <p>If the nine dots on the left are lit up:</p>
                 <button onClick={verify} className="pulse">Verify</button>
             </>
         )
