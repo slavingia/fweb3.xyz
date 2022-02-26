@@ -2,6 +2,7 @@ import useSwr from "swr";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
 import TokenBalance from "../components/TokenBalance";
+import GameFinish from "../components/GameFinish";
 import useEagerConnect from "../hooks/useEagerConnect";
 import { parseBalanceToNum } from "../util";
 import { useRouter } from "next/router";
@@ -500,24 +501,14 @@ export default function Home() {
               )}
             </div>
           )}
-          {completedTiles === 9 && !query.wallet && activeDot == -1 && (
+          {completedTiles === 9 && activeDot == -1 && (
             <div>
-              <p>
-                <strong style={{ color: "white" }}>
-                  You&apos;ve completed all the dots!
-                </strong>
-              </p>
-              <p>
-                Click{" "}
-                <a href="https://polygonscan.com/address/0xc6c5f7b1a27528dd6f34ef164377965114bfa7d9#writeContract">
-                  here
-                </a>{" "}
-                and click Write under seekVerification.
-              </p>
-              <p>
-                Then, ping #finish-line in Discord with your Fweb3 profile URL:
-                https://fweb3.xyz?wallet={account}
-              </p>
+                  <p>
+                  <strong style={{ color: "white" }}>
+                      You&apos;ve completed all the dots!
+                  </strong>
+                  </p>
+                  <GameFinish />
             </div>
           )}
         </section>
