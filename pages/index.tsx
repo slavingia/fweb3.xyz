@@ -323,11 +323,6 @@ export default function Home() {
           {completedTiles === 9 && activeDot == -1 && (
             <div>
               <h2>You&apos;ve learned and built in web3!</h2>
-              <p>
-                <strong style={{ color: "white" }}>
-
-                </strong>
-              </p>
               <GameFinish />
             </div>
           )}
