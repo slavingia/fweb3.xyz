@@ -52,7 +52,7 @@ const GameFinish = () => {
         const provider = getProviderOrSigner();
         const contract = new ethers.Contract(CONTRACT, ABI, provider);
         const user = query.wallet ? query.wallet : account;
-        setIsWinner(await contract.hasBeenVerifiedToWin(user));
+        setIsWinner(await contract.isWinner(user));
     }
 
     useEffect(() => {
@@ -86,15 +86,20 @@ const GameFinish = () => {
     const verify = async () => {
         const signer = getProviderOrSigner(true);
         const contract = new ethers.Contract(CONTRACT, ABI, signer);
-        const tx = await contract.verify(query);
+        const tx = await contract.verifyPlayer(query.wallet);
         setLoading(true);
         await tx.wait();
         setLoading(false);
         setTransactionFinished(true);
     }
 
+    if (loading) {
+        return <img src={'/loading.gif'} alt="loading"/>
     // User is not verified and on their own page
-    if (!isVerified && (!query || query === account)) {
+    } else if (!isVerified && (!query.wallet || query.wallet === account)) {
+        if (transactionFinished) {
+            return <p>Transaction has finished! Please wait for judge to verify or remind them in Discord.</p>
+        }
         return (
             <>
                 <p>Click on the button below to seek verification. A judge will verify you before you can win and collect rewards!</p>
@@ -104,6 +109,9 @@ const GameFinish = () => {
         )
     // User is a judge and page account is not verified
     } else if (!isVerified && isJudge) {
+        if (transactionFinished) {
+            return <p>Transaction has finished! Please remind the player to claim rewards.</p>
+        }
         return (
             <>
                 <p>Please double check this person has completed all the dots before verifying.</p>
@@ -111,7 +119,10 @@ const GameFinish = () => {
             </>
         )
     // User is verified and is not a winner and is on their own page
-    } else if (isVerified && !isWinner && (!query || query === account)) {
+    } else if (isVerified && !isWinner && (!query.wallet || query.wallet === account)) {
+        if (transactionFinished) {
+            return <p>Congratulations, again! Your rewards should be arriving in your wallet shortly.</p>
+        }
         return (
             <>
                 <p>Click the button below to claim your rewards. Congratulations!</p>
