@@ -3,6 +3,7 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 interface Game {
@@ -10,6 +11,8 @@ interface Game {
 }
 
 contract Fweb3CommemorativeNFT is ERC721 {
+  using Counters for Counters.Counter;
+  Counters.Counter private _tokenIds;
   address private _gameAddress;
 
   constructor(
@@ -25,29 +28,6 @@ contract Fweb3CommemorativeNFT is ERC721 {
     return game.isWinner(player);
   }
 
-  function toString(uint256 value) internal pure returns (string memory) {
-    if (value == 0) {
-        return "0";
-    }
-    uint256 temp = value;
-    uint256 digits;
-    while (temp != 0) {
-        digits++;
-        temp /= 10;
-    }
-    bytes memory buffer = new bytes(digits);
-    while (value != 0) {
-        digits -= 1;
-        buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
-        value /= 10;
-    }
-    return string(buffer);
-  }
-
-  function random(string memory input) internal pure returns (uint256) {
-    return uint256(keccak256(abi.encodePacked(input)));
-  }
-
   function tokenURI(uint256 tokenId) override public pure returns (string memory) {
     string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "https://ipfs.io/ipfs/QmYSbJd7ivjrRteXygXiGWck2JHJqPTcAfourK5D6bL7zZ"}'))));
     string memory output = string(abi.encodePacked('data:application/json;base64,', json));
@@ -55,9 +35,10 @@ contract Fweb3CommemorativeNFT is ERC721 {
     return output;
   }
 
-  function mint(uint256 tokenId) public {
+  function mint() public {
     require(isWinner(msg.sender), "Not a winner");
-    _safeMint(_msgSender(), tokenId);
+    _tokenIds.increment();
+    _safeMint(_msgSender(), _tokenIds.current());
   }
 }
 
