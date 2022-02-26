@@ -11,8 +11,6 @@ import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import cn from "classnames";
 
-const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
-
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 type AccountProps = {
@@ -20,15 +18,13 @@ type AccountProps = {
 };
 
 const Account = ({ triedToEagerConnect }: AccountProps) => {
-  const { query } = useRouter();
-
   const { active, error, activate, account, setError } = useWeb3React();
 
   const { isWeb3Available, startOnboarding, stopOnboarding } =
     useMetaMaskOnboarding();
 
   // manage connecting state for injected connector
-  const [connecting, setConnecting] = useState(false);
+  const [_connecting, setConnecting] = useState(false);
   useEffect(() => {
     if (active || error) {
       setConnecting(false);
@@ -182,38 +178,52 @@ const Dot: React.FC<DotProps> = ({
 export default function Home() {
   const { query } = useRouter();
 
-  const { account, library, active, chainId } = useWeb3React();
+  const { account, library, chainId } = useWeb3React();
 
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
 
-  const { data: polygonData, error } = useSwr(
-    `/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`,
-    fetcher,
-    { revalidateOnFocus: false }
-  );
-
   const [activeDot, setActiveDot] = useState(-1);
 
-  let gameTileCompletionStates = [
-    isConnected || query.wallet ? 1 : 0,
-    parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100
-      ? 1
-      : 0,
-    polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
-    polygonData && polygonData["hasSentTokens"] ? 1 : 0,
-    polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
-    polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
-    polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
-    polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
-    polygonData && polygonData["hasDeployedContract"] ? 1 : 0,
-  ];
+  let polygonData, completedTiles = 0, gameTileCompletionStates = [];
 
-  let completedTiles = 0;
-  for (let i = 0; i < gameTileCompletionStates.length; i++) {
-    completedTiles += gameTileCompletionStates[i];
-  }
+  useEffect(() => {
+    console.log(localStorage);
+    if (localStorage.getItem("gameState") === "won") {
+      polygonData = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+      completedTiles = 9;
+    } else {
+      const { data: polygonData } = useSwr(
+        `/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`,
+        fetcher,
+        { revalidateOnFocus: false }
+      );
+
+      gameTileCompletionStates = [
+        isConnected || query.wallet ? 1 : 0,
+        parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100
+          ? 1
+          : 0,
+        polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
+        polygonData && polygonData["hasSentTokens"] ? 1 : 0,
+        polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
+        polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
+        polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
+        polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
+        polygonData && polygonData["hasDeployedContract"] ? 1 : 0,
+      ];
+
+      completedTiles = 0;
+      for (let i = 0; i < gameTileCompletionStates.length; i++) {
+        completedTiles += gameTileCompletionStates[i];
+      }
+
+      if (completedTiles === 9) {
+        localStorage.setItem("gameState", "won");
+      }
+    }
+  }, []);
 
   return (
     <div>
