@@ -451,7 +451,7 @@ export default function Home() {
               </p>
               <p>
                 <a href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract">
-                  https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract
+                  0x718ad63821a6a3611Ceb706f15971ee029812365
                 </a>
               </p>
               <p>What question are you answering? Who knows!</p>
