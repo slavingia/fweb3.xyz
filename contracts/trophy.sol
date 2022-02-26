@@ -30,10 +30,10 @@ contract Fweb3TrophyNFT is ERC721 {
     string memory tier;
     string memory url;
 
-    if (tokenId <= 333) {
+    if (tokenId <= 1000) {
       tier = "Gold";
       url = "https://ipfs.io/ipfs/QmYSbJd7ivjrRteXygXiGWck2JHJqPTcAfourK5D6bL7zZ";
-    } else if (tokenId <= 3333) {
+    } else if (tokenId <= 9000) {
       tier = "Silver";
       url = "https://ipfs.io/ipfs/QmWf4zTTEayJmWCkKtgHwBK6PmD7yXwDvENKT5gJspLG8C";
     } else {
