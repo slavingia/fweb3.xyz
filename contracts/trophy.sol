@@ -27,7 +27,21 @@ contract Fweb3TrophyNFT is ERC721 {
   }
 
   function tokenURI(uint256 tokenId) override public pure returns (string memory) {
-    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "https://ipfs.io/ipfs/QmYSbJd7ivjrRteXygXiGWck2JHJqPTcAfourK5D6bL7zZ"}'))));
+    string memory tier;
+    string memory url;
+
+    if (tokenId <= 333) {
+      tier = "Gold";
+      url = "https://ipfs.io/ipfs/QmYSbJd7ivjrRteXygXiGWck2JHJqPTcAfourK5D6bL7zZ";
+    } else if (tokenId <= 3333) {
+      tier = "Silver";
+      url = "https://ipfs.io/ipfs/QmWf4zTTEayJmWCkKtgHwBK6PmD7yXwDvENKT5gJspLG8C";
+    } else {
+      tier = "Bronze";
+      url = "https://ipfs.io/ipfs/QmQJBa9wFqB5hWWK7iFrReEwBPfubWjGAmH9Vbb9dMTCay";
+    }
+
+    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 ', tier, 'Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "', url, '"}'))));
     string memory output = string(abi.encodePacked('data:application/json;base64,', json));
 
     return output;
