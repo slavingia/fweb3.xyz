@@ -32,7 +32,7 @@ const GameFinish = () => {
         } catch (error) {
             console.log(error);
         }
-        
+
     }
 
     const getJudge = async (account: string) => {
@@ -98,42 +98,47 @@ const GameFinish = () => {
     // User is not verified and on their own page
     } else if (!isVerified && (!query.wallet || query.wallet === account)) {
         if (transactionFinished) {
-            return <p>Transaction has finished! Please wait for judge to verify or remind them in Discord.</p>
+            return <p>Please wait for a judge to verify you. If it's been awhile, ping #finish-line to remind them.</p>
         }
         return (
             <>
-                <p>Click on the button below to seek verification. A judge will verify you before you can win and collect rewards!</p>
-                <p>Once a judge verifies you, the button will turn into a win button. Go to #finish-line in Discord to remind judges.</p>
-                <button onClick={seekVerification} className="pulse">Seek Verification</button>
+                <p>Please click the button below to seek verification from a judge.</p>
+                <p>Once a judge verifies you, you'll be able to claim your 1,000 $FWEB3 tokens.</p>
+                <button onClick={seekVerification} className="pulse">Seek verification</button>
             </>
         )
     // User is a judge and page account is not verified
     } else if (!isVerified && isJudge) {
         if (transactionFinished) {
-            return <p>Transaction has finished! Please remind the player to claim rewards.</p>
+            return <p>You can remind this player to claim their tokens.</p>
         }
         return (
             <>
-                <p>Please double check this person has completed all the dots before verifying.</p>
+                <p>If the nine dots on the left are lit up:</p>
                 <button onClick={verify} className="pulse">Verify</button>
             </>
         )
     // User is verified and is not a winner and is on their own page
     } else if (isVerified && !isWinner && (!query.wallet || query.wallet === account)) {
         if (transactionFinished) {
-            return <p>Congratulations, again! Your rewards should be arriving in your wallet shortly.</p>
+            return (
+                <>
+                    <p>Your tokens are en route...</p>
+                    <p>Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
+                </>
+            )
         }
         return (
             <>
-                <p>Click the button below to claim your rewards. Congratulations!</p>
-                <button onClick={win} className="pulse">Win!</button>
+                <button onClick={win} className="pulse">Claim 1,000 $FWEB3 tokens</button>
             </>
         )
     } else if (isWinner) {
         return (
             <>
-                <p>You have claimed your prize already.</p>
-                <p>Congratulations, winner!</p>
+                <p>For your efforts, you've received 1,000 FWEB3 tokens and will soon be getting a trophy NFT.</p>
+                <p>Enjoyed yourself? Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
+                <p>Or help us build by chiming into the #building channel on Discord.</p>
             </>
         )
     } else {
