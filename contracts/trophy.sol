@@ -10,14 +10,14 @@ interface Game {
   function isWinner(address player) view external returns (bool);
 }
 
-contract Fweb3CommemorativeNFT is ERC721 {
+contract Fweb3TrophyNFT is ERC721 {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
   address private _gameAddress;
 
   constructor(
     address gameAddress
-  ) ERC721("Fweb3 2022 Commemorative NFT", "FWEB3COMMEMORATIVENFT") {
+  ) ERC721("Fweb3 2022 Trophy NFT", "FWEB3TROPHYNFT") {
     _gameAddress = gameAddress;
   }
 
