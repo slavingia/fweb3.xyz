@@ -98,7 +98,7 @@ const GameFinish = () => {
     // User is not verified and on their own page
     } else if (!isVerified && (!query.wallet || query.wallet === account)) {
         if (transactionFinished) {
-            return <p>Please wait for a judge to verify you. Ping #finish-line in Discord to remind them.</p>
+            return <p>Please wait for a judge to verify you. If it's been awhile, ping #finish-line to remind them.</p>
         }
         return (
             <>
