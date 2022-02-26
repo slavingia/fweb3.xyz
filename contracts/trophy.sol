@@ -48,34 +48,8 @@ contract Fweb3CommemorativeNFT is ERC721 {
     return uint256(keccak256(abi.encodePacked(input)));
   }
 
-  function getBackgroundColor(uint256 tokenId) public pure returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
-    bytes32 val = bytes32(rand);
-    bytes memory hx = "0123456789ABCDEF";
-    bytes memory str = new bytes(6);
-
-    for (uint i = 0; i < 6; i++) {
-      str[i] = hx[uint8(val[i]) & 0x0f];
-    }
-
-    return string(str);
-  }
-
-  function tokenURI(uint256 tokenId) override public pure returns (string memory) {
-    string[4] memory parts;
-    string memory backgroundColor = getBackgroundColor(tokenId);
-
-    parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512"><rect width="100%" height="100%" fill="#';
-    parts[1] = backgroundColor;
-    parts[2] = '"/>';
-    parts[3] = '</svg>';
-
-    string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3]));
-
-    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
-    output = string(abi.encodePacked('data:application/json;base64,', json));
-
-    return output;
+  function baseTokenURI() public pure returns (string memory) {
+    return "https://ipfs.io/ipfs/QmeB87321i121xN88bXZzmjSUXqS46B8bU3H9ocyTb8tJf";
   }
 
   function mint(uint256 tokenId) public {
