@@ -123,7 +123,7 @@ const GameFinish = () => {
         if (transactionFinished) {
             return (
                 <>
-                    <p>Coming soon: a trophy NFT to prove you won Fweb3 2022.</p>
+                    <p>Your tokens are en route...</p>
                     <p>Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
                 </>
             )
