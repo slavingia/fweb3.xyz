@@ -18,7 +18,9 @@ const Trophy = (props) => {
         return (
             <>
                 <p>Here's your trophy:</p>
-                <img src={'/fweb_yearone_' + props.trophyColor + '.png'} style={{width: '20vh'}} />
+                <p>
+                  <img src={'/fweb_yearone_' + props.trophyColor + '.png'} style={{width: '100%'}} />
+                </p>
             </>
         )
     }
