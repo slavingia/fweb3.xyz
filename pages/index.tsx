@@ -221,6 +221,23 @@ export default function Home() {
 
   let hasWonGame = polygonData && polygonData["hasWonGame"];
   let trophyId = polygonData && polygonData["trophyId"];
+  let shareText = "Fweb3";
+  let shareImageUrl = "https://fweb3.xyz/fweb3.png";
+
+  if (hasWonGame && trophyId) {
+    let trophyColor;
+
+    if (trophyId <= 333) {
+      trophyColor = "gold";
+    } else if (trophyId <= 3333) {
+      trophyColor = "silver";
+    } else {
+      trophyColor = "copper";
+    }
+
+    shareText = "🏆 I just won a " + trophyColor + " trophy in Fweb3!";
+    shareImageUrl = "https://fweb3.xyz/fweb_yearone_" + trophyColor + ".png";
+  }
 
   return (
     <div>
@@ -231,9 +248,9 @@ export default function Home() {
         <meta content="Learn and build web3" name="description" />
         <meta content="Fweb3" property="og:title" />
         <meta content="Learn and build web3" property="og:description" />
-        <meta content="https://fweb3.xyz/fweb3.png" property="og:image" />
+        <meta content={shareImageUrl} property="og:image" />
         <meta content="Fweb3 – Learn and build web3" property="twitter:title" />
-        <meta content="https://fweb3.xyz/fweb3.png" property="twitter:image" />
+        <meta content={shareImageUrl} property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -305,20 +322,21 @@ export default function Home() {
             onClick={() => {
               let gameTiles = document.getElementsByClassName("game-tile");
               let completedGameTiles = [];
+              console.log(completedGameTiles);
               for (let i = 0; i < gameTiles.length; i++) {
                 completedGameTiles.push(
                   gameTiles[i].classList.contains("completed") || hasWonGame
+                    ? 1
+                    : 0
                 );
               }
 
-              let shareText;
-
               if (hasWonGame) {
                 shareText =
-                  `🏆 I won Fweb3! @fweb3_\n\nhttps://fweb3.xyz?wallet=` +
+                  `${shareText} @fweb3_\n\nhttps://fweb3.xyz?wallet=` +
                   (account ? account : query.wallet);
               } else {
-                let shareText = `Fweb3 ${completedGameTiles.reduce(
+                shareText = `${shareText} @fweb3_ ${completedGameTiles.reduce(
                   (a, b) => a + b
                 )}/9\n\n`;
 
