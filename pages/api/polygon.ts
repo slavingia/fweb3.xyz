@@ -198,6 +198,6 @@ export default async function handler(req, res) {
     hasVotedInPoll: hasVotedInPoll,
     hasDeployedContract: hasDeployedContract,
     hasWonGame: hasWonGame,
-    trophyColor: trophyColor
+    trophyColor: trophyColor,
   });
 }
