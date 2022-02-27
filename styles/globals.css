@@ -117,6 +117,16 @@ section > div > p {
   margin-top: 1rem;
 }
 
+section p img {
+  max-width: 62%;
+  border-radius: 21px;
+}
+
+section p img:hover {
+  cursor: pointer;
+  box-shadow: #ff95ee 0 0 0 3px;
+}
+
 hr {
   width: 100px;
   height: 1px;

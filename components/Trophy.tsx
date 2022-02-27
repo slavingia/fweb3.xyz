@@ -23,7 +23,12 @@ const Trophy = (props) => {
       <>
         <p>Here&apos;s your trophy for doing so:</p>
         <p>
-          <a href="https://opensea.io/assets/matic/0x2a0493dee4f4b5e4b595326f0e73645f6f493923/{props.trophyID}">
+          <a
+            href={
+              "https://opensea.io/assets/matic/0x2a0493dee4f4b5e4b595326f0e73645f6f493923/" +
+              props.trophyID
+            }
+          >
             <img
               src={"/fweb_yearone_" + props.trophyColor + ".png"}
               style={{ width: "100%" }}
