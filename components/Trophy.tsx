@@ -3,7 +3,7 @@ import React from "react";
 const Trophy = (props) => {
   const contractUrl =
     "https://polygonscan.com/address/0x2a0493dee4f4b5e4b595326f0e73645f6f493923#writeContract";
-  const openseaUrl =
+  const openSeaUrl =
     "https://opensea.io/assets/matic/0x2a0493dee4f4b5e4b595326f0e73645f6f493923/";
 
   if (props.trophyId == 0) {
@@ -31,13 +31,20 @@ const Trophy = (props) => {
     }
     return (
       <>
-        <p>Here&apos;s your trophy:</p>
-        <a href={openseaUrl + props.trophyId} target="_blank" rel="noreferrer">
-          <img
-            src={"/fweb_yearone_" + trophyColor + ".png"}
-            style={{ width: "100%" }}
-          />
-        </a>
+        <p>Here&apos;s your trophy for doing so:</p>
+        <p>
+          <a
+            href={openSeaUrl + props.trophyId}
+            style={{ display: "block" }}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={"/fweb_yearone_" + trophyColor + ".png"}
+              style={{ width: "100%" }}
+            />
+          </a>
+        </p>
       </>
     );
   }
