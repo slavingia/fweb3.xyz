@@ -222,7 +222,7 @@ export default function Home() {
   let hasWonGame = polygonData && polygonData["hasWonGame"];
   let trophyId = query.won ? query.won : polygonData && polygonData["trophyId"];
   let shareText = "Fweb3";
-  let shareImageUrl = "https://fweb3.xyz/fweb3.png";
+  let shareImageUrl = "https://fweb3.xyz/fweb_yearone_gold.png";
 
   if (hasWonGame || trophyId) {
     let trophyColor;
