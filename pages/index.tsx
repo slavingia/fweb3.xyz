@@ -307,7 +307,7 @@ export default function Home() {
               let completedGameTiles = [];
               for (let i = 0; i < gameTiles.length; i++) {
                 completedGameTiles.push(
-                  gameTiles[i].classList.contains("completed")
+                  gameTiles[i].classList.contains("completed") || hasWonGame
                 );
               }
 
