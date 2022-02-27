@@ -220,11 +220,11 @@ export default function Home() {
   }
 
   let hasWonGame = polygonData && polygonData["hasWonGame"];
-  let trophyId = polygonData && polygonData["trophyId"];
+  let trophyId = query.won ? query.won : polygonData && polygonData["trophyId"];
   let shareText = "Fweb3";
   let shareImageUrl = "https://fweb3.xyz/fweb3.png";
 
-  if (hasWonGame && trophyId) {
+  if (hasWonGame || trophyId) {
     let trophyColor;
 
     if (trophyId <= 333) {
@@ -333,7 +333,8 @@ export default function Home() {
               if (hasWonGame) {
                 shareText =
                   `${shareText} @fweb3_\n\nhttps://fweb3.xyz?wallet=` +
-                  (account ? account : query.wallet);
+                  (account ? account : query.wallet) +
+                  `&won=${trophyId}`;
               } else {
                 shareText = `${shareText} @fweb3_ ${completedGameTiles.reduce(
                   (a, b) => a + b
