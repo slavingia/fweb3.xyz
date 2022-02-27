@@ -155,7 +155,7 @@ const orderedDots = Object.keys(dotContent).reduce((list, key) => {
 }, []);
 
 type DotProps = DotContent & {
-  gameTileCompletionStates: number[];
+  completed: boolean;
   activeDot: number;
   setActiveDot: (dot: number) => void;
   hideDot: boolean;
@@ -164,7 +164,7 @@ type DotProps = DotContent & {
 const Dot: React.FC<DotProps> = ({
   toolTip,
   position,
-  gameTileCompletionStates,
+  completed,
   activeDot,
   setActiveDot,
   hideDot,
@@ -173,7 +173,7 @@ const Dot: React.FC<DotProps> = ({
     <div
       onClick={() => setActiveDot(position)}
       className={cn("game-tile", {
-        completed: !!gameTileCompletionStates[position],
+        completed: completed,
         active: activeDot === position,
         hidden: hideDot,
       })}
@@ -288,7 +288,7 @@ export default function Home() {
                 <Dot
                   key={id}
                   id={id}
-                  gameTileCompletionStates={gameTileCompletionStates}
+                  completed={hasWonGame || !!gameTileCompletionStates[position]}
                   link={link}
                   position={position}
                   toolTip={toolTip}
