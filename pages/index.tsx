@@ -249,7 +249,7 @@ export default function Home() {
         <meta content="Fweb3" property="og:title" />
         <meta content="Learn and build web3" property="og:description" />
         <meta content={shareImageUrl} property="og:image" />
-        <meta content="Fweb3 – Learn and build web3" property="twitter:title" />
+        <meta content="Fweb3" property="twitter:title" />
         <meta content={shareImageUrl} property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
