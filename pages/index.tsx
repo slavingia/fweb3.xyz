@@ -343,8 +343,10 @@ export default function Home() {
                 you haven&apos;t already, and login.
               </p>
               <p>
-                If you&apos;re new, I would recommend taking your seed phrase
-                and sticking it in Apple Notes. It&apos;s good enough for now.
+                If you&apos;re new, take your seed phrase and stick it in Apple Notes. It&apos;s good enough for now.
+              </p>
+              <p style={{color: "#f55"}}>
+                Note: there&apos;s lots of phishing happening out there! Our code is <a href="https://github.com/slavingia/fweb3.xyz">open source</a> so you can make sure it&apos;s safe. We only use MetaMask to get your wallet address.
               </p>
             </>
           )}
@@ -387,6 +389,7 @@ export default function Home() {
           {activeDot === 3 && (
             <>
               <h2>Use gas to send tokens</h2>
+              <p>This one&apos;s easy!</p>
               <p>Use MetaMask to send tokens to someone.</p>
             </>
           )}
