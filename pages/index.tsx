@@ -190,7 +190,7 @@ export default function Home() {
   const isConnected = typeof account === "string" && !!library;
 
   const { data: polygonData, error } = useSwr(
-    `/api/polygon?wallet_address=${query.wallet ? query.wallet : account}`,
+    `/api/polygon?debug=${query.debug}&wallet_address=${query.wallet ? query.wallet : account}`,
     fetcher,
     { revalidateOnFocus: false }
   );
@@ -199,9 +199,7 @@ export default function Home() {
 
   let gameTileCompletionStates = [
     isConnected || query.wallet ? 1 : 0,
-    parseBalanceToNum((polygonData && polygonData["tokenBalance"]) ?? 0) >= 100
-      ? 1
-      : 0,
+    polygonData && polygonData["hasEnoughTokens"] ? 1 : 0,
     polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
     polygonData && polygonData["hasSentTokens"] ? 1 : 0,
     polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
