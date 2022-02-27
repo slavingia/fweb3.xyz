@@ -35,7 +35,8 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
       setConnecting(false);
       stopOnboarding();
     }
-  }, [active, error, stopOnboarding]);
+  }, [active, error,
+    stopOnboarding]);
 
   if (error) {
     return null;
