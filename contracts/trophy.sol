@@ -21,8 +21,6 @@ contract Fweb3TrophyNFT is ERC721 {
     _gameAddress = gameAddress;
   }
 
-  mapping (address => uint) public ownerCount;
-
   function isWinner(address player) view public returns (bool) {
     Game game = Game(_gameAddress);
     return game.isWinner(player);
@@ -50,10 +48,9 @@ contract Fweb3TrophyNFT is ERC721 {
   }
 
   function mint() public {
-    require(ownerCount[msg.sender] == 0, 'Each address may mint only one NFT');
+    require(balanceOf(msg.sender) == 0, "Already minted trophy");
     require(isWinner(msg.sender), "Not a winner");
     _tokenIds.increment();
-    ownerCount[msg.sender]++;
     _safeMint(_msgSender(), _tokenIds.current());
   }
 }
