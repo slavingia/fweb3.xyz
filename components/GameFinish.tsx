@@ -300,29 +300,14 @@ const GameFinish = (props) => {
         </button>
       </>
     );
-    } else if (isVerified && !isWinner && (!query.wallet || query.wallet === account)) {
-        if (transactionFinished) {
-            return (
-                <>
-                    <p>Your tokens are en route...</p>
-                </>
-            )
-        }
-        return (
-            <>
-                <button onClick={win} className="pulse">Claim 1,000 $FWEB3 tokens</button>
-            </>
-        )
-    } else if (isWinner) {
-        return (
-            <>
-                <Trophy trophyColor={props.trophyColor} />
-                <p>Enjoyed yourself? Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
-                <p>Or help us build by chiming into the #building channel on Discord.</p>
-            </>
-        )
-    } else {
-        return <></>
+  } else if (isWinner) {
+    return (
+      <>
+        <Trophy trophyColor={props.trophyColor} />
+        <p>Enjoyed yourself? Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
+        <p>Or help us build by chiming into the #building channel on Discord.</p>
+      </>
+    )
   } else if (
     isVerified &&
     !isWinner &&
