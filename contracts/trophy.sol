@@ -3,20 +3,21 @@ pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 interface Game {
   function isWinner(address player) view external returns (bool);
 }
 
-contract Fweb3CommemorativeNFT is ERC721 {
+contract Fweb3TrophyNFT is ERC721 {
+  using Counters for Counters.Counter;
+  Counters.Counter private _tokenIds;
   address private _gameAddress;
 
   constructor(
-    string memory _name,
-    string memory _symbol,
     address gameAddress
-  ) ERC721("Fweb3 2022 Commemorative NFT", "FWEB3COMMEMORATIVENFT") {
+  ) ERC721("Fweb3 2022 Trophy NFT", "FWEB3TROPHYNFT") {
     _gameAddress = gameAddress;
   }
 
@@ -25,62 +26,32 @@ contract Fweb3CommemorativeNFT is ERC721 {
     return game.isWinner(player);
   }
 
-  function toString(uint256 value) internal pure returns (string memory) {
-    if (value == 0) {
-        return "0";
-    }
-    uint256 temp = value;
-    uint256 digits;
-    while (temp != 0) {
-        digits++;
-        temp /= 10;
-    }
-    bytes memory buffer = new bytes(digits);
-    while (value != 0) {
-        digits -= 1;
-        buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
-        value /= 10;
-    }
-    return string(buffer);
-  }
-
-  function random(string memory input) internal pure returns (uint256) {
-    return uint256(keccak256(abi.encodePacked(input)));
-  }
-
-  function getBackgroundColor(uint256 tokenId) public pure returns (string memory) {
-    uint256 rand = random(string(abi.encodePacked(toString(tokenId))));
-    bytes32 val = bytes32(rand);
-    bytes memory hx = "0123456789ABCDEF";
-    bytes memory str = new bytes(6);
-
-    for (uint i = 0; i < 6; i++) {
-      str[i] = hx[uint8(val[i]) & 0x0f];
-    }
-
-    return string(str);
-  }
-
   function tokenURI(uint256 tokenId) override public pure returns (string memory) {
-    string[4] memory parts;
-    string memory backgroundColor = getBackgroundColor(tokenId);
+    string memory tier;
+    string memory url;
 
-    parts[0] = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 512 512"><rect width="100%" height="100%" fill="#';
-    parts[1] = backgroundColor;
-    parts[2] = '"/>';
-    parts[3] = '</svg>';
+    if (tokenId <= 1000) {
+      tier = "Gold";
+      url = "https://ipfs.io/ipfs/QmYSbJd7ivjrRteXygXiGWck2JHJqPTcAfourK5D6bL7zZ";
+    } else if (tokenId <= 9000) {
+      tier = "Silver";
+      url = "https://ipfs.io/ipfs/QmWf4zTTEayJmWCkKtgHwBK6PmD7yXwDvENKT5gJspLG8C";
+    } else {
+      tier = "Bronze";
+      url = "https://ipfs.io/ipfs/QmQJBa9wFqB5hWWK7iFrReEwBPfubWjGAmH9Vbb9dMTCay";
+    }
 
-    string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3]));
-
-    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '"}'))));
-    output = string(abi.encodePacked('data:application/json;base64,', json));
+    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 ', tier, ' Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "', url, '"}'))));
+    string memory output = string(abi.encodePacked('data:application/json;base64,', json));
 
     return output;
   }
 
-  function mint(uint256 tokenId) public {
+  function mint() public {
+    require(balanceOf(msg.sender) == 0, "Already minted trophy");
     require(isWinner(msg.sender), "Not a winner");
-    _safeMint(_msgSender(), tokenId);
+    _tokenIds.increment();
+    _safeMint(_msgSender(), _tokenIds.current());
   }
 }
 
