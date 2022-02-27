@@ -222,7 +222,7 @@ export default function Home() {
   let hasWonGame = polygonData && polygonData["hasWonGame"];
   let trophyId = query.won ? query.won : polygonData && polygonData["trophyId"];
   let shareText = "Fweb3";
-  let shareImageUrl = "https://fweb3.xyz/fweb3.png";
+  let shareImageUrl = "https://fweb3.xyz/fweb_yearone_gold.png";
 
   if (hasWonGame || trophyId) {
     let trophyColor;
@@ -249,7 +249,7 @@ export default function Home() {
         <meta content="Fweb3" property="og:title" />
         <meta content="Learn and build web3" property="og:description" />
         <meta content={shareImageUrl} property="og:image" />
-        <meta content="Fweb3 – Learn and build web3" property="twitter:title" />
+        <meta content="Fweb3" property="twitter:title" />
         <meta content={shareImageUrl} property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
