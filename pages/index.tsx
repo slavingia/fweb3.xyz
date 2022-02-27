@@ -74,7 +74,6 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
 
 type DotContent = {
   id: string;
-
   position: number;
   toolTip: string;
   link: string;
