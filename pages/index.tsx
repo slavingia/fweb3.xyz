@@ -353,11 +353,10 @@ export default function Home() {
               <h2>Receive tokens (for free!)</h2>
               <p>
                 <a href="https://discord.gg/azzGB8MJB2">Join our Discord</a> and
-                ask in #token-requests for 222 $FWEB3 tokens.
+                ask in #faucet for 222 $FWEB3 tokens by specifying your wallet address.
               </p>
               <p>
-                Please specify your wallet address when you do so! That&apos;s
-                enough to complete all the tasks in the game.
+                That&apos;s enough to complete all the tasks in the game.
               </p>
               <p>
                 Once you receive them, use the #collabland-join channel to
