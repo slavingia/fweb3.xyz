@@ -366,7 +366,9 @@ export default function Home() {
         <section>
           {completedTiles === 9 && activeDot == -1 && (
             <div>
-              <h2>You learned and built in web3!</h2>
+              <h2>
+                {query.wallet ? query.wallet : "You"} learned and built in web3!
+              </h2>
               <GameFinish trophyId={trophyId ? trophyId : ""} />
             </div>
           )}
