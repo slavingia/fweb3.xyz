@@ -300,7 +300,7 @@ export default function Home() {
                 );
               }
 
-              let shareText = `Fweb3 ${completedGameTiles.reduce(
+              let shareText = `${hasWonGame ? "🏆 I won " : " "}Fweb3 ${completedGameTiles.reduce(
                 (a, b) => a + b
               )}/9\n\n`;
 
@@ -324,7 +324,7 @@ export default function Home() {
               }
             }}
           >
-            Share your progress
+            {hasWonGame ? "Share your win" : "Share your progress"}
           </a>
         </section>
         <section>
