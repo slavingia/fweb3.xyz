@@ -2,11 +2,12 @@ import { ethers } from "ethers";
 import { useWeb3React } from "@web3-react/core";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import Trophy from "./Trophy";
 
 const CONTRACT = '0xc6c5F7B1a27528DD6F34EF164377965114bfA7D9';
 const ABI = [{"inputs":[{"internalType":"contract IERC20","name":"token","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_player","type":"address"}],"name":"PlayerSeeksVerification","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_player","type":"address"},{"indexed":true,"internalType":"address","name":"_judge","type":"address"}],"name":"PlayerVerifiedToWin","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"player","type":"address"}],"name":"PlayerWon","type":"event"},{"inputs":[{"internalType":"address","name":"judge","type":"address"}],"name":"addJudge","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getJudges","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"hasBeenVerifiedToWin","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"hasNotWonBefore","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"hasTokens","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"judge","type":"address"}],"name":"isJudge","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"isWinner","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"judge","type":"address"}],"name":"removeJudge","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"seekVerification","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"verifyPlayer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"win","outputs":[],"stateMutability":"nonpayable","type":"function"}]
 
-const GameFinish = () => {
+const GameFinish = (props) => {
     const [isJudge, setIsJudge] = useState(false);
     const [isVerified, setIsVerified] = useState(false);
     const [isWinner, setIsWinner] = useState(false);
@@ -135,16 +136,7 @@ const GameFinish = () => {
     } else if (isWinner) {
         return (
             <>
-                <p>
-                    For your efforts, you&apos;ve received 1,000 FWEB3 tokens and can now mint a{" "}
-                    <a href="https://polygonscan.com/address/0x2a0493dee4f4b5e4b595326f0e73645f6f493923#writeContract">
-                        Trophy NFT
-                    </a>
-                    .
-                </p>
-                <p>
-                    Hurry! There are only 10,000 trophies. The first 333 winners get a Gold trophy, the next 3,333 get a Silver trophy, and the rest get a Bronze trophy.
-                </p>
+                <Trophy trophyColor={props.trophyColor} />
                 <p>Enjoyed yourself? Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
                 <p>Or help us build by chiming into the #building channel on Discord.</p>
             </>
