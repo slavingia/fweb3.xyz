@@ -220,7 +220,7 @@ export default function Home() {
   }
 
   let hasWonGame = polygonData && polygonData["hasWonGame"];
-  let trophyColor = polygonData && polygonData["trophyColor"];
+  let trophyId = polygonData && polygonData["trophyId"];
 
   return (
     <div>
@@ -342,7 +342,7 @@ export default function Home() {
           {completedTiles === 9 && activeDot == -1 && (
             <div>
               <h2>You&apos;ve learned and built in web3!</h2>
-              <GameFinish trophyColor={trophyColor ? trophyColor : ""} />
+              <GameFinish trophyId={trophyId ? trophyId : ""} />
             </div>
           )}
           {(activeDot === -1 || activeDot === 0) && completedTiles !== 9 && (
