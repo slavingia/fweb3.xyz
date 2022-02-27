@@ -137,7 +137,7 @@ const GameFinish = () => {
             <>
                 <p>
                     For your efforts, you've received 1,000 FWEB3 tokens and can now mint a{" "}
-                    <a href="https://polygonscan.com/address/0x65b8456a2da79682badef2a5cf6ea9ae7b55a1ba#writeContract">
+                    <a href="https://polygonscan.com/address/0x2a0493dee4f4b5e4b595326f0e73645f6f493923#writeContract">
                         Trophy NFT
                     </a>
                     .
