@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
-  if (req.query.debug !== undefined && req.query.debug !== 'undefined') {
+  if (req.query.debug !== undefined && req.query.debug !== "undefined") {
     let dots = req.query.debug.split(",");
 
     return res.status(200).json({
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
   let hasBurnedTokens: boolean = false;
   let hasMintedNFT: boolean = false;
   let hasWonGame: boolean = false;
-  let trophyColor: string = '';
+  let trophyColor: string = "";
   const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
 
   const responseTokenBalance = await fetch(
@@ -178,11 +178,11 @@ export default async function handler(req, res) {
     if (transaction.from === "0x0000000000000000000000000000000000000000") {
       hasWonGame = true;
       if (transaction.tokenID <= 333) {
-        trophyColor = 'gold';
+        trophyColor = "gold";
       } else if (transaction.tokenID <= 3333) {
-        trophyColor = 'silver';
+        trophyColor = "silver";
       } else {
-        trophyColor = 'copper';
+        trophyColor = "copper";
       }
     }
   }

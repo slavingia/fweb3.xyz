@@ -10,10 +10,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm i
-    - name: Run ESLint
-      run: node_modules/.bin/next lint --quiet
-    - name: Run Prettier
-      run: node_modules/.bin/prettier --check "**/*.{js,css,md,json,jsx,ts,tsx}"
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm i
+      - name: Run ESLint
+        run: node_modules/.bin/next lint --quiet
+      - name: Run Prettier
+        run: node_modules/.bin/prettier --check "**/*.{js,css,md,json,jsx,ts,tsx}"
