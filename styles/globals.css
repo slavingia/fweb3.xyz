@@ -160,6 +160,8 @@ footer a {
 
   width: 940px;
   height: 940px;
+
+  transition: background 0.3s ease-in-out;
 }
 
 .open {
