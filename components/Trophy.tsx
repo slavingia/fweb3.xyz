@@ -17,7 +17,7 @@ const Trophy = (props) => {
     } else {
         return (
             <>
-                <p>Here's your trophy:</p>
+                <p>Here&apos;s your trophy:</p>
                 <p>
                   <img src={'/fweb_yearone_' + props.trophyColor + '.png'} style={{width: '100%'}} />
                 </p>
