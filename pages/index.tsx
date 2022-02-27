@@ -271,6 +271,7 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
+            <div className="chest"></div>
             {orderedDots.map(({ id, toolTip, link, position }) => {
               return (
                 <Dot

@@ -94,7 +94,7 @@ const GameFinish = () => {
     }
 
     if (loading) {
-        return <img src={'/loading.gif'} alt="loading"/>
+        return <button className="disabled">Waiting for confirmation...</button>;
     // User is not verified and on their own page
     } else if (!isVerified && (!query.wallet || query.wallet === account)) {
         if (transactionFinished) {

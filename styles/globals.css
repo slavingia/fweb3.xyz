@@ -64,7 +64,9 @@ main {
 
 main section:first-child {
   flex: 1;
+  margin-top: 3rem;
   padding-right: 3rem;
+  position: relative;
 }
 
 main section:last-child {
@@ -81,6 +83,10 @@ main section:last-child {
     flex: 2;
     padding-right: 0;
     padding-bottom: 2rem;
+  }
+
+  .chest {
+    margin-left: -470px !important;
   }
 }
 
@@ -141,10 +147,25 @@ footer a {
   margin: 0 1rem 0 0;
 }
 
+.chest {
+  position: absolute;
+  content: "";
+  display: block;
+  background: url('../public/chest_closed.png') top left;
+  background-size: contain;
+  background-repeat: no-repeat;
+  left: 50%;
+  top: -164px;
+  margin-left: -502.5px;
+
+  width: 940px;
+  height: 940px;
+}
+
 .game-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 1.9rem;
   margin: 1rem auto;
 }
 
@@ -165,7 +186,7 @@ footer a {
   display: none;
   padding: 1rem;
   font-weight: bold;
-  z-index: 1;
+  z-index: 10;
   min-width: 200px;
   max-width: 320px;
   font-size: 0.75rem;
@@ -178,6 +199,22 @@ footer a {
 
 .completed {
   background: #ff95ee;
+}
+
+.completed:after {
+  position: absolute;
+  content: "";
+  display: block;
+  background: url('../public/lit_dot.png') top left;
+  background-size: contain;
+  background-repeat: no-repeat;
+  left: 50%;
+  top: 50%;
+  margin-left: -38px;
+  margin-top: -33px;
+
+  width: 72px;
+  height: 72px;
 }
 
 button {
@@ -219,16 +256,17 @@ button {
 }
 
 .disabled {
-  background: #222;
-  color: #333;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .share-button {
-  margin: 1rem;
+  margin: 5rem 1rem 1rem;
   color: white;
   display: block;
   text-align: center;
+  position: relative;
+  z-index: 3;
 }
 
 pre {
