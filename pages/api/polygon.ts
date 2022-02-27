@@ -18,7 +18,6 @@ export default async function handler(req, res) {
     });
   }
 
-
   if (req.query.wallet_address === undefined) {
     return res.status(500).json({
       message: "Wallet address undefined",

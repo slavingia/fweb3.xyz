@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "compile-contract-types": "typechain --target ethers-v5 --out-dir './contracts/types' './contracts/*.json'",
-    "postinstall": "yarn compile-contract-types",
+    "postinstall": "npm run compile-contract-types",
     "e2e": "cypress open",
     "prepare": "husky install"
   },
@@ -49,9 +49,5 @@
     "prettier": "2.5.1",
     "typechain": "^6.0.5",
     "typescript": "^4.5.4"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{js,css,md,json,jsx,ts,tsx}": "prettier --write"
   }
 }
