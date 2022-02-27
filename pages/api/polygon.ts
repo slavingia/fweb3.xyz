@@ -173,7 +173,7 @@ export default async function handler(req, res) {
       process.env.POLYGON_API_KEY
   );
   const trophyJson = await trophyResponse.json();
-  console.log(trophyJson);
+
   for (let i = 0; i < trophyJson.result.length; i++) {
     let transaction = trophyJson.result[i];
     if (transaction.from === "0x0000000000000000000000000000000000000000") {
