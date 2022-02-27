@@ -221,19 +221,36 @@ export default function Home() {
 
   let hasWonGame = polygonData && polygonData["hasWonGame"];
   let trophyId = polygonData && polygonData["trophyId"];
+  let shareText = "Fweb3";
+  let shareImageUrl = "https://fweb3.xyz/fweb3.png";
+
+  if (hasWonGame && trophyId) {
+    let trophyColor;
+
+    if (trophyId <= 333) {
+      trophyColor = "gold";
+    } else if (trophyId <= 3333) {
+      trophyColor = "silver";
+    } else {
+      trophyColor = "copper";
+    }
+
+    shareText = "🏆 I just won a " + trophyColor + " trophy in Fweb3!";
+    shareImageUrl = "https://fweb3.xyz/fweb_yearone_" + trophyColor + ".png";
+  }
 
   return (
     <div>
       <Head>
-        <title>Fweb3</title>
+        <title>{query.wallet ? query.wallet : "Fweb3"}</title>
         <meta name="description" content="Learn and build web3" />
         <link rel="icon" href="/icon.png" />
         <meta content="Learn and build web3" name="description" />
         <meta content="Fweb3" property="og:title" />
         <meta content="Learn and build web3" property="og:description" />
-        <meta content="https://fweb3.xyz/fweb3.png" property="og:image" />
+        <meta content={shareImageUrl} property="og:image" />
         <meta content="Fweb3 – Learn and build web3" property="twitter:title" />
-        <meta content="https://fweb3.xyz/fweb3.png" property="twitter:image" />
+        <meta content={shareImageUrl} property="twitter:image" />
         <meta property="og:type" content="website" />
         <meta content="summary_large_image" name="twitter:card" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -308,18 +325,26 @@ export default function Home() {
               for (let i = 0; i < gameTiles.length; i++) {
                 completedGameTiles.push(
                   gameTiles[i].classList.contains("completed") || hasWonGame
+                    ? 1
+                    : 0
                 );
               }
 
-              let shareText = `${
-                hasWonGame ? "🏆 I won " : " "
-              }Fweb3 ${completedGameTiles.reduce((a, b) => a + b)}/9\n\n`;
+              if (hasWonGame) {
+                shareText =
+                  `${shareText} @fweb3_\n\nhttps://fweb3.xyz?wallet=` +
+                  (account ? account : query.wallet);
+              } else {
+                shareText = `${shareText} @fweb3_ ${completedGameTiles.reduce(
+                  (a, b) => a + b
+                )}/9\n\n`;
 
-              for (let i = 0; i < gameTiles.length; i++) {
-                shareText += completedGameTiles[i] ? "🟣" : "⚫️";
+                for (let i = 0; i < gameTiles.length; i++) {
+                  shareText += completedGameTiles[i] ? "🟣" : "⚫️";
 
-                if (i % 3 == 2 && i != gameTiles.length - 1) {
-                  shareText += "\n";
+                  if (i % 3 == 2 && i != gameTiles.length - 1) {
+                    shareText += "\n";
+                  }
                 }
               }
 
@@ -341,7 +366,9 @@ export default function Home() {
         <section>
           {completedTiles === 9 && activeDot == -1 && (
             <div>
-              <h2>You&apos;ve learned and built in web3!</h2>
+              <h2>
+                {query.wallet ? query.wallet : "You"} learned and built in web3!
+              </h2>
               <GameFinish trophyId={trophyId ? trophyId : ""} />
             </div>
           )}

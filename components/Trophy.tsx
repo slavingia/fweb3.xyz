@@ -31,7 +31,7 @@ const Trophy = (props) => {
     }
     return (
       <>
-        <p>Here&apos;s your trophy for doing so:</p>
+        <p>Here&apos;s the trophy that proves it:</p>
         <p>
           <a
             href={openSeaUrl + props.trophyId}
