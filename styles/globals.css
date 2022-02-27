@@ -151,7 +151,7 @@ footer a {
   position: absolute;
   content: "";
   display: block;
-  background: url('../public/chest_closed.png') top left;
+  background: url("../public/chest_closed.png") top left;
   background-size: contain;
   background-repeat: no-repeat;
   left: 50%;
@@ -165,7 +165,7 @@ footer a {
 }
 
 .open {
-  background: url('../public/chest_open.png') top left;
+  background: url("../public/chest_open.png") top left;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -218,7 +218,7 @@ footer a {
   position: absolute;
   content: "";
   display: block;
-  background: url('../public/lit_dot.png') top left;
+  background: url("../public/lit_dot.png") top left;
   background-size: contain;
   background-repeat: no-repeat;
   left: 50%;

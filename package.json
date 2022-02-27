@@ -49,9 +49,5 @@
     "prettier": "2.5.1",
     "typechain": "^6.0.5",
     "typescript": "^4.5.4"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{js,css,md,json,jsx,ts,tsx}": "prettier --write"
   }
 }
