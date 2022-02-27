@@ -510,7 +510,7 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://s-h-l.notion.site/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0">
+        <a href="https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7">
           Walkthrough
         </a>
         <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
