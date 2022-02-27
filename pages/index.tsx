@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import useSwr from "swr";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
