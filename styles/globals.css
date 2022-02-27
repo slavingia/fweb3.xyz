@@ -162,6 +162,12 @@ footer a {
   height: 940px;
 }
 
+.open {
+  background: url('../public/chest_open.png') top left;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .game-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

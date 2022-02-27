@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import useSwr from "swr";
 import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
@@ -273,7 +274,9 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <div className="chest"></div>
+            <div className={cn("chest", {
+              open: !!hasWonGame
+            })}></div>
             {orderedDots.map(({ id, toolTip, link, position }) => {
               return (
                 <Dot
