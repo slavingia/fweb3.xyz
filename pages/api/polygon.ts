@@ -182,7 +182,7 @@ export default async function handler(req, res) {
       } else if (transaction.tokenID <= 3333) {
         trophyColor = 'silver';
       } else {
-        trophyColor = 'copper'
+        trophyColor = 'copper';
       }
     }
   }
