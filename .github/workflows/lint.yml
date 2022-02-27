@@ -1,0 +1,19 @@
+name: Linter
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm i
+    - name: Run ESLint
+      run: node_modules/.bin/next lint . --ext "*.{js,jsx,ts,tsx}"
+    - name: Run Prettier
+      run: node_modules/.bin/prettier --check "**/*.{js,css,md,json,jsx,ts,tsx}"
