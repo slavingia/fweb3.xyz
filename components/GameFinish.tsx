@@ -124,7 +124,6 @@ const GameFinish = () => {
             return (
                 <>
                     <p>Your tokens are en route...</p>
-                    <p>Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
                 </>
             )
         }
@@ -136,7 +135,16 @@ const GameFinish = () => {
     } else if (isWinner) {
         return (
             <>
-                <p>For your efforts, you've received 1,000 FWEB3 tokens and will soon be getting a trophy NFT.</p>
+                <p>
+                    For your efforts, you've received 1,000 FWEB3 tokens and can now mint a{" "}
+                    <a href="https://polygonscan.com/address/0x65b8456a2da79682badef2a5cf6ea9ae7b55a1ba#writeContract">
+                        Trophy NFT
+                    </a>
+                    .
+                </p>
+                <p>
+                    Hurry! The first 1,000 winners get a Gold trophy, the next 9,000 get a Silver trophy, and the rest get a Bronze trophy.
+                </p>
                 <p>Enjoyed yourself? Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
                 <p>Or help us build by chiming into the #building channel on Discord.</p>
             </>
