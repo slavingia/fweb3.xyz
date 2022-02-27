@@ -14,6 +14,7 @@ export default async function handler(req, res) {
       hasVotedInPoll: parseInt(dots[6]),
       hasDeployedContract: parseInt(dots[7]),
       hasWonGame: parseInt(dots[8]),
+      trophyColor: dots[9],
     });
   }
 
