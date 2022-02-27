@@ -172,12 +172,14 @@ footer a {
   height: 940px;
 
   transition: background 0.3s ease-in-out;
+  pointer-events: none;
 }
 
 .open {
   background: url("../public/chest_open.png") top left;
   background-size: contain;
   background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 .game-grid {
