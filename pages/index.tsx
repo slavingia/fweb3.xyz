@@ -193,7 +193,9 @@ export default function Home() {
   const isConnected = typeof account === "string" && !!library;
 
   const { data: polygonData, error } = useSwr(
-    `/api/polygon?debug=${query.debug}&wallet_address=${query.wallet ? query.wallet : account}`,
+    `/api/polygon?debug=${query.debug}&wallet_address=${
+      query.wallet ? query.wallet : account
+    }`,
     fetcher,
     { revalidateOnFocus: false }
   );
@@ -240,9 +242,12 @@ export default function Home() {
         <h1>fweb3</h1>
 
         <p>
-          {hasWonGame ? "🏆" : (
+          {hasWonGame ? (
+            "🏆"
+          ) : (
             <>
-              <strong>{Math.round((completedTiles / 9) * 100)}%</strong> complete
+              <strong>{Math.round((completedTiles / 9) * 100)}%</strong>{" "}
+              complete
             </>
           )}
         </p>
@@ -255,9 +260,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <p style={{ color: "#fff" }}>
-                {query.wallet}
-              </p>
+              <p style={{ color: "#fff" }}>{query.wallet}</p>
             </a>
           )}
 
@@ -274,9 +277,11 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <div className={cn("chest", {
-              open: !!hasWonGame
-            })}></div>
+            <div
+              className={cn("chest", {
+                open: !!hasWonGame,
+              })}
+            ></div>
             {orderedDots.map(({ id, toolTip, link, position }) => {
               return (
                 <Dot
@@ -305,9 +310,9 @@ export default function Home() {
                 );
               }
 
-              let shareText = `${hasWonGame ? "🏆 I won " : " "}Fweb3 ${completedGameTiles.reduce(
-                (a, b) => a + b
-              )}/9\n\n`;
+              let shareText = `${
+                hasWonGame ? "🏆 I won " : " "
+              }Fweb3 ${completedGameTiles.reduce((a, b) => a + b)}/9\n\n`;
 
               for (let i = 0; i < gameTiles.length; i++) {
                 shareText += completedGameTiles[i] ? "🟣" : "⚫️";
@@ -356,10 +361,20 @@ export default function Home() {
                 you haven&apos;t already, and login.
               </p>
               <p>
-                If you&apos;re new, take your seed phrase and stick it in Apple Notes. It&apos;s good enough for now.
+                If you&apos;re new, take your seed phrase and stick it in Apple
+                Notes. It&apos;s good enough for now.
               </p>
-              <p style={{color: "#f55"}}>
-                Note: there&apos;s lots of phishing happening out there! Our code is <a href="https://github.com/slavingia/fweb3.xyz" target="_blank">open source</a> so you can make sure it&apos;s safe. We only use MetaMask to get your wallet address.
+              <p style={{ color: "#f55" }}>
+                Note: there&apos;s lots of phishing happening out there! Our
+                code is{" "}
+                <a
+                  href="https://github.com/slavingia/fweb3.xyz"
+                  target="_blank"
+                >
+                  open source
+                </a>{" "}
+                so you can make sure it&apos;s safe. We only use MetaMask to get
+                your wallet address.
               </p>
             </>
           )}
@@ -367,12 +382,13 @@ export default function Home() {
             <>
               <h2>Receive tokens (for free!)</h2>
               <p>
-                <a href="https://discord.gg/azzGB8MJB2" target="_blank">Join our Discord</a> and
-                ask in #faucet for 222 $FWEB3 tokens by specifying your wallet address.
+                <a href="https://discord.gg/azzGB8MJB2" target="_blank">
+                  Join our Discord
+                </a>{" "}
+                and ask in #faucet for 222 $FWEB3 tokens by specifying your
+                wallet address.
               </p>
-              <p>
-                That&apos;s enough to complete all the tasks in the game.
-              </p>
+              <p>That&apos;s enough to complete all the tasks in the game.</p>
               <p>
                 Once you receive them, use the #collabland-join channel to
                 verify your ownership and see the rest of the channels on
@@ -393,7 +409,10 @@ export default function Home() {
               </p>
               <p>
                 Use this website we built to use it for free:{" "}
-                <a href="https://fweb3-matic-faucet.netlify.app/" target="_blank">
+                <a
+                  href="https://fweb3-matic-faucet.netlify.app/"
+                  target="_blank"
+                >
                   https://fweb3-matic-faucet.netlify.app/
                 </a>
               </p>
@@ -411,7 +430,10 @@ export default function Home() {
               <h2>Mint an NFT</h2>
               <p>
                 Go to{" "}
-                <a href="https://polygonscan.com/address/0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B#writeContract" target="_blank">
+                <a
+                  href="https://polygonscan.com/address/0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B#writeContract"
+                  target="_blank"
+                >
                   our diamond NFT smart contract
                 </a>{" "}
                 and mint yourself a Diamond NFT that will last forever.
@@ -453,7 +475,10 @@ export default function Home() {
               <h2>Swap a token</h2>
               <p>
                 Go to Uniswap to swap 1 $FWEB3 token for some more MATIC:{" "}
-                <a href="https://app.uniswap.org/#/swap?chain=polygon" target="_blank">
+                <a
+                  href="https://app.uniswap.org/#/swap?chain=polygon"
+                  target="_blank"
+                >
                   https://app.uniswap.org/#/swap?chain=polygon
                 </a>
                 .
@@ -472,7 +497,10 @@ export default function Home() {
                 least 100 $FWEB3 tokens in order to do this.
               </p>
               <p>
-                <a href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract" target="_blank">
+                <a
+                  href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract"
+                  target="_blank"
+                >
                   0x718ad63821a6a3611Ceb706f15971ee029812365
                 </a>
               </p>
@@ -483,9 +511,9 @@ export default function Home() {
             <>
               <h2>Create your own token</h2>
               <p>
-                This is the final step. You&apos;re going to deploy your own code to
-                the Polygon blockchain, just like we had to do to make this
-                game.
+                This is the final step. You&apos;re going to deploy your own
+                code to the Polygon blockchain, just like we had to do to make
+                this game.
               </p>
               <p>
                 So far, you have interfaced with **three** smart contracts we
@@ -498,7 +526,10 @@ export default function Home() {
               </ol>
               <p>
                 Now you will deploy one of your own. Need help? Check out{" "}
-                <a href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#669ca4319ed646c683f4098e71505ead" target="_blank">
+                <a
+                  href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#669ca4319ed646c683f4098e71505ead"
+                  target="_blank"
+                >
                   this video
                 </a>{" "}
                 we made.
@@ -525,11 +556,18 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7" target="_blank">
+        <a
+          href="https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7"
+          target="_blank"
+        >
           Walkthrough
         </a>
-        <a href="https://discord.gg/dNvYpeg2RC" target="_blank">Discord</a>
-        <a href="https://github.com/slavingia/fweb3.xyz/issues" target="_blank">GitHub</a>
+        <a href="https://discord.gg/dNvYpeg2RC" target="_blank">
+          Discord
+        </a>
+        <a href="https://github.com/slavingia/fweb3.xyz/issues" target="_blank">
+          GitHub
+        </a>
       </footer>
     </div>
   );
