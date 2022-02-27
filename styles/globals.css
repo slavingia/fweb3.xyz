@@ -238,6 +238,7 @@ button {
   margin-top: 2rem;
   background: #ff95ee;
   color: black;
+  cursor: pointer;
 }
 
 .active {
