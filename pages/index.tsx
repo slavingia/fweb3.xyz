@@ -225,7 +225,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Fweb3</title>
+        <title>{query.wallet ? query.wallet : "Fweb3"}</title>
         <meta name="description" content="Learn and build web3" />
         <link rel="icon" href="/icon.png" />
         <meta content="Learn and build web3" name="description" />
@@ -311,15 +311,23 @@ export default function Home() {
                 );
               }
 
-              let shareText = `${
-                hasWonGame ? "🏆 I won " : " "
-              }Fweb3 ${completedGameTiles.reduce((a, b) => a + b)}/9\n\n`;
+              let shareText;
 
-              for (let i = 0; i < gameTiles.length; i++) {
-                shareText += completedGameTiles[i] ? "🟣" : "⚫️";
+              if (hasWonGame) {
+                shareText =
+                  `🏆 I won Fweb3! @fweb3_\n\nhttps://fweb3.xyz?wallet=` +
+                  (account ? account : query.wallet);
+              } else {
+                let shareText = `Fweb3 ${completedGameTiles.reduce(
+                  (a, b) => a + b
+                )}/9\n\n`;
 
-                if (i % 3 == 2 && i != gameTiles.length - 1) {
-                  shareText += "\n";
+                for (let i = 0; i < gameTiles.length; i++) {
+                  shareText += completedGameTiles[i] ? "🟣" : "⚫️";
+
+                  if (i % 3 == 2 && i != gameTiles.length - 1) {
+                    shareText += "\n";
+                  }
                 }
               }
 
