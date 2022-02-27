@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
-  if (req.query.debug !== undefined) {
+  if (req.query.debug !== undefined && false) {
     let dots = req.query.debug.split(",");
 
     return res.status(200).json({
