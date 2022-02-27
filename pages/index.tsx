@@ -370,6 +370,7 @@ export default function Home() {
                 <a
                   href="https://github.com/slavingia/fweb3.xyz"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   open source
                 </a>{" "}
@@ -382,7 +383,11 @@ export default function Home() {
             <>
               <h2>Receive tokens (for free!)</h2>
               <p>
-                <a href="https://discord.gg/azzGB8MJB2" target="_blank">
+                <a
+                  href="https://discord.gg/azzGB8MJB2"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Join our Discord
                 </a>{" "}
                 and ask in #faucet for 222 $FWEB3 tokens by specifying your
@@ -412,6 +417,7 @@ export default function Home() {
                 <a
                   href="https://fweb3-matic-faucet.netlify.app/"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   https://fweb3-matic-faucet.netlify.app/
                 </a>
@@ -433,6 +439,7 @@ export default function Home() {
                 <a
                   href="https://polygonscan.com/address/0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B#writeContract"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   our diamond NFT smart contract
                 </a>{" "}
@@ -449,7 +456,11 @@ export default function Home() {
               <p>
                 This will show up in your OpenSea shortly, which you can see
                 here:{" "}
-                <a href="https://opensea.io/account" target="_blank">
+                <a
+                  href="https://opensea.io/account"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   https://opensea.io/account
                 </a>
               </p>
@@ -478,6 +489,7 @@ export default function Home() {
                 <a
                   href="https://app.uniswap.org/#/swap?chain=polygon"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   https://app.uniswap.org/#/swap?chain=polygon
                 </a>
@@ -500,6 +512,7 @@ export default function Home() {
                 <a
                   href="https://polygonscan.com/address/0x718ad63821a6a3611Ceb706f15971ee029812365#writeContract"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   0x718ad63821a6a3611Ceb706f15971ee029812365
                 </a>
@@ -529,6 +542,7 @@ export default function Home() {
                 <a
                   href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#669ca4319ed646c683f4098e71505ead"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   this video
                 </a>{" "}
@@ -559,13 +573,22 @@ export default function Home() {
         <a
           href="https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7"
           target="_blank"
+          rel="noreferrer"
         >
           Walkthrough
         </a>
-        <a href="https://discord.gg/dNvYpeg2RC" target="_blank">
+        <a
+          href="https://discord.gg/dNvYpeg2RC"
+          target="_blank"
+          rel="noreferrer"
+        >
           Discord
         </a>
-        <a href="https://github.com/slavingia/fweb3.xyz/issues" target="_blank">
+        <a
+          href="https://github.com/slavingia/fweb3.xyz/issues"
+          target="_blank"
+          rel="noreferrer"
+        >
           GitHub
         </a>
       </footer>
