@@ -14,6 +14,7 @@ export default async function handler(req, res) {
   let hasSentTokens: boolean = false;
   let hasBurnedTokens: boolean = false;
   let hasMintedNFT: boolean = false;
+  let hasWonGame: boolean = false;
   const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
 
   const responseTokenBalance = await fetch(
@@ -144,6 +145,21 @@ export default async function handler(req, res) {
     }
   }
 
+  const trophyResponse = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x2a0493dee4f4b5e4b595326f0e73645f6f493923&address=" +
+      req.query.wallet_address +
+      "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
+  const trophyJson = await trophyResponse.json();
+
+  for (let i = 0; i < trophyJson.result.length; i++) {
+    let transaction = trophyJson.result[i];
+    if (transaction.from === "0x0000000000000000000000000000000000000000") {
+      hasWonGame = true;
+    }
+  }
+
   res.status(200).json({
     tokenBalance: tokenBalance,
     hasUsedFaucet: hasUsedFaucet,
@@ -153,5 +169,6 @@ export default async function handler(req, res) {
     hasSwappedTokens: hasSwappedTokens,
     hasVotedInPoll: hasVotedInPoll,
     hasDeployedContract: hasDeployedContract,
+    hasWonGame: hasWonGame,
   });
 }
