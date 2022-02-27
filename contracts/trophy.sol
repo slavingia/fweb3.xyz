@@ -41,7 +41,7 @@ contract Fweb3TrophyNFT is ERC721 {
       url = "https://ipfs.io/ipfs/QmQJBa9wFqB5hWWK7iFrReEwBPfubWjGAmH9Vbb9dMTCay";
     }
 
-    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 ', tier, 'Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "', url, '"}'))));
+    string memory json = Base64.encode(bytes(string(abi.encodePacked('{"name": "Fweb3 ', tier, ' Trophy NFT", "description": "This NFT represents winning Fweb3 2022.", "image": "', url, '"}'))));
     string memory output = string(abi.encodePacked('data:application/json;base64,', json));
 
     return output;
