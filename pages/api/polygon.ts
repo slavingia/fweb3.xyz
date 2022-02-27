@@ -1,12 +1,30 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
+  if (req.query.debug !== undefined) {
+    let dots = req.query.debug.split(",");
+
+    return res.status(200).json({
+      hasEnoughTokens: parseInt(dots[0]),
+      hasUsedFaucet: parseInt(dots[1]),
+      hasSentTokens: parseInt(dots[2]),
+      hasMintedNFT: parseInt(dots[3]),
+      hasBurnedTokens: parseInt(dots[4]),
+      hasSwappedTokens: parseInt(dots[5]),
+      hasVotedInPoll: parseInt(dots[6]),
+      hasDeployedContract: parseInt(dots[7]),
+      hasWonGame: parseInt(dots[8]),
+    });
+  }
+
+
   if (req.query.wallet_address === undefined) {
     return res.status(500).json({
       message: "Wallet address undefined",
     });
   }
   let tokenBalance: number = 0;
+  let hasEnoughTokens: boolean = false;
   let hasUsedFaucet: boolean = false;
   let hasSwappedTokens: boolean = false;
   let hasVotedInPoll: boolean = false;
@@ -43,6 +61,7 @@ export default async function handler(req, res) {
   }
 
   tokenBalance = balanceJson.result;
+  hasEnoughTokens = balanceJson.result >= 100;
 
   const response = await fetch(
     "https://api.polygonscan.com/api?module=account&action=txlist&address=" +
@@ -162,6 +181,7 @@ export default async function handler(req, res) {
 
   res.status(200).json({
     tokenBalance: tokenBalance,
+    hasEnoughTokens: hasEnoughTokens,
     hasUsedFaucet: hasUsedFaucet,
     hasSentTokens: hasSentTokens,
     hasMintedNFT: hasMintedNFT,
