@@ -14,7 +14,8 @@ export default async function handler(req, res) {
       hasVotedInPoll: parseInt(dots[6]),
       hasDeployedContract: parseInt(dots[7]),
       hasWonGame: parseInt(dots[8]),
-      trophyColor: dots[9],
+      trophyColor: parseInt(dots[9]),
+      trophyID: parseInt(dots[10]),
     });
   }
 
@@ -34,6 +35,7 @@ export default async function handler(req, res) {
   let hasMintedNFT: boolean = false;
   let hasWonGame: boolean = false;
   let trophyColor: string = "";
+  let trophyID: number = 0;
   const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
 
   const responseTokenBalance = await fetch(
@@ -177,6 +179,7 @@ export default async function handler(req, res) {
     let transaction = trophyJson.result[i];
     if (transaction.from === "0x0000000000000000000000000000000000000000") {
       hasWonGame = true;
+      trophyID = transaction.tokenID;
       if (transaction.tokenID <= 333) {
         trophyColor = "gold";
       } else if (transaction.tokenID <= 3333) {
@@ -199,5 +202,6 @@ export default async function handler(req, res) {
     hasDeployedContract: hasDeployedContract,
     hasWonGame: hasWonGame,
     trophyColor: trophyColor,
+    trophyID: trophyID,
   });
 }
