@@ -219,8 +219,7 @@ button {
 }
 
 .disabled {
-  background: #222;
-  color: #333;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
