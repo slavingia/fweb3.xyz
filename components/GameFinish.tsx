@@ -143,7 +143,7 @@ const GameFinish = () => {
                     .
                 </p>
                 <p>
-                    Hurry! The first 1,000 winners get a Gold trophy, the next 9,000 get a Silver trophy, and the rest get a Bronze trophy.
+                    Hurry! There are only 10,000 trophies. The first 333 winners get a Gold trophy, the next 3,333 get a Silver trophy, and the rest get a Bronze trophy.
                 </p>
                 <p>Enjoyed yourself? Consider onboarding a friend or family member by sending them some $FWEB3 tokens.</p>
                 <p>Or help us build by chiming into the #building channel on Discord.</p>

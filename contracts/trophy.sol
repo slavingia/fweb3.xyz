@@ -30,10 +30,10 @@ contract Fweb3TrophyNFT is ERC721 {
     string memory tier;
     string memory url;
 
-    if (tokenId <= 1000) {
+    if (tokenId <= 333) {
       tier = "Gold";
       url = "https://ipfs.io/ipfs/QmYSbJd7ivjrRteXygXiGWck2JHJqPTcAfourK5D6bL7zZ";
-    } else if (tokenId <= 9000) {
+    } else if (tokenId <= 3333) {
       tier = "Silver";
       url = "https://ipfs.io/ipfs/QmWf4zTTEayJmWCkKtgHwBK6PmD7yXwDvENKT5gJspLG8C";
     } else {
@@ -51,6 +51,7 @@ contract Fweb3TrophyNFT is ERC721 {
     require(balanceOf(msg.sender) == 0, "Already minted trophy");
     require(isWinner(msg.sender), "Not a winner");
     _tokenIds.increment();
+    require(_tokenIds.current() <= 10000, "Too many trophies");
     _safeMint(_msgSender(), _tokenIds.current());
   }
 }
