@@ -467,7 +467,7 @@ export default function Home() {
             <>
               <h2>Create your own token</h2>
               <p>
-                This is the final step. You’re going to deploy your own code to
+                This is the final step. You&apos;re going to deploy your own code to
                 the Polygon blockchain, just like we had to do to make this
                 game.
               </p>
