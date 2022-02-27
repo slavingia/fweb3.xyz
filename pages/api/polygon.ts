@@ -65,6 +65,40 @@ export default async function handler(req, res) {
   tokenBalance = balanceJson.result;
   hasEnoughTokens = balanceJson.result >= 100;
 
+  const trophyResponse = await fetch(
+    "https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x2a0493dee4f4b5e4b595326f0e73645f6f493923&address=" +
+      req.query.wallet_address +
+      "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" +
+      process.env.POLYGON_API_KEY
+  );
+  const trophyJson = await trophyResponse.json();
+
+  for (let i = 0; i < trophyJson.result.length; i++) {
+    let transaction = trophyJson.result[i];
+    if (transaction.from === "0x0000000000000000000000000000000000000000") {
+      hasWonGame = true;
+      trophyId = transaction.tokenID;
+    }
+  }
+
+  if (hasWonGame) {
+    console.log("won game");
+    res.status(200).json({
+      tokenBalance: tokenBalance,
+      hasEnoughTokens: hasEnoughTokens,
+      hasUsedFaucet: true,
+      hasSentTokens: true,
+      hasMintedNFT: true,
+      hasBurnedTokens: true,
+      hasSwappedTokens: true,
+      hasVotedInPoll: true,
+      hasDeployedContract: true,
+      hasWonGame: hasWonGame,
+      trophyId: trophyId,
+    });
+    return;
+  }
+
   const response = await fetch(
     "https://api.polygonscan.com/api?module=account&action=txlist&address=" +
       req.query.wallet_address +
@@ -163,22 +197,6 @@ export default async function handler(req, res) {
     let transaction = nftJson.result[i];
     if (transaction.from === "0x0000000000000000000000000000000000000000") {
       hasMintedNFT = true;
-    }
-  }
-
-  const trophyResponse = await fetch(
-    "https://api.polygonscan.com/api?module=account&action=tokennfttx&contractaddress=0x2a0493dee4f4b5e4b595326f0e73645f6f493923&address=" +
-      req.query.wallet_address +
-      "&startblock=0&endblock=99999999&page=1&offset=100&sort=asc&apikey=" +
-      process.env.POLYGON_API_KEY
-  );
-  const trophyJson = await trophyResponse.json();
-
-  for (let i = 0; i < trophyJson.result.length; i++) {
-    let transaction = trophyJson.result[i];
-    if (transaction.from === "0x0000000000000000000000000000000000000000") {
-      hasWonGame = true;
-      trophyId = transaction.tokenID;
     }
   }
 
