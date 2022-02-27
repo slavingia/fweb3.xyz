@@ -520,11 +520,11 @@ export default function Home() {
         </section>
       </main>
       <footer>
-        <a href="https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7">
+        <a href="https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7" target="_blank">
           Walkthrough
         </a>
-        <a href="https://discord.gg/dNvYpeg2RC">Discord</a>
-        <a href="https://github.com/slavingia/fweb3.xyz/issues">GitHub</a>
+        <a href="https://discord.gg/dNvYpeg2RC" target="_blank">Discord</a>
+        <a href="https://github.com/slavingia/fweb3.xyz/issues" target="_blank">GitHub</a>
       </footer>
     </div>
   );
