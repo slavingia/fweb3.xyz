@@ -158,6 +158,7 @@ type DotProps = DotContent & {
   gameTileCompletionStates: number[];
   activeDot: number;
   setActiveDot: (dot: number) => void;
+  hideDot: boolean;
 };
 
 const Dot: React.FC<DotProps> = ({
@@ -166,6 +167,7 @@ const Dot: React.FC<DotProps> = ({
   gameTileCompletionStates,
   activeDot,
   setActiveDot,
+  hideDot,
 }) => {
   return (
     <div
@@ -173,6 +175,7 @@ const Dot: React.FC<DotProps> = ({
       className={cn("game-tile", {
         completed: !!gameTileCompletionStates[position],
         active: activeDot === position,
+        hidden: hideDot,
       })}
     >
       <div className="tooltip">{toolTip}</div>
@@ -271,7 +274,9 @@ export default function Home() {
       <main>
         <section>
           <div className="game-grid">
-            <div className="chest"></div>
+            <div className={cn("chest", {
+              open: !!hasWonGame
+            })}></div>
             {orderedDots.map(({ id, toolTip, link, position }) => {
               return (
                 <Dot
@@ -283,6 +288,7 @@ export default function Home() {
                   toolTip={toolTip}
                   activeDot={activeDot}
                   setActiveDot={setActiveDot}
+                  hideDot={hasWonGame}
                 />
               );
             })}
