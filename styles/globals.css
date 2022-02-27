@@ -183,6 +183,11 @@ footer a {
   cursor: pointer;
 }
 
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .game-tile > .tooltip {
   position: absolute;
   background: white;
