@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { useWeb3React } from "@web3-react/core";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
+import Trophy from "./Trophy";
 
 const CONTRACT = "0xc6c5F7B1a27528DD6F34EF164377965114bfA7D9";
 const ABI = [
@@ -176,7 +177,7 @@ const ABI = [
   },
 ];
 
-const GameFinish = () => {
+const GameFinish = (props) => {
   const [isJudge, setIsJudge] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
@@ -299,7 +300,6 @@ const GameFinish = () => {
         </button>
       </>
     );
-    // User is verified and is not a winner and is on their own page
   } else if (
     isVerified &&
     !isWinner &&
@@ -322,19 +322,7 @@ const GameFinish = () => {
   } else if (isWinner) {
     return (
       <>
-        <p>
-          For your efforts, you&apos;ve received 1,000 FWEB3 tokens and can now
-          mint a{" "}
-          <a href="https://polygonscan.com/address/0x2a0493dee4f4b5e4b595326f0e73645f6f493923#writeContract">
-            Trophy NFT
-          </a>
-          .
-        </p>
-        <p>
-          Hurry! There are only 10,000 trophies. The first 333 winners get a
-          Gold trophy, the next 3,333 get a Silver trophy, and the rest get a
-          Bronze trophy.
-        </p>
+        <Trophy trophyColor={props.trophyColor} />
         <p>
           Enjoyed yourself? Consider onboarding a friend or family member by
           sending them some $FWEB3 tokens.
