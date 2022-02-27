@@ -322,7 +322,7 @@ const GameFinish = (props) => {
   } else if (isWinner) {
     return (
       <>
-        <Trophy trophyColor={props.trophyColor} trophyID={props.trophyID} />
+        <Trophy trophyId={props.trophyId} />
         <p>
           Enjoyed yourself? Consider onboarding a friend or family member by
           sending them some $FWEB3 tokens.
