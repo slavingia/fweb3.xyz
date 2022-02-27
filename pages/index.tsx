@@ -216,6 +216,8 @@ export default function Home() {
     completedTiles += gameTileCompletionStates[i];
   }
 
+  let hasWonGame = polygonData && polygonData["hasWonGame"];
+
   return (
     <div>
       <Head>
@@ -237,7 +239,11 @@ export default function Home() {
         <h1>fweb3</h1>
 
         <p>
-          <strong>{Math.round((completedTiles / 9) * 100)}%</strong> complete
+          {hasWonGame ? "🏆" : (
+            <>
+              <strong>{Math.round((completedTiles / 9) * 100)}%</strong> complete
+            </>
+          )}
         </p>
 
         {query.wallet !== undefined &&
@@ -248,7 +254,9 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <p style={{ color: "#fff" }}>{query.wallet}</p>
+              <p style={{ color: "#fff" }}>
+                {query.wallet}
+              </p>
             </a>
           )}
 
