@@ -98,12 +98,12 @@ const GameFinish = () => {
     // User is not verified and on their own page
     } else if (!isVerified && (!query.wallet || query.wallet === account)) {
         if (transactionFinished) {
-            return <p>Please wait for a judge to verify you. If it's been awhile, ping #finish-line to remind them.</p>
+            return <p>Please wait for a judge to verify you. If it&apos;s been awhile, ping #finish-line to remind them.</p>
         }
         return (
             <>
                 <p>Please click the button below to seek verification from a judge.</p>
-                <p>Once a judge verifies you, you'll be able to claim your 1,000 $FWEB3 tokens.</p>
+                <p>Once a judge verifies you, you&apos;ll be able to claim your 1,000 $FWEB3 tokens.</p>
                 <button onClick={seekVerification} className="pulse">Seek verification</button>
             </>
         )
@@ -136,7 +136,7 @@ const GameFinish = () => {
         return (
             <>
                 <p>
-                    For your efforts, you've received 1,000 FWEB3 tokens and can now mint a{" "}
+                    For your efforts, you&apos;ve received 1,000 FWEB3 tokens and can now mint a{" "}
                     <a href="https://polygonscan.com/address/0x2a0493dee4f4b5e4b595326f0e73645f6f493923#writeContract">
                         Trophy NFT
                     </a>
