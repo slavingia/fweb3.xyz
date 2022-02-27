@@ -322,7 +322,6 @@ export default function Home() {
             onClick={() => {
               let gameTiles = document.getElementsByClassName("game-tile");
               let completedGameTiles = [];
-              console.log(completedGameTiles);
               for (let i = 0; i < gameTiles.length; i++) {
                 completedGameTiles.push(
                   gameTiles[i].classList.contains("completed") || hasWonGame
