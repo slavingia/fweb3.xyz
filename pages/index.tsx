@@ -235,7 +235,7 @@ export default function Home() {
       trophyColor = "copper";
     }
 
-    shareText = "🏆 I just won a " + trophyColor + " trophy in Fweb3!";
+    shareText = "🏆 I won a " + trophyColor + " trophy in Fweb3!";
     shareImageUrl = "https://fweb3.xyz/fweb_yearone_" + trophyColor + ".png";
   }
 
