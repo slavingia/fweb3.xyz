@@ -322,6 +322,8 @@ export default function Home() {
             onClick={() => {
               let gameTiles = document.getElementsByClassName("game-tile");
               let completedGameTiles = [];
+              let finalShareText;
+
               for (let i = 0; i < gameTiles.length; i++) {
                 completedGameTiles.push(
                   gameTiles[i].classList.contains("completed") || hasWonGame
@@ -331,32 +333,32 @@ export default function Home() {
               }
 
               if (hasWonGame) {
-                shareText =
+                finalShareText =
                   `${shareText} @fweb3_\n\nhttps://fweb3.xyz?wallet=` +
                   (account ? account : query.wallet) +
                   `&won=${trophyId}`;
               } else {
-                shareText = `${shareText} @fweb3_ ${completedGameTiles.reduce(
+                finalShareText = `${shareText} @fweb3_ ${completedGameTiles.reduce(
                   (a, b) => a + b
                 )}/9\n\n`;
 
                 for (let i = 0; i < gameTiles.length; i++) {
-                  shareText += completedGameTiles[i] ? "🟣" : "⚫️";
+                  finalShareText += completedGameTiles[i] ? "🟣" : "⚫️";
 
                   if (i % 3 == 2 && i != gameTiles.length - 1) {
-                    shareText += "\n";
+                    finalShareText += "\n";
                   }
                 }
               }
 
               if (navigator.share) {
                 navigator.share({
-                  text: shareText,
+                  text: finalShareText,
                 });
               } else {
                 window.open(
                   "https://twitter.com/intent/tweet?text=" +
-                    encodeURIComponent(shareText)
+                    encodeURIComponent(finalShareText)
                 );
               }
             }}
