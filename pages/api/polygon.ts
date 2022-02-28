@@ -14,8 +14,7 @@ export default async function handler(req, res) {
       hasVotedInPoll: parseInt(dots[6]),
       hasDeployedContract: parseInt(dots[7]),
       hasWonGame: parseInt(dots[8]),
-      trophyColor: parseInt(dots[9]),
-      trophyID: parseInt(dots[10]),
+      trophyID: parseInt(dots[9]),
     });
   }
 
@@ -196,6 +195,10 @@ export default async function handler(req, res) {
     if (transaction.from === "0x0000000000000000000000000000000000000000") {
       hasMintedNFT = true;
     }
+  }
+
+  if (hasUsedFaucet || hasSentTokens || hasVotedInPoll) {
+    hasEnoughTokens = true;
   }
 
   res.status(200).json({
