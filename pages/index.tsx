@@ -459,7 +459,7 @@ export default function Home() {
             <>
               <h2>Use gas to send tokens</h2>
               <p>This one&apos;s easy!</p>
-              <p>Use MetaMask to send tokens to someone.</p>
+              <p>Use MetaMask to send 100 FWEB3 tokens to someone.</p>
             </>
           )}
           {activeDot === 4 && (
@@ -571,7 +571,7 @@ export default function Home() {
               <p>
                 Now you will deploy one of your own. Need help? Check out{" "}
                 <a
-                  href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#669ca4319ed646c683f4098e71505ead"
+                  href="https://www.notion.so/fweb3/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#3c526735ae074b88838ad7b467545614"
                   target="_blank"
                   rel="noreferrer"
                 >
