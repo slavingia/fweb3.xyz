@@ -383,10 +383,6 @@ export default function Home() {
                 this case, Polygon). Once you light them all up, you win
                 additional $FWEB3 tokens and a commemorative NFT.
               </p>
-              <p style={{ color: "#fff", fontWeight: "bold" }}>
-                Stuck? Click the dots to the left to see further instructions,
-                or check out the Walkthrough below.
-              </p>
             </>
           )}
           {activeDot === 0 && (
@@ -601,6 +597,12 @@ export default function Home() {
                 </p>
               )}
             </div>
+          )}
+          {completedTiles !== 9 && (
+            <p style={{ color: "#fff", fontWeight: "bold" }}>
+              Stuck? Click the dots to the left to see further instructions, or
+              check out the Walkthrough below.
+            </p>
           )}
         </section>
       </main>
