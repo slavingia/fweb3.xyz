@@ -18,6 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cypress run
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
         uses: cypress-io/github-action@v2
         with:
           build: npm install
