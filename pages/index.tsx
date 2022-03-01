@@ -388,8 +388,8 @@ export default function Home() {
                 additional $FWEB3 tokens and a commemorative NFT.
               </p>
               <p style={{ color: "#fff", fontWeight: "bold" }}>
-                Once you connect your wallet, click the dots to the left to see
-                further instructions.
+                Stuck? Click the dots to the left to see further instructions,
+                or check out the Walkthrough below.
               </p>
             </>
           )}
