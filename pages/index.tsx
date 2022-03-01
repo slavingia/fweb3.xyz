@@ -598,6 +598,12 @@ export default function Home() {
               )}
             </div>
           )}
+          {completedTiles !== 9 && (
+            <p style={{ color: "#fff", fontWeight: "bold" }}>
+              Stuck? Click the dots to the left to see further instructions, or
+              check out the Walkthrough below.
+            </p>
+          )}
         </section>
       </main>
       <footer>
