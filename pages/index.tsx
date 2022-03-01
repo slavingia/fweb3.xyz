@@ -159,7 +159,6 @@ type DotProps = DotContent & {
   activeDot: number;
   setActiveDot: (dot: number) => void;
   hideDot: boolean;
-  nextDot: boolean;
 };
 
 const Dot: React.FC<DotProps> = ({
@@ -169,7 +168,6 @@ const Dot: React.FC<DotProps> = ({
   activeDot,
   setActiveDot,
   hideDot,
-  nextDot,
 }) => {
   return (
     <div
@@ -178,7 +176,6 @@ const Dot: React.FC<DotProps> = ({
         completed: completed,
         active: activeDot === position,
         hidden: hideDot,
-        pulse: nextDot,
       })}
     >
       <div className="tooltip">{toolTip}</div>
@@ -315,7 +312,6 @@ export default function Home() {
                   activeDot={activeDot}
                   setActiveDot={setActiveDot}
                   hideDot={hasWonGame}
-                  nextDot={completedTiles === position}
                 />
               );
             })}
