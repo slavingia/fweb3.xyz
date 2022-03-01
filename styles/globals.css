@@ -203,17 +203,21 @@ footer a {
 }
 
 .game-tile > .tooltip {
+  box-sizing: border-box;
   position: absolute;
   background: white;
   border-radius: 10px;
   color: black;
   box-shadow: 5px 5px 0 black;
   display: none;
-  padding: 1rem;
+  padding: 20px;
   font-weight: bold;
   z-index: 10;
-  min-width: 200px;
-  max-width: 320px;
+  width: 220px;
+  left: 50%;
+  margin-left: -110px;
+  bottom: 100%;
+  margin-bottom: 30px;
   font-size: 0.75rem;
   pointer-events: none;
 }
