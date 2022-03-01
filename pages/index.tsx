@@ -609,7 +609,7 @@ export default function Home() {
           Walkthrough
         </a>
         <a
-          href="https://discord.gg/dNvYpeg2RC"
+          href="https://discord.gg/pNSFNfyVxA"
           target="_blank"
           rel="noreferrer"
         >
