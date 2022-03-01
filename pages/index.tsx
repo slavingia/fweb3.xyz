@@ -415,7 +415,7 @@ export default function Home() {
               <h2>Receive tokens (for free!)</h2>
               <p>
                 <a
-                  href="https://discord.gg/azzGB8MJB2"
+                  href="https://discord.gg/pNSFNfyVxA"
                   target="_blank"
                   rel="noreferrer"
                 >
