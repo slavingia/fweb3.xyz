@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { injected } from "../connectors";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import cn from "classnames";
+import ENSLookup from "../components/ENSLookup";
 
 const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 
@@ -278,7 +279,9 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <p style={{ color: "#fff" }}>{query.wallet}</p>
+              <p style={{ color: "#fff" }}>
+                <ENSLookup address={query.wallet} />
+              </p>
             </a>
           )}
 
@@ -370,7 +373,12 @@ export default function Home() {
           {completedTiles === 9 && activeDot == -1 && (
             <div>
               <h2>
-                {query.wallet ? query.wallet : "You"} learned and built in web3!
+                {<ENSLookup address={query.wallet} /> ? (
+                  <ENSLookup address={query.wallet} />
+                ) : (
+                  "You"
+                )}{" "}
+                learned and built in web3!
               </h2>
               <GameFinish trophyId={trophyId ? trophyId : ""} />
             </div>
