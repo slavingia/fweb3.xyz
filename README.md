@@ -39,3 +39,7 @@ To run the tests using [Cypress](https://cypress.io):
 Supports using either the VS Code debugger or Chrome DevTools.
 
 See official Next.js docs: https://nextjs.org/docs/advanced-features/debugging
+
+#### Debugging with variables
+
+You can use `?wallet=` to test using a specific wallet address, and `?debug=0,1,1,1,1,` to test with sample data.
