@@ -434,6 +434,10 @@ export default function Home() {
               </p>
               <p>That&apos;s enough to complete all the tasks in the game.</p>
               <p>
+                Don&apos;t see your tokens? Double check that your wallet
+                is connected to the Polygon Network.
+              </p>
+              <p>
                 Once you receive them, use the #collabland-join channel to
                 verify your ownership and see the rest of the channels on
                 Discord.
