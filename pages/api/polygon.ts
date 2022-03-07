@@ -139,8 +139,9 @@ export default async function handler(req, res) {
   for (let i = 0; i < internalTxnJson.result.length; i++) {
     let transaction = internalTxnJson.result[i];
     if (
-      transaction.from === "0x67806adca0fd8825da9cddc69b9ba8837a64874b" &&
-      transaction.isError === "0"
+      transaction.from === "0x67806adca0fd8825da9cddc69b9ba8837a64874b" ||
+      (transaction.from === "0xe995b21d94638d81ae5123a65fc369f6aea429bc" &&
+        transaction.isError === "0")
     ) {
       hasUsedFaucet = true;
     }
