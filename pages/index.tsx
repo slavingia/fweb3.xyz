@@ -373,11 +373,7 @@ export default function Home() {
           {completedTiles === 9 && activeDot == -1 && (
             <div>
               <h2>
-                {<ENSLookup address={query.wallet} /> ? (
-                  <ENSLookup address={query.wallet} />
-                ) : (
-                  "You"
-                )}{" "}
+                {query.wallet ? <ENSLookup address={query.wallet} /> : "You"}{" "}
                 learned and built in web3!
               </h2>
               <GameFinish trophyId={trophyId ? trophyId : ""} />
