@@ -231,6 +231,7 @@ const GameFinish = (props) => {
       getVerified(account);
       getWinner(account);
     }
+    // eslint-disable-next-line
   }, [active, error]);
 
   const seekVerification = async () => {

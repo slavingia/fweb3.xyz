@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Trophy = (props) => {
   const contractUrl =
@@ -39,9 +40,10 @@ const Trophy = (props) => {
             target="_blank"
             rel="noreferrer"
           >
-            <img
+            <Image
+              alt="tropy image"
               src={"/fweb_yearone_" + trophyColor + ".png"}
-              style={{ width: "100%" }}
+              width={100}
             />
           </a>
         </p>
