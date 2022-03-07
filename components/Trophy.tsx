@@ -1,12 +1,23 @@
-import React from "react";
+import { ReactElement } from "react";
+import Image from "next/image";
 
-const Trophy = (props) => {
-  const contractUrl =
-    "https://polygonscan.com/address/0x2a0493dee4f4b5e4b595326f0e73645f6f493923#writeContract";
-  const openSeaUrl =
-    "https://opensea.io/assets/matic/0x2a0493dee4f4b5e4b595326f0e73645f6f493923/";
+import { TROPHY_NFT_ADDRESS } from "../constants";
+import { TrophyProps } from "./types";
 
-  if (props.trophyId == 0) {
+const _getTrophyColor = (trophyId: number): string => {
+  if (trophyId <= 333) {
+    return "gold";
+  } else if (trophyId <= 3333) {
+    return "silver";
+  }
+  return "copper";
+};
+
+export const Trophy: React.FC<TrophyProps> = ({ trophyId }): ReactElement => {
+  const contractUrl = `https://polygonscan.com/address/${TROPHY_NFT_ADDRESS}#writeContract`;
+  const openSeaUrl = `https://opensea.io/assets/matic/${TROPHY_NFT_ADDRESS}/`;
+
+  if (trophyId == 0) {
     return (
       <>
         <p>
@@ -21,27 +32,21 @@ const Trophy = (props) => {
       </>
     );
   } else {
-    let trophyColor;
-    if (props.trophyId <= 333) {
-      trophyColor = "gold";
-    } else if (props.trophyId <= 3333) {
-      trophyColor = "silver";
-    } else {
-      trophyColor = "copper";
-    }
+    const trophyColor = _getTrophyColor(trophyId);
     return (
       <>
         <p>Here&apos;s the trophy that proves it:</p>
         <p>
           <a
-            href={openSeaUrl + props.trophyId}
+            href={openSeaUrl + trophyId}
             style={{ display: "block" }}
             target="_blank"
             rel="noreferrer"
           >
-            <img
+            <Image
+              alt="trophy image"
               src={"/fweb_yearone_" + trophyColor + ".png"}
-              style={{ width: "100%" }}
+              width={100}
             />
           </a>
         </p>
@@ -49,5 +54,3 @@ const Trophy = (props) => {
     );
   }
 };
-
-export default Trophy;

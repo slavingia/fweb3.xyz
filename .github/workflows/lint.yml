@@ -1,4 +1,4 @@
-name: Checks and tests
+name: Lint
 
 on: [push]
 
@@ -13,14 +13,3 @@ jobs:
         run: node_modules/.bin/next lint --quiet
       - name: Run Prettier
         run: node_modules/.bin/prettier --check "**/*.{js,css,md,json,jsx,ts,tsx}"
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Cypress run
-        env:
-          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
-        uses: cypress-io/github-action@v2
-        with:
-          build: npm install
-          start: npm run dev
