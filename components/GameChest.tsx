@@ -2,7 +2,7 @@ import { useContext } from "react";
 import cn from "classnames";
 
 import { DotContent, DotKey, DotProps } from "./types";
-import { GameContext } from "../context";
+import { GameContext } from "../pages/_app";
 import { ShareLink } from "./ShareLink";
 import { GameDot } from "./GameDot";
 

@@ -24,3 +24,7 @@ export type DotProps = DotContent & {
   setActiveDot: (dot: number) => void;
   hideDot: boolean;
 };
+
+export type Address = {
+  address: string | string[];
+};

@@ -1,7 +1,8 @@
-import { ethers } from "ethers";
+import React, { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import { ethers } from "ethers";
+
 import Trophy from "./Trophy";
 
 const CONTRACT = "0xc6c5F7B1a27528DD6F34EF164377965114bfA7D9";
@@ -177,14 +178,14 @@ const ABI = [
   },
 ];
 
-const GameFinish = (props) => {
-  const [isJudge, setIsJudge] = useState(false);
+export const GameFinish = (props) => {
+  const [transactionFinished, setTransactionFinished] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
+  const [isJudge, setIsJudge] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [transactionFinished, setTransactionFinished] = useState(false);
 
-  const { active, error, activate, account, setError } = useWeb3React();
+  const { active, error, account } = useWeb3React();
   const { query } = useRouter();
 
   const getProviderOrSigner = (needSigner = false) => {
@@ -201,7 +202,7 @@ const GameFinish = (props) => {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -337,5 +338,3 @@ const GameFinish = (props) => {
     return <></>;
   }
 };
-
-export default GameFinish;

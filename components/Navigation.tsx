@@ -1,13 +1,16 @@
 import { useWeb3React } from "@web3-react/core";
 import { useRouter } from "next/router";
-import ENSLookup from "./ENSLookup";
-import TokenBalance from "./TokenBalance";
-import { GameContext } from "../context";
 import { useContext } from "react";
+
+import { GameContext } from "../pages/_app";
+import TokenBalance from "./TokenBalance";
+import { ENSLookup } from "./ENSLookup";
+
 export const Navigation = () => {
+  const { completedTiles, hasWonGame, polygonData } = useContext(GameContext);
   const { active, account } = useWeb3React();
   const { query } = useRouter();
-  const { completedTiles, hasWonGame, polygonData } = useContext(GameContext);
+
   return (
     <nav>
       <h1>fweb3</h1>

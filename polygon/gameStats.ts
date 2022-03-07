@@ -1,4 +1,6 @@
-const _getGameCompleteionStates = (polygonData) => {
+import { PolygonData, TileStates } from "./types";
+
+const _getGameCompleteionStates = (polygonData: PolygonData): number[] => {
   return [
     polygonData && polygonData["hasEnoughTokens"] ? 1 : 0,
     polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
@@ -11,7 +13,7 @@ const _getGameCompleteionStates = (polygonData) => {
   ];
 };
 
-export const getTileStates = (polygonData) => {
+export const getTileStates = (polygonData: PolygonData): TileStates => {
   const gameTileCompletionStates = _getGameCompleteionStates(polygonData);
   let completedTiles = 0;
   for (let i = 0; i < gameTileCompletionStates.length; i++) {

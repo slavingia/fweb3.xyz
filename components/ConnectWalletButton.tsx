@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import useEagerConnect from "../hooks/useEagerConnect";
-import { injected } from "../connectors";
+import { injected } from "../utils/connectors";
 
 export const ConnectWalletButton = () => {
   const { active, error, activate, account, setError } = useWeb3React();
@@ -38,14 +38,12 @@ export const ConnectWalletButton = () => {
   const shouldRenderButton =
     error || !triedToEagerConnect || typeof account !== "string";
 
-  return (
-    shouldRenderButton && (
-      <button
-        className="pulse"
-        onClick={isWeb3Available ? handleActivate : startOnboarding}
-      >
-        {connecting ? "connecting..." : "Connect your wallet"}
-      </button>
-    )
-  );
+  return shouldRenderButton ? (
+    <button
+      className="pulse"
+      onClick={isWeb3Available ? handleActivate : startOnboarding}
+    >
+      {connecting ? "connecting..." : "Connect your wallet"}
+    </button>
+  ) : null;
 };

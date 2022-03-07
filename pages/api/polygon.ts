@@ -1,4 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { PolygonData } from "./../../polygon/types";
+
+import {
+  GENESYS_ADDRESS,
+  BURN_ADDRESS,
+  FAUCET_ADDRESS,
+  SWAP_ROUTER_ADDRESS,
+  POLL_ADRESS,
+} from "../../polygon/constants";
+
 import {
   walletsTokenBalanceURI,
   trophyCheckURI,
@@ -8,13 +18,8 @@ import {
 } from "../../polygon";
 
 const { POLYGON_API_KEY } = process.env;
-const GENESYS_ADDRESS = "0x0000000000000000000000000000000000000000";
-const BURN_ADDRESS = `${GENESYS_ADDRESS}burn`;
-const FAUCET_ADDRESS = "0x67806adca0fd8825da9cddc69b9ba8837a64874b";
-const SWAP_ROUTER_ADDRESS = "0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45";
-const POLL_ADRESS = "0x718ad63821a6a3611ceb706f15971ee029812365";
 
-const _defaultCompletionState = {
+const _defaultCompletionState: PolygonData = {
   tokenBalance: 100,
   hasEnoughTokens: true,
   hasUsedFaucet: true,
@@ -28,7 +33,7 @@ const _defaultCompletionState = {
   trophyId: 0,
 };
 
-const _validateReq = (req, res) => {
+const _validateReq = (req, res): void | boolean => {
   if (!req?.query?.wallet_address) {
     res.status(400).json("missing params");
     return;
@@ -40,7 +45,7 @@ const _validateReq = (req, res) => {
   return true;
 };
 
-export default async function handler(req, res) {
+export default async function handler(req, res): Promise<void> {
   try {
     if (req.query.off) {
       res.json(_defaultCompletionState);
@@ -99,10 +104,7 @@ export default async function handler(req, res) {
     }
   } catch (e) {
     console.error(e);
-    return {
-      data: [],
-      error: e.message,
-    };
+    res.json({ data: [], error: e.message });
   }
 }
 
@@ -129,7 +131,6 @@ const fetchERC20Txs = async (walletAddress: string) => {
 
 const fetchNftsTxs = async (walletAddress: string) => {
   const url = nftTxsURI(walletAddress);
-  console.log(url);
   return fetcher(url);
 };
 

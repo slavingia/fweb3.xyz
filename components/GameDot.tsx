@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { DotProps } from "./types";
-import { GameContext } from "../context";
 import cn from "classnames";
+
+import { GameContext } from "../pages/_app";
+import type { DotProps } from "./types";
 
 export const GameDot: React.FC<DotProps> = ({
   id,

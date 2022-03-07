@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import Head from "next/head";
 
-import { GameContext } from "../context";
+import { GameContext } from "../pages/_app";
 
 export const Header = () => {
   const { shareImageUrl } = useContext(GameContext);

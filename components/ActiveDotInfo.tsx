@@ -1,11 +1,12 @@
-import ENSLookup from "./ENSLookup";
-import { GameDescriptionText } from "./GameDescriptionText";
-import GameFinish from "./GameFinish";
-import { ConnectWalletButton } from "./ConnectWalletButton";
-import { GameContext } from "../context";
-import { useContext } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+
+import { GameDescriptionText } from "./GameDescriptionText";
+import { ConnectWalletButton } from "./ConnectWalletButton";
+import { GameContext } from "../pages/_app";
+import { GameFinish } from "./GameFinish";
+import { ENSLookup } from "./ENSLookup";
 
 export const ActiveDotInfo = () => {
   const { query } = useRouter();

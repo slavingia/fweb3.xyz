@@ -7,7 +7,7 @@ import { getTileStates } from "../polygon/gameStats";
 import { GameChest } from "../components/GameChest";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { GameContext } from "../context";
+import { GameContext, GameState } from "../pages/_app";
 
 const trophyColor = (trophyId) => {
   switch (trophyId) {
@@ -33,8 +33,8 @@ const getShareImageUrl = (trophyId) => {
 };
 
 export default function Home() {
-  const [gameTileCompletionStates, setGameTileCompletionStates] = useState({});
-  const [completedTiles, setCompletedTiles] = useState(null);
+  const [gameTileCompletionStates, setGameTileCompletionStates] = useState([]);
+  const [completedTiles, setCompletedTiles] = useState(0);
   const [polygonData, setPolgonData] = useState(null);
   const [activeDot, setActiveDot] = useState(-1);
   const { active, account } = useWeb3React();
@@ -57,7 +57,7 @@ export default function Home() {
   const hasWonGame = polygonData && polygonData["hasWonGame"];
   const trophyId = (polygonData && polygonData.trophyId) || null;
 
-  const gameState = {
+  const gameState: GameState = {
     polygonData,
     activeDot,
     setActiveDot,
