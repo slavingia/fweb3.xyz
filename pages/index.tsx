@@ -97,55 +97,55 @@ const dotContent: Record<DotKey, DotContent> = {
     id: DotKey.isConnected,
     position: 0,
     toolTip: "Connect your wallet",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#191c2bd41ffc41b3a47a239d7cfa7346",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#ce289ff87e18455b9f9054fbe63691e4",
   },
   [DotKey.hasTokens]: {
     id: DotKey.hasTokens,
     position: 1,
     toolTip: "Get 100 $FWEB3 tokens",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#33e99118e0ae497bac26e5b62f629684",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#4f53243dd1cd45008eb9152a881aa360",
   },
   [DotKey.hasUsedFaucet]: {
     id: DotKey.hasUsedFaucet,
     position: 2,
     toolTip: "Use the faucet to get .1 $MATIC",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#b9f3a9b9f2c645fb82e9633a2e44ca19",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#f0e9ac0f5b2e4ad9be50cdcbed465985",
   },
   [DotKey.hasSentTokens]: {
     id: DotKey.hasSentTokens,
     position: 3,
     toolTip: "Send 100 $FWEB3 tokens to someone",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#dfbd8c7587504d72b93cfa9b1ed3d822",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#339af791f3a24b41a971cf64292fd780",
   },
   [DotKey.hasMintedNFT]: {
     id: DotKey.hasMintedNFT,
     position: 4,
     toolTip: "Mint a Fweb3 NFT",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#1683ea6108ae41e49a6cfa3a30fdc0a7",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#31e6fd5efc8040d3b7bf2fdeefeb10c8",
   },
   [DotKey.hasBurnedTokens]: {
     id: DotKey.hasBurnedTokens,
     position: 5,
     toolTip: "Burn at least one $FWEB3 token",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#50bdb9a3ed904aa58b0e71979e7f52d6",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#15ffc723113448b6948636c6dc03d714",
   },
   [DotKey.hasSwappedTokens]: {
     id: DotKey.hasSwappedTokens,
     position: 6,
     toolTip: "Swap a $FWEB3 token for some $MATIC",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#de8d1ab1d12f408b96b9f4d7156b3959",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#36b4bef4912e435db74e0bcc803cd73e",
   },
   [DotKey.hasVotedInPoll]: {
     id: DotKey.hasVotedInPoll,
     position: 7,
     toolTip: "Vote on a Fweb3 poll",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#f9d992dc1327486eba0e417f53ac7753",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#3935569b82774761865e72d4e53e50c4",
   },
   [DotKey.hasDeployedContract]: {
     id: DotKey.hasDeployedContract,
     position: 8,
     toolTip: "Write and deploy a smart contract",
-    link: "https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#034d12e44d9e4ee693a193dc4b1e7ab0",
+    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#3c526735ae074b88838ad7b467545614",
   },
 };
 
@@ -373,11 +373,7 @@ export default function Home() {
           {completedTiles === 9 && activeDot == -1 && (
             <div>
               <h2>
-                {<ENSLookup address={query.wallet} /> ? (
-                  <ENSLookup address={query.wallet} />
-                ) : (
-                  "You"
-                )}{" "}
+                {query.wallet ? <ENSLookup address={query.wallet} /> : "You"}{" "}
                 learned and built in web3!
               </h2>
               <GameFinish trophyId={trophyId ? trophyId : ""} />
@@ -423,7 +419,7 @@ export default function Home() {
               <h2>Receive tokens (for free!)</h2>
               <p>
                 <a
-                  href="https://discord.gg/azzGB8MJB2"
+                  href="https://discord.gg/pNSFNfyVxA"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -467,7 +463,7 @@ export default function Home() {
             <>
               <h2>Use gas to send tokens</h2>
               <p>This one&apos;s easy!</p>
-              <p>Use MetaMask to send tokens to someone.</p>
+              <p>Use MetaMask to send 100 FWEB3 tokens to someone.</p>
             </>
           )}
           {activeDot === 4 && (
@@ -579,7 +575,7 @@ export default function Home() {
               <p>
                 Now you will deploy one of your own. Need help? Check out{" "}
                 <a
-                  href="https://www.notion.so/s-h-l/Walkthrough-058a7ba0a8fe4d798370e4f6a5fda8b0#669ca4319ed646c683f4098e71505ead"
+                  href="https://www.notion.so/fweb3/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#3c526735ae074b88838ad7b467545614"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -606,6 +602,12 @@ export default function Home() {
               )}
             </div>
           )}
+          {completedTiles !== 9 && (
+            <p style={{ color: "#fff", fontWeight: "bold" }}>
+              Stuck? Click the dots to the left to see further instructions, or
+              check out the Walkthrough below.
+            </p>
+          )}
         </section>
       </main>
       <footer>
@@ -617,7 +619,7 @@ export default function Home() {
           Walkthrough
         </a>
         <a
-          href="https://discord.gg/dNvYpeg2RC"
+          href="https://discord.gg/pNSFNfyVxA"
           target="_blank"
           rel="noreferrer"
         >
