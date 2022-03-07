@@ -1,0 +1,13 @@
+name: Unit, Lint, and E2E
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  # Only run e2e on PR to main
+  # Cypress makes actual API requests
+  # Runs all the dev.yml jobs as well
+  e2e:
+    uses: ./.github/workflows/e2e.yml

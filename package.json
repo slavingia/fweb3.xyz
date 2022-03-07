@@ -2,7 +2,6 @@
   "name": "fweb3.xyz",
   "private": true,
   "engines": {
-    "npm": ">=8.5.3",
     "node": ">=16.14.0"
   },
   "scripts": {
@@ -11,11 +10,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:quiet": "npx next lint --quiet",
     "compile-contract-types": "typechain --target ethers-v5 --out-dir './contracts/types' './contracts/*.json'",
     "postinstall": "npm run compile-contract-types",
     "e2e": "cypress open",
     "prepare": "husky install",
-    "test": "jest --watch"
+    "prettier": "npx prettier -c **/*.{js,css,md,json,ts,tsx}",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "dependencies": {
     "@ethersproject/bignumber": "^5.5.0",

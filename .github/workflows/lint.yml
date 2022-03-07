@@ -1,15 +1,20 @@
-name: Lint
+name: Lint & Format
 
-on: [push]
+on:
+  workflow_call
 
 jobs:
-  lint:
+  prettier:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install modules
         run: npm i
-      - name: Run ESLint
-        run: node_modules/.bin/next lint --quiet
       - name: Run Prettier
-        run: node_modules/.bin/prettier --check "**/*.{js,css,md,json,jsx,ts,tsx}"
+        run: npm run prettier
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ESLint
+        run: npm run lint:quiet

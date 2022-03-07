@@ -1,8 +1,9 @@
-import { ethers } from "ethers";
 import { useWeb3React } from "@web3-react/core";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import Trophy from "./Trophy";
+import { ethers } from "ethers";
+
+import { Trophy } from "./Trophy";
 
 const CONTRACT = "0xc6c5F7B1a27528DD6F34EF164377965114bfA7D9";
 const ABI = [
@@ -231,7 +232,7 @@ const GameFinish = (props) => {
       getVerified(account);
       getWinner(account);
     }
-  }, [active, error]);
+  }, [active, error]); // eslint-disable-line
 
   const seekVerification = async () => {
     const signer = getProviderOrSigner(true);
