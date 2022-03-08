@@ -2,7 +2,7 @@
   "name": "fweb3.xyz",
   "private": true,
   "engines": {
-    "node": ">=16.14.0"
+    "node": ">=14"
   },
   "scripts": {
     "dev": "next dev",
