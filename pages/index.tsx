@@ -4,7 +4,6 @@ import Head from "next/head";
 import TokenBalance from "../components/TokenBalance";
 import GameFinish from "../components/GameFinish";
 import useEagerConnect from "../hooks/useEagerConnect";
-import { parseBalanceToNum } from "../util";
 import { useRouter } from "next/router";
 import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import React, { useEffect, useState } from "react";
@@ -434,8 +433,8 @@ export default function Home() {
               </p>
               <p>That&apos;s enough to complete all the tasks in the game.</p>
               <p>
-                Don&apos;t see your tokens? Double check that your wallet
-                is connected to the Polygon Network.
+                Don&apos;t see your tokens? Double check that your wallet is
+                connected to the Polygon Network.
               </p>
               <p>
                 Once you receive them, use the #collabland-join channel to
