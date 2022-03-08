@@ -15,7 +15,7 @@
     "postinstall": "npm run compile-contract-types",
     "e2e": "cypress open",
     "prepare": "husky install",
-    "prettier": "npx prettier -c **/*.{js,css,md,json,ts,tsx}",
+    "prettier": "npx prettier -c --write **/*.{js,css,md,json,ts,tsx}",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
