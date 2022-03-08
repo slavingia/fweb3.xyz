@@ -17,7 +17,9 @@
     "prepare": "husky install",
     "prettier": "npx prettier -c --write **/*.{js,css,md,json,ts,tsx}",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:coverage:badge": "istanbul-badges-readme --logo=jest"
   },
   "dependencies": {
     "@ethersproject/bignumber": "^5.5.0",
@@ -31,6 +33,7 @@
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "classnames": "^2.3.1",
+    "istanbul-badges-readme": "^1.8.1",
     "next": "12.0.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
