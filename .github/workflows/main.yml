@@ -1,0 +1,43 @@
+name: Unit, Lint, and E2E
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: Install modules
+        run: npm i
+
+      - name: Eslint
+        run: npm run lint:quiet
+
+      - name: Prettier
+        run: npm run prettier
+
+      - name: Jest
+        run: npm run test
+
+  cypress:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cypress
+        env:
+          POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
+        uses: cypress-io/github-action@v2
+        with:
+          build: npm i
+          start: npm run dev
