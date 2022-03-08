@@ -34,6 +34,17 @@ To run the tests using [Cypress](https://cypress.io):
 2. Run local server: `npm run dev`
 3. Run Cypress tests in a separate terminal: `npm run e2e`
 
+To run unit tests with jest
+
+bash```
+npm run test
+
+# watch mode
+
+npm run test:watch
+
+```
+
 #### Debugging with devtools
 
 Supports using either the VS Code debugger or Chrome DevTools.
@@ -43,3 +54,4 @@ See official Next.js docs: https://nextjs.org/docs/advanced-features/debugging
 #### Debugging with variables
 
 You can use `?wallet=` to test using a specific wallet address, and `?debug=0,1,1,1,1,` to test with sample data.
+```
