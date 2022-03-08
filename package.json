@@ -14,6 +14,7 @@
     "compile-contract-types": "typechain --target ethers-v5 --out-dir './contracts/types' './contracts/*.json'",
     "postinstall": "npm run compile-contract-types",
     "e2e": "cypress open",
+    "e2e:run": "npx cypress run",
     "prepare": "husky install",
     "prettier": "npx prettier -c --write **/*.{js,css,md,json,ts,tsx}",
     "test": "jest",
