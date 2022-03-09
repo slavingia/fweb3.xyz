@@ -97,7 +97,6 @@ const dotContent: Record<DotKey, DotContent> = {
     id: DotKey.isConnected,
     position: 0,
     toolTip: "Connect your wallet",
-    link: "https://fweb3.notion.site/Walkthrough-8ac4fc0d3b814a068767c86d63fd8fb7#ce289ff87e18455b9f9054fbe63691e4",
   },
   [DotKey.hasTokens]: {
     id: DotKey.hasTokens,
