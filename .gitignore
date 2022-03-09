@@ -6,7 +6,6 @@
 .pnp.js
 cypress/videos/*
 cypress/screenshots/*
-
 # testing
 /coverage
 

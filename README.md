@@ -1,5 +1,10 @@
 ### Website
 
+![Statements](https://img.shields.io/badge/statements-87.5%25-yellow.svg?style=flat&logo=jest)
+![Branches](https://img.shields.io/badge/branches-60%25-red.svg?style=flat&logo=jest)
+![Functions](https://img.shields.io/badge/functions-100%25-brightgreen.svg?style=flat&logo=jest)
+![Lines](https://img.shields.io/badge/lines-87.5%25-yellow.svg?style=flat&logo=jest)
+
 Get a [PolygonScan API key](https://polygonscan.com/apis) and put it in `.env.local`:
 
 `POLYGON_API_KEY=`
