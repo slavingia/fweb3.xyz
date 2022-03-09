@@ -34,23 +34,23 @@ export const Trophy: React.FC<TrophyProps> = ({ trophyId }): ReactElement => {
   } else {
     const trophyColor = _getTrophyColor(trophyId);
     return (
-      <>
+      <div className="trophy-container">
+        <h2>You learned and built in web3!</h2>
         <p>Here&apos;s the trophy that proves it:</p>
-        <p>
-          <a
-            href={openSeaUrl + trophyId}
-            style={{ display: "block" }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Image
-              alt="trophy image"
-              src={"/fweb_yearone_" + trophyColor + ".png"}
-              layout="intrinsic"
-            />
-          </a>
-        </p>
-      </>
+        <a
+          href={openSeaUrl + trophyId}
+          style={{ display: "block" }}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image
+            alt="trophy image"
+            src={"/fweb_yearone_" + trophyColor + ".png"}
+            width="500px"
+            height="500px"
+          />
+        </a>
+      </div>
     );
   }
 };
