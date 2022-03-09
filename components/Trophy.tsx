@@ -46,7 +46,7 @@ export const Trophy: React.FC<TrophyProps> = ({ trophyId }): ReactElement => {
             <Image
               alt="trophy image"
               src={"/fweb_yearone_" + trophyColor + ".png"}
-              layout="fill"
+              layout="intrinsic"
             />
           </a>
         </p>
