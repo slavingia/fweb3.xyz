@@ -23,6 +23,7 @@ export const useGameState = () => {
     library,
     active,
     activate,
+    setError,
   } = useWeb3React<Web3ReactContextInterface>();
   const [activeDot, setActiveDot] = useState<number>(-1);
   const triedToEagerConnect: boolean = useEagerConnect();
@@ -73,5 +74,6 @@ export const useGameState = () => {
     swrError,
     walletAddressToUse,
     error: web3Error, // FIXME
+    setError,
   };
 };
