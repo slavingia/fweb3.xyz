@@ -270,7 +270,7 @@ export default function Home() {
               target="_blank"
               rel="noreferrer"
             >
-              <p style={{ color: "#fff" }}>
+              <p>
                 <ENSLookup address={query.wallet} />
               </p>
             </a>
@@ -363,10 +363,11 @@ export default function Home() {
         <section>
           {completedTiles === 9 && activeDot == -1 && (
             <div>
-              <h2>
-                {query.wallet ? <ENSLookup address={query.wallet} /> : "You"}{" "}
-                learned and built in web3!
-              </h2>
+              {query.wallet && (
+                <h2>
+                  <ENSLookup address={query.wallet} />
+                </h2>
+              )}
               <GameFinish trophyId={trophyId ? trophyId : ""} />
             </div>
           )}
@@ -416,8 +417,8 @@ export default function Home() {
                 >
                   Join our Discord
                 </a>{" "}
-                and use the #fweb3-faucet to receive 222 $FWEB3 tokens by specifying your
-                wallet address.
+                and use the #fweb3-faucet to receive 222 $FWEB3 tokens by
+                specifying your wallet address.
               </p>
               <p>That&apos;s enough to complete all the tasks in the game.</p>
               <p>
@@ -442,8 +443,8 @@ export default function Home() {
                 >
                   Join our Discord
                 </a>{" "}
-                and use the #matic-faucet to receive .1 $MATIC. You&apos;ll need at least
-                100 $FWEB3 tokens in order to use it.
+                and use the #matic-faucet to receive .1 $MATIC. You&apos;ll need
+                at least 100 $FWEB3 tokens in order to use it.
               </p>
             </>
           )}
