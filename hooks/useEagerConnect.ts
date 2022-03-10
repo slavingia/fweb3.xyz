@@ -1,11 +1,12 @@
+import { Web3ReactContextInterface } from "@web3-react/core/dist/types";
 import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
 import { injected } from "../connectors";
 
-export default function useEagerConnect() {
-  const { activate, active } = useWeb3React();
+export default function useEagerConnect(): boolean {
+  const { activate, active } = useWeb3React<Web3ReactContextInterface>();
 
-  const [tried, setTried] = useState(false);
+  const [tried, setTried] = useState<boolean>(false);
 
   useEffect(() => {
     injected.isAuthorized().then((isAuthorized) => {

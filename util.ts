@@ -14,3 +14,12 @@ export const parseBalanceToNum = (
   decimalsToDisplay = 0
 ) =>
   parseInt(parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay));
+
+export const getTrophyColor = (trophyId: number): string => {
+  if (trophyId <= 333) {
+    return "gold";
+  } else if (trophyId <= 3333) {
+    return "silver";
+  }
+  return "copper";
+};
