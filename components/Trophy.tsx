@@ -2,16 +2,8 @@ import { ReactElement } from "react";
 import Image from "next/image";
 
 import { TROPHY_NFT_ADDRESS } from "../constants";
+import { getTrophyColor } from "../util";
 import { TrophyProps } from "./types";
-
-const _getTrophyColor = (trophyId: number): string => {
-  if (trophyId <= 333) {
-    return "gold";
-  } else if (trophyId <= 3333) {
-    return "silver";
-  }
-  return "copper";
-};
 
 export const Trophy: React.FC<TrophyProps> = ({ trophyId }): ReactElement => {
   const contractUrl = `https://polygonscan.com/address/${TROPHY_NFT_ADDRESS}#writeContract`;
@@ -32,7 +24,7 @@ export const Trophy: React.FC<TrophyProps> = ({ trophyId }): ReactElement => {
       </>
     );
   } else {
-    const trophyColor = _getTrophyColor(trophyId);
+    const trophyColor = getTrophyColor(trophyId);
     return (
       <div className="trophy-container">
         <h2>You learned and built in web3!</h2>
