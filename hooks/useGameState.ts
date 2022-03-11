@@ -35,12 +35,13 @@ export const useGameState = () => {
   const apiUri: string = `/api/polygon?wallet_address=${walletAddressToUse}${
     query.debug ?? `&debug=${query.debug}`
   }`;
-
-  const { data: polygonData, error: swrError } = useSwr<IPolygonData, Error>(
-    query.wallet || account ? apiUri : null,
-    fetcher,
-    { revalidateOnFocus: false }
-  );
+  const polygonData = {};
+  const swrError = "";
+  // const { data: polygonData, error: swrError } = useSwr<IPolygonData, Error>(
+  //   query.wallet || account ? apiUri : null,
+  //   fetcher,
+  //   { revalidateOnFocus: false }
+  // );
 
   const isConnected: boolean = typeof account === "string" && !!library;
   const hasWonGame: boolean = polygonData && polygonData["hasWonGame"];
@@ -48,6 +49,7 @@ export const useGameState = () => {
   const trophyId: any = query.won
     ? query.won
     : polygonData && polygonData["trophyId"];
+  console.log(trophyId);
 
   useEffect(() => {
     if (web3Error || swrError) {

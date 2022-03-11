@@ -1,19 +1,78 @@
+import useSwr from "swr";
+import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
-import cn from "classnames";
-
 import TokenBalance from "../components/TokenBalance";
-import { useGameState } from "../hooks/useGameState";
 import GameFinish from "../components/GameFinish";
-import { Account } from "../components/Account";
+import useEagerConnect from "../hooks/useEagerConnect";
+import { useRouter } from "next/router";
+import { UserRejectedRequestError } from "@web3-react/injected-connector";
+import React, { useEffect, useState } from "react";
+import { injected, fetcher } from "../lib";
+import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
+import cn from "classnames";
 import ENSLookup from "../components/ENSLookup";
-import { getTrophyColor } from "../util";
-import { IPolygonData } from "../types";
+
+type AccountProps = {
+  triedToEagerConnect: boolean;
+};
+
+const Account = ({ triedToEagerConnect }: AccountProps) => {
+  const { query } = useRouter();
+
+  const { active, error, activate, account, setError } = useWeb3React();
+
+  const { isWeb3Available, startOnboarding, stopOnboarding } =
+    useMetaMaskOnboarding();
+
+  // manage connecting state for injected connector
+  const [connecting, setConnecting] = useState(false);
+  useEffect(() => {
+    if (active || error) {
+      setConnecting(false);
+      stopOnboarding();
+    }
+  }, [active, error, stopOnboarding]);
+
+  if (error) {
+    return null;
+  }
+
+  if (!triedToEagerConnect) {
+    return null;
+  }
+
+  if (typeof account !== "string") {
+    return (
+      <button
+        className="pulse"
+        onClick={
+          isWeb3Available
+            ? () => {
+                setConnecting(true);
+
+                activate(injected, undefined, true).catch((error) => {
+                  // ignore the error if it is a user rejected request
+                  if (error instanceof UserRejectedRequestError) {
+                    setConnecting(false);
+                  } else {
+                    setError(error);
+                  }
+                });
+              }
+            : startOnboarding
+        }
+      >
+        Connect your wallet
+      </button>
+    );
+  }
+};
 
 type DotContent = {
   id: string;
   position: number;
   toolTip: string;
-  link?: string;
+  link: string;
 };
 
 enum DotKey {
@@ -111,13 +170,27 @@ const Dot: React.FC<DotProps> = ({
   );
 };
 
-const calcCompletionStates = (
-  isConnected: boolean,
-  wallet: string,
-  polygonData: IPolygonData
-): number[] => {
-  return [
-    isConnected || wallet ? 1 : 0,
+export default function Home() {
+  const { query } = useRouter();
+
+  const { account, library, active, chainId } = useWeb3React();
+
+  const triedToEagerConnect = useEagerConnect();
+
+  const isConnected = typeof account === "string" && !!library;
+
+  const { data: polygonData, error } = useSwr(
+    `/api/polygon?debug=${query.debug}&wallet_address=${
+      query.wallet ? query.wallet : account
+    }`,
+    fetcher,
+    { revalidateOnFocus: false }
+  );
+
+  const [activeDot, setActiveDot] = useState(-1);
+
+  let gameTileCompletionStates = [
+    isConnected || query.wallet ? 1 : 0,
     polygonData && polygonData["hasEnoughTokens"] ? 1 : 0,
     polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
     polygonData && polygonData["hasSentTokens"] ? 1 : 0,
@@ -127,37 +200,28 @@ const calcCompletionStates = (
     polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
     polygonData && polygonData["hasDeployedContract"] ? 1 : 0,
   ];
-};
 
-export default function Home() {
-  const {
-    query,
-    account,
-    isConnected,
-    trophyId,
-    hasWonGame,
-    activeDot,
-    setActiveDot,
-    polygonData,
-    chainId,
-    triedToEagerConnect,
-  } = useGameState();
+  let completedTiles = 0;
+  for (let i = 0; i < gameTileCompletionStates.length; i++) {
+    completedTiles += gameTileCompletionStates[i];
+  }
 
-  const gameTileCompletionStates = calcCompletionStates(
-    isConnected,
-    Array.isArray(query.wallet) ? query.wallet[0] : query.wallet,
-    polygonData
-  );
-
-  const completedTiles = gameTileCompletionStates.reduce((acc, cur) => {
-    return (acc += cur);
-  }, 0);
-
+  let hasWonGame = polygonData && polygonData["hasWonGame"];
+  let trophyId = query.won ? query.won : polygonData && polygonData["trophyId"];
   let shareText = "Fweb3";
   let shareImageUrl = "https://fweb3.xyz/fweb3.png";
 
   if (hasWonGame || trophyId) {
-    const trophyColor = getTrophyColor(trophyId);
+    let trophyColor;
+
+    if (trophyId <= 333) {
+      trophyColor = "gold";
+    } else if (trophyId <= 3333) {
+      trophyColor = "silver";
+    } else {
+      trophyColor = "copper";
+    }
+
     shareText = "🏆 I won a " + trophyColor + " trophy in Fweb3!";
     shareImageUrl = "https://fweb3.xyz/fweb_yearone_" + trophyColor + ".png";
   }
@@ -299,7 +363,7 @@ export default function Home() {
                   <ENSLookup address={query.wallet} />
                 </h2>
               )}
-              <GameFinish />
+              <GameFinish trophyId={trophyId ? trophyId : ""} />
             </div>
           )}
           {(activeDot === -1 || activeDot === 0) && completedTiles !== 9 && (
@@ -513,9 +577,7 @@ export default function Home() {
                 already):
               </p>
               <p>
-                {triedToEagerConnect && (
-                  <Account triedToEagerConnect={triedToEagerConnect} />
-                )}
+                <Account triedToEagerConnect={triedToEagerConnect} />
               </p>
               {chainId !== undefined && chainId !== 137 && !query.wallet && (
                 <p style={{ color: "#f55" }}>

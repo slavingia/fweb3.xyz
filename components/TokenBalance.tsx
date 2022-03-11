@@ -1,6 +1,6 @@
 import type { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
-import { parseBalance } from "../util";
+import { parseBalance } from "../lib/util";
 
 type TokenBalanceProps = {
   balance: number;

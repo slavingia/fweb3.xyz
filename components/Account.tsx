@@ -4,9 +4,9 @@ import styled from "styled-components";
 
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import { useGameState } from "../hooks/useGameState";
-import { injected } from "../connectors";
+import { injected } from "../lib/connectors";
 import { IAccountProps } from "./types";
-import { COLORS } from "../constants";
+import { COLORS } from "../lib/constants";
 
 const Button = styled.button`
   border-radius: 99px;

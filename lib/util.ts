@@ -1,6 +1,11 @@
 import type { BigNumberish } from "@ethersproject/bignumber";
 import { formatUnits, commify } from "@ethersproject/units";
 
+export const fetcher = async (uri): Promise<JSON> => {
+  const res = await fetch(uri);
+  return res.json();
+};
+
 export const parseBalance = (
   value: BigNumberish,
   decimals = 18,
@@ -22,4 +27,12 @@ export const getTrophyColor = (trophyId: number): string => {
     return "silver";
   }
   return "copper";
+};
+
+export const sleep = (milliseconds) => {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
 };

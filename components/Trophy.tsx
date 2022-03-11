@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import Image from "next/image";
 
-import { TROPHY_NFT_ADDRESS } from "../constants";
-import { getTrophyColor } from "../util";
+import { TROPHY_NFT_ADDRESS } from "../lib/constants";
+import { getTrophyColor } from "../lib/util";
 import { TrophyProps } from "./types";
 
 export const Trophy: React.FC<TrophyProps> = ({ trophyId }): ReactElement => {
