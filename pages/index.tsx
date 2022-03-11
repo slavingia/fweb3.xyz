@@ -1,74 +1,13 @@
-import { UserRejectedRequestError } from "@web3-react/injected-connector";
-import React, { useEffect, useState } from "react";
-import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
 import cn from "classnames";
 
-import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import TokenBalance from "../components/TokenBalance";
 import { useGameState } from "../hooks/useGameState";
 import GameFinish from "../components/GameFinish";
+import { Account } from "../components/Account";
 import ENSLookup from "../components/ENSLookup";
-import { injected } from "../connectors";
 import { getTrophyColor } from "../util";
 import { IPolygonData } from "../types";
-
-type AccountProps = {
-  triedToEagerConnect: boolean;
-};
-
-const Account = ({ triedToEagerConnect }: AccountProps) => {
-  const { active, error, activate, account, setError } = useGameState();
-  const { isWeb3Available, startOnboarding, stopOnboarding } =
-    useMetaMaskOnboarding();
-
-  // FIXME: Handle connecting
-  // manage connecting state for injected connector
-  const [connecting, setConnecting] = useState(false);
-  useEffect(() => {
-    if (active || error) {
-      setConnecting(false);
-      stopOnboarding();
-    }
-  }, [active, error, stopOnboarding]);
-
-  if (error) {
-    // FIXME: handle errors
-    return null;
-  }
-
-  if (!triedToEagerConnect) {
-    return null;
-  }
-
-  if (typeof account !== "string") {
-    return (
-      <button
-        className="pulse"
-        onClick={
-          isWeb3Available
-            ? () => {
-                setConnecting(true);
-
-                activate(injected, undefined, true).catch((error) => {
-                  // ignore the error if it is a user rejected request
-                  if (error instanceof UserRejectedRequestError) {
-                    setConnecting(false);
-                  } else {
-                    setError(error);
-                  }
-                });
-              }
-            : startOnboarding
-        }
-      >
-        Connect your wallet
-      </button>
-    );
-  } else {
-    return null;
-  }
-};
 
 type DotContent = {
   id: string;
@@ -194,8 +133,8 @@ export default function Home() {
   const {
     query,
     account,
-    trophyId,
     isConnected,
+    trophyId,
     hasWonGame,
     activeDot,
     setActiveDot,
@@ -360,7 +299,7 @@ export default function Home() {
                   <ENSLookup address={query.wallet} />
                 </h2>
               )}
-              <GameFinish trophyId={trophyId ? trophyId : ""} />
+              <GameFinish />
             </div>
           )}
           {(activeDot === -1 || activeDot === 0) && completedTiles !== 9 && (

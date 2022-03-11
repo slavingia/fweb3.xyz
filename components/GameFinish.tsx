@@ -1,8 +1,8 @@
-import { useWeb3React } from "@web3-react/core";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
 
+import { useGameState } from "../hooks/useGameState";
 import { Trophy } from "./Trophy";
 
 const CONTRACT = "0xc6c5F7B1a27528DD6F34EF164377965114bfA7D9";
@@ -178,14 +178,15 @@ const ABI = [
   },
 ];
 
-const GameFinish = (props) => {
+const GameFinish = () => {
   const [isJudge, setIsJudge] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
   const [loading, setLoading] = useState(false);
   const [transactionFinished, setTransactionFinished] = useState(false);
 
-  const { active, error, activate, account, setError } = useWeb3React();
+  const { active, error, activate, account, setError, trophyId } =
+    useGameState();
   const { query } = useRouter();
 
   const getProviderOrSigner = (needSigner = false) => {
@@ -220,10 +221,15 @@ const GameFinish = (props) => {
   };
 
   const getWinner = async (account: string) => {
-    const provider = getProviderOrSigner();
-    const contract = new ethers.Contract(CONTRACT, ABI, provider);
-    const user = query.wallet ? query.wallet : account;
-    setIsWinner(await contract.isWinner(user));
+    try {
+      const provider = getProviderOrSigner();
+      const contract = new ethers.Contract(CONTRACT, ABI, provider);
+      const user = query.wallet ? query.wallet : account;
+      const isWinner = await contract.isWinner(user);
+      setIsWinner(isWinner);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   useEffect(() => {
@@ -323,7 +329,7 @@ const GameFinish = (props) => {
   } else if (isWinner) {
     return (
       <>
-        <Trophy trophyId={props.trophyId} />
+        <Trophy trophyId={trophyId} />
         <p>
           Enjoyed yourself? Consider onboarding a friend or family member by
           sending them some $FWEB3 tokens.

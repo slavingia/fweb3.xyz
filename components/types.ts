@@ -7,3 +7,7 @@ export interface Address {
 export interface TrophyProps {
   trophyId: number;
 }
+
+export interface IAccountProps {
+  triedToEagerConnect: boolean;
+}
