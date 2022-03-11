@@ -35,21 +35,20 @@ export const useGameState = () => {
   const apiUri: string = `/api/polygon?wallet_address=${walletAddressToUse}${
     query.debug ?? `&debug=${query.debug}`
   }`;
-  const polygonData = {};
-  const swrError = "";
-  // const { data: polygonData, error: swrError } = useSwr<IPolygonData, Error>(
-  //   query.wallet || account ? apiUri : null,
-  //   fetcher,
-  //   { revalidateOnFocus: false }
-  // );
 
+  const { data: polygonData, error: swrError } = useSwr<IPolygonData, Error>(
+    null,
+    // query.wallet || account ? apiUri : null,
+    fetcher,
+    { revalidateOnFocus: false }
+  );
+  console.log({ polygonData });
   const isConnected: boolean = typeof account === "string" && !!library;
   const hasWonGame: boolean = polygonData && polygonData["hasWonGame"];
   // FIXME
   const trophyId: any = query.won
     ? query.won
     : polygonData && polygonData["trophyId"];
-  console.log(trophyId);
 
   useEffect(() => {
     if (web3Error || swrError) {
@@ -68,6 +67,7 @@ export const useGameState = () => {
     triedToEagerConnect,
     query,
     trophyId,
+    library,
     isConnected,
     hasWonGame,
     activeDot,

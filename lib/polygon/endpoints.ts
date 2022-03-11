@@ -3,24 +3,24 @@ import {
   TROPHY_NFT_ADDRESS,
   FWEB3_TOKEN_ADDRESS,
   NFT_ADDRESS,
+  POLYGON_API_KEY,
 } from "../constants";
-
-const { POLYGON_API_KEY } = process.env;
 
 const POLYGON_BASE_URL = "https://api.polygonscan.com/api";
 
 // Internal Endpoints
 
-const _isDebugEnabled = ({ debug = false }: PolygonWalletQuery): boolean =>
+const _isDebugEnabled = ({ debug }: PolygonWalletQuery): boolean =>
   debug && debug !== "undefined" && debug !== undefined;
+
 const _selectAddressToUse = ({ account, wallet }: PolygonWalletQuery) =>
-  ((wallet && wallet) || account) ?? false;
+  wallet ? wallet : account;
 
 export const polygonWalletURI = (query: PolygonWalletQuery): string => {
-  const wallet = _selectAddressToUse(query);
-  if (!wallet) return "";
-  return `/api/polygon?wallet_address=${wallet}${
-    _isDebugEnabled(query) ? "&debug=true" : ""
+  const walletToUse = _selectAddressToUse(query);
+  if (!walletToUse) throw new Error("no wallet or address specified");
+  return `/api/polygon?wallet_address=${walletToUse}${
+    _isDebugEnabled(query) ? `&debug=${query.debug}` : ""
   }`;
 };
 

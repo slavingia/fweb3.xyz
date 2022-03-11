@@ -13,10 +13,13 @@ export const fetchCurrentGameState = async (
 };
 
 export const fetchDebugGameState = (debugItems: string): GameTaskState => {
+  if (!debugItems) {
+    return { ...DEFAULT_GAME_STATE };
+  }
   const items: string[] = debugItems.split("");
   const enabledState = {
     ...DEFAULT_GAME_STATE,
   };
-  items.forEach((item) => (enabledState[GAME_TASKS[parseInt(item)]] = true));
+  items.map((item, idx) => (enabledState[GAME_TASKS[idx + 1]] = true));
   return enabledState;
 };

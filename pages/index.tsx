@@ -11,62 +11,8 @@ import { injected, fetcher } from "../lib";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import cn from "classnames";
 import ENSLookup from "../components/ENSLookup";
-
-type AccountProps = {
-  triedToEagerConnect: boolean;
-};
-
-const Account = ({ triedToEagerConnect }: AccountProps) => {
-  const { query } = useRouter();
-
-  const { active, error, activate, account, setError } = useWeb3React();
-
-  const { isWeb3Available, startOnboarding, stopOnboarding } =
-    useMetaMaskOnboarding();
-
-  // manage connecting state for injected connector
-  const [connecting, setConnecting] = useState(false);
-  useEffect(() => {
-    if (active || error) {
-      setConnecting(false);
-      stopOnboarding();
-    }
-  }, [active, error, stopOnboarding]);
-
-  if (error) {
-    return null;
-  }
-
-  if (!triedToEagerConnect) {
-    return null;
-  }
-
-  if (typeof account !== "string") {
-    return (
-      <button
-        className="pulse"
-        onClick={
-          isWeb3Available
-            ? () => {
-                setConnecting(true);
-
-                activate(injected, undefined, true).catch((error) => {
-                  // ignore the error if it is a user rejected request
-                  if (error instanceof UserRejectedRequestError) {
-                    setConnecting(false);
-                  } else {
-                    setError(error);
-                  }
-                });
-              }
-            : startOnboarding
-        }
-      >
-        Connect your wallet
-      </button>
-    );
-  }
-};
+import { useGameState } from "../hooks/useGameState";
+import { Account } from "../components/Account";
 
 type DotContent = {
   id: string;
@@ -173,19 +119,11 @@ const Dot: React.FC<DotProps> = ({
 export default function Home() {
   const { query } = useRouter();
 
-  const { account, library, active, chainId } = useWeb3React();
+  const { polygonData, account, library, active, chainId } = useGameState();
 
   const triedToEagerConnect = useEagerConnect();
 
   const isConnected = typeof account === "string" && !!library;
-
-  const { data: polygonData, error } = useSwr(
-    `/api/polygon?debug=${query.debug}&wallet_address=${
-      query.wallet ? query.wallet : account
-    }`,
-    fetcher,
-    { revalidateOnFocus: false }
-  );
 
   const [activeDot, setActiveDot] = useState(-1);
 
@@ -200,7 +138,6 @@ export default function Home() {
     polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
     polygonData && polygonData["hasDeployedContract"] ? 1 : 0,
   ];
-
   let completedTiles = 0;
   for (let i = 0; i < gameTileCompletionStates.length; i++) {
     completedTiles += gameTileCompletionStates[i];
