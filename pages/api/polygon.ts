@@ -1,13 +1,13 @@
-import { GameWinState } from "./../../lib/types";
+import { NextApiRequest, NextApiResponse } from "next";
+
 import {
   validateRequest,
   fetchDebugGameState,
   fetchCurrentGameState,
-  GameTaskState,
+  IGameTaskState,
+  IGameWinState,
 } from "../../lib";
-import { NextApiRequest, NextApiResponse } from "next";
 
-// TODO: Figure out handler type
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -24,7 +24,7 @@ export default async function handler(
     const strWallet: string = Array.isArray(walletAddress)
       ? walletAddress[0]
       : walletAddress;
-    const currentGameState: GameTaskState | GameWinState =
+    const currentGameState: IGameTaskState | IGameWinState =
       await fetchCurrentGameState(strWallet);
     return res.json(currentGameState);
   } catch (e) {

@@ -1,4 +1,4 @@
-import { GameTaskState } from "./types";
+import { IGameTaskState } from "./types";
 export const TROPHY_NFT_ADDRESS = "0x2a0493dee4f4b5e4b595326f0e73645f6f493923";
 export const FWEB3_TOKEN_ADDRESS = "0x4a14ac36667b574b08443a15093e417db909d7a3";
 export const GENESYS_ADDRESS = "0x0000000000000000000000000000000000000000";
@@ -17,7 +17,7 @@ export const COLORS = {
   pinkish: "#ff95ee",
 };
 
-export const DEFAULT_GAME_STATE: GameTaskState = {
+export const DEFAULT_GAME_STATE: IGameTaskState = {
   tokenBalance: 0,
   hasEnoughTokens: false,
   hasUsedFweb3Faucet: false,

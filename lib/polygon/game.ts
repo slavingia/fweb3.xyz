@@ -1,10 +1,10 @@
 import { checkHasWonGame, currentWalletGameState } from "./validators";
 import { DEFAULT_GAME_STATE, GAME_TASKS } from "../constants";
-import { GameTaskState, GameWinState } from "./../types";
+import { IGameTaskState, IGameWinState } from "./../types";
 
 export const fetchCurrentGameState = async (
   walletAddress: string
-): Promise<GameTaskState | GameWinState> => {
+): Promise<IGameTaskState | IGameWinState> => {
   const wonGameState = await checkHasWonGame(walletAddress);
   if (wonGameState && wonGameState.trophyId) {
     return wonGameState;
@@ -12,7 +12,7 @@ export const fetchCurrentGameState = async (
   return currentWalletGameState(walletAddress);
 };
 
-export const fetchDebugGameState = (debugItems: string): GameTaskState => {
+export const fetchDebugGameState = (debugItems: string): IGameTaskState => {
   if (!debugItems) {
     return { ...DEFAULT_GAME_STATE };
   }

@@ -1,19 +1,19 @@
-export interface GameTaskState
-  extends Partial<GameWinState>,
-    ERC20GameTasks,
-    WalletTXGameTasks {
+export interface IGameTaskState
+  extends Partial<IGameWinState>,
+    IERC20GameTasks,
+    IWalletTXGameTasks {
   tokenBalance: number;
   hasEnoughTokens: boolean;
   hasDeployedContract: boolean;
   hasMintedNFT: boolean;
 }
 
-export interface ERC20GameTasks {
+export interface IERC20GameTasks {
   hasSentTokens: boolean;
   hasBurnedTokens: boolean;
 }
 
-export interface WalletTXGameTasks {
+export interface IWalletTXGameTasks {
   hasUsedFweb3Faucet: boolean;
   hasUsedMaticFaucet: boolean;
   hasSwappedTokens: boolean;
@@ -21,18 +21,18 @@ export interface WalletTXGameTasks {
   hasVotedInPoll: boolean;
 }
 
-export interface GameWinState {
+export interface IGameWinState {
   hasWonGame: boolean;
   trophyId: number;
 }
 
-export interface PolygonWalletQuery {
+export interface IPolygonWalletQuery {
   debug?: string | boolean;
   wallet?: string;
   account?: string;
 }
 
-export interface TileStates {
+export interface ITileStates {
   completedTiles: number;
   gameTileCompletionStates: number[];
 }

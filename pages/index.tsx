@@ -1,24 +1,19 @@
-import useSwr from "swr";
-import { useWeb3React } from "@web3-react/core";
 import Head from "next/head";
-import TokenBalance from "../components/TokenBalance";
-import GameFinish from "../components/GameFinish";
-import useEagerConnect from "../hooks/useEagerConnect";
-import { useRouter } from "next/router";
-import { UserRejectedRequestError } from "@web3-react/injected-connector";
-import React, { useEffect, useState } from "react";
-import { injected, fetcher } from "../lib";
-import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import cn from "classnames";
-import ENSLookup from "../components/ENSLookup";
+
+import TokenBalance from "../components/TokenBalance";
 import { useGameState } from "../hooks/useGameState";
+import GameFinish from "../components/GameFinish";
 import { Account } from "../components/Account";
+import ENSLookup from "../components/ENSLookup";
+import { getTrophyColor } from "../lib";
+import { IPolygonData } from "../types";
 
 type DotContent = {
   id: string;
   position: number;
   toolTip: string;
-  link: string;
+  link?: string;
 };
 
 enum DotKey {
@@ -116,19 +111,13 @@ const Dot: React.FC<DotProps> = ({
   );
 };
 
-export default function Home() {
-  const { query } = useRouter();
-
-  const { polygonData, account, library, active, chainId } = useGameState();
-
-  const triedToEagerConnect = useEagerConnect();
-
-  const isConnected = typeof account === "string" && !!library;
-
-  const [activeDot, setActiveDot] = useState(-1);
-
-  let gameTileCompletionStates = [
-    isConnected || query.wallet ? 1 : 0,
+const calcCompletionStates = (
+  isConnected: boolean,
+  wallet: string,
+  polygonData: IPolygonData
+): number[] => {
+  return [
+    isConnected || wallet ? 1 : 0,
     polygonData && polygonData["hasEnoughTokens"] ? 1 : 0,
     polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
     polygonData && polygonData["hasSentTokens"] ? 1 : 0,
@@ -138,27 +127,37 @@ export default function Home() {
     polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
     polygonData && polygonData["hasDeployedContract"] ? 1 : 0,
   ];
-  let completedTiles = 0;
-  for (let i = 0; i < gameTileCompletionStates.length; i++) {
-    completedTiles += gameTileCompletionStates[i];
-  }
+};
 
-  let hasWonGame = polygonData && polygonData["hasWonGame"];
-  let trophyId = query.won ? query.won : polygonData && polygonData["trophyId"];
+export default function Home() {
+  const {
+    query,
+    account,
+    isConnected,
+    trophyId,
+    hasWonGame,
+    activeDot,
+    setActiveDot,
+    polygonData,
+    chainId,
+    triedToEagerConnect,
+  } = useGameState();
+
+  const gameTileCompletionStates = calcCompletionStates(
+    isConnected,
+    Array.isArray(query.wallet) ? query.wallet[0] : query.wallet,
+    polygonData
+  );
+
+  const completedTiles = gameTileCompletionStates.reduce((acc, cur) => {
+    return (acc += cur);
+  }, 0);
+
   let shareText = "Fweb3";
   let shareImageUrl = "https://fweb3.xyz/fweb3.png";
 
   if (hasWonGame || trophyId) {
-    let trophyColor;
-
-    if (trophyId <= 333) {
-      trophyColor = "gold";
-    } else if (trophyId <= 3333) {
-      trophyColor = "silver";
-    } else {
-      trophyColor = "copper";
-    }
-
+    const trophyColor = getTrophyColor(trophyId);
     shareText = "🏆 I won a " + trophyColor + " trophy in Fweb3!";
     shareImageUrl = "https://fweb3.xyz/fweb_yearone_" + trophyColor + ".png";
   }
@@ -300,7 +299,7 @@ export default function Home() {
                   <ENSLookup address={query.wallet} />
                 </h2>
               )}
-              <GameFinish trophyId={trophyId ? trophyId : ""} />
+              <GameFinish />
             </div>
           )}
           {(activeDot === -1 || activeDot === 0) && completedTiles !== 9 && (
@@ -514,7 +513,9 @@ export default function Home() {
                 already):
               </p>
               <p>
-                <Account triedToEagerConnect={triedToEagerConnect} />
+                {triedToEagerConnect && (
+                  <Account triedToEagerConnect={triedToEagerConnect} />
+                )}
               </p>
               {chainId !== undefined && chainId !== 137 && !query.wallet && (
                 <p style={{ color: "#f55" }}>

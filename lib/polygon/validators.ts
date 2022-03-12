@@ -1,4 +1,4 @@
-import { GameTaskState, ERC20GameTasks, WalletTXGameTasks } from "../types";
+import { IGameTaskState, IERC20GameTasks, IWalletTXGameTasks } from "../types";
 import { NextApiRequest } from "next";
 import {
   POLYGON_API_KEY,
@@ -33,7 +33,7 @@ export const validateRequest = (req: NextApiRequest): boolean => {
 
 export const checkHasWonGame = async (
   walletAddress: string
-): Promise<GameTaskState> => {
+): Promise<IGameTaskState> => {
   const rawResult = (await fetchTrophyTransactions(walletAddress)) || {};
   _checkStatus(rawResult);
   const { result: trophyTxs } = rawResult;
@@ -73,7 +73,7 @@ export const _checkHasMintedNTF = async (
 
 export const currentWalletGameState = async (
   walletAddress: string
-): Promise<GameTaskState> => {
+): Promise<IGameTaskState> => {
   const walletTxCompletedItems = await _checkWalletTxCompletedItems(
     walletAddress
   );
@@ -90,7 +90,7 @@ export const currentWalletGameState = async (
 
 const _checkWalletTxCompletedItems = async (
   walletAddress: string
-): Promise<WalletTXGameTasks> => {
+): Promise<IWalletTXGameTasks> => {
   const rawResult = (await fetchWalletsTxs(walletAddress)) || {};
   _checkStatus(rawResult);
   const { result: walletsTxs } = rawResult;
@@ -143,7 +143,7 @@ const _checkHasVotedInPoll = (walletsTxs) => {
 
 const _checkERC20CompletedItems = async (
   walletAddress: string
-): Promise<ERC20GameTasks> => {
+): Promise<IERC20GameTasks> => {
   const rawResult = (await fetchERC20Txs(walletAddress)) || {};
   _checkStatus(rawResult);
   const { result: erc20Txs } = rawResult;

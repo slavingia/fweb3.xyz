@@ -1,5 +1,5 @@
-export type { GameTaskState } from "./types";
-export { fetcher, parseBalanceToNum } from "./util";
+export { fetcher, parseBalanceToNum, getTrophyColor } from "./util";
+export type { IGameTaskState, IGameWinState } from "./types";
 export { getLibrary } from "./getLibrary";
 export { injected } from "./connectors";
 export * from "./constants";
