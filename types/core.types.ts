@@ -2,7 +2,7 @@ export interface IGameTaskState
   extends Partial<IGameWinState>,
     IERC20GameTasks,
     IWalletTXGameTasks {
-  tokenBalance: number;
+  tokenBalance: string;
   hasEnoughTokens: boolean;
   hasDeployedContract: boolean;
   hasMintedNFT: boolean;
@@ -21,40 +21,30 @@ export interface IWalletTXGameTasks {
   hasVotedInPoll: boolean;
 }
 
-export interface IGameWinState {
+interface IGameWinState {
   hasWonGame: boolean;
-  trophyId: number;
+  trophyId: string;
 }
 
-export interface IPolygonWalletQuery {
-  debug?: string | boolean;
+export interface IAPIQuery {
+  debug?: string;
   wallet?: string;
   account?: string;
 }
 
-export interface ITileStates {
-  completedTiles: number;
-  gameTileCompletionStates: number[];
+interface IPolygonResponseBase {
+  status: string;
+  message: string;
 }
-// {
+export interface IPolygonDataResponse extends IPolygonResponseBase {
+  result: IPolygonData[];
+}
 
-//   "tokenID": "666",
-//   "tokenName": "Fweb3 Diamond NFT",
-//   "tokenSymbol": "FWEB3DIAMONDNFT",
-//   "tokenDecimal": "0",
-//   "transactionIndex": "79",
-//   "gas": "103743",
-//   "gasPrice": "30069785502",
-//   "gasUsed": "69162",
-//   "cumulativeGasUsed": "9506477",
-//   "input": "deprecated",
-//   "confirmations": "678701"
-// }
+export interface IPolygonBalanceResponse extends IPolygonResponseBase {
+  result: string;
+}
 
-export interface IPolygonAPIResponse extends IPolygonCoreResponse {}
-
-// erc20 ex
-export interface IPolygonCoreResponse {
+export interface IPolygonData {
   blockNumber: string;
   timeStamp: string;
   hash: string;
@@ -64,6 +54,7 @@ export interface IPolygonCoreResponse {
   contractAddress: string;
   to: string;
   value: string;
+  tokenID?: string;
   tokenName: string;
   tokenSymbol: string;
   tokenDecimal: string;
@@ -75,6 +66,12 @@ export interface IPolygonCoreResponse {
   confirmations: string;
 }
 
-interface INFTsTxResponse {
-  tokenID: string;
+export interface IAppColors {
+  [key: string]: string;
+}
+
+export interface IRouterQuery {
+  won?: string;
+  debug?: string;
+  wallet?: string;
 }

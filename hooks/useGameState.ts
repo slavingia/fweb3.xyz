@@ -5,14 +5,18 @@ import { useState, useEffect } from "react";
 import useSwr from "swr";
 
 import useEagerConnect from "./useEagerConnect";
-import { IPolygonData } from "../types";
+import type { IGameTaskState, IRouterQuery } from "../types";
+import { fetcher } from "../lib";
 
-const fetcher = async (
-  input: RequestInfo,
-  init?: RequestInit
-): Promise<IPolygonData> => {
-  const res = await fetch(input, init);
-  return res.json();
+const { NODE_ENV } = process.env;
+
+// Debug should not be public facing
+const _allowDebug = (debug: string): boolean => {
+  return debug === "true" && NODE_ENV !== "production";
+};
+
+const _getWalletAddress = (wallet, account): string => {
+  return wallet ?? account;
 };
 
 export const useGameState = () => {
@@ -25,30 +29,27 @@ export const useGameState = () => {
     activate,
     setError,
   } = useWeb3React<Web3ReactContextInterface>();
+  const {
+    query: { wallet, debug, won },
+  }: { query: IRouterQuery } = useRouter();
   const [activeDot, setActiveDot] = useState<number>(-1);
   const triedToEagerConnect: boolean = useEagerConnect();
-  const { query }: NextRouter = useRouter();
 
-  const walletAddressToUse: string | string[] = query.wallet
-    ? query.wallet
-    : account;
-  const apiUri: string = `/api/polygon?wallet_address=${walletAddressToUse}${
-    query.debug ?? `&debug=${query.debug}`
+  const walletAddress: string = _getWalletAddress(wallet, account);
+
+  const apiUri: string = `/api/polygon?wallet_address=${walletAddress}${
+    _allowDebug(debug) ? `&debug=${debug}` : ""
   }`;
 
-  const { data: polygonData, error: swrError } = useSwr<IPolygonData, Error>(
-    null,
-    // query.wallet || account ? apiUri : null,
-    fetcher,
-    { revalidateOnFocus: false }
-  );
-  console.log({ polygonData });
+  const { data: gameTaskState, error: swrError } = useSwr<
+    IGameTaskState,
+    Error
+  >(wallet || account ? apiUri : null, fetcher, { revalidateOnFocus: false });
+
   const isConnected: boolean = typeof account === "string" && !!library;
-  const hasWonGame: boolean = polygonData && polygonData["hasWonGame"];
+  const hasWonGame: boolean = gameTaskState && gameTaskState["hasWonGame"];
   // FIXME
-  const trophyId: any = query.won
-    ? query.won
-    : polygonData && polygonData["trophyId"];
+  const trophyId: string = won ?? (gameTaskState && gameTaskState["trophyId"]);
 
   useEffect(() => {
     if (web3Error || swrError) {
@@ -65,16 +66,15 @@ export const useGameState = () => {
     account,
     chainId,
     triedToEagerConnect,
-    query,
     trophyId,
     library,
     isConnected,
     hasWonGame,
     activeDot,
     setActiveDot,
-    polygonData,
+    gameTaskState,
     swrError,
-    walletAddressToUse,
+    walletAddress,
     error: web3Error, // FIXME
     setError,
   };

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import { useGameState } from "../hooks/useGameState";
 import { COLORS, injected } from "../lib";
-import { IAccountProps } from "./types";
+import { IAccountProps } from "../types";
 
 const Button = styled.button`
   border-radius: 99px;

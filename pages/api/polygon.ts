@@ -4,9 +4,8 @@ import {
   validateRequest,
   fetchDebugGameState,
   fetchCurrentGameState,
-  IGameTaskState,
-  IGameWinState,
 } from "../../lib";
+import type { IGameTaskState } from "../../types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,11 +20,14 @@ export default async function handler(
       const debugStr: string = Array.isArray(debug) ? debug[0] : debug;
       return res.json(fetchDebugGameState(debugStr));
     }
+
     const strWallet: string = Array.isArray(walletAddress)
       ? walletAddress[0]
       : walletAddress;
-    const currentGameState: IGameTaskState | IGameWinState =
-      await fetchCurrentGameState(strWallet);
+
+    const currentGameState: IGameTaskState = await fetchCurrentGameState(
+      strWallet
+    );
     return res.json(currentGameState);
   } catch (e) {
     console.error(e);

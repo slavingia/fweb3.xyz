@@ -1,32 +1,20 @@
 import Head from "next/head";
 import cn from "classnames";
 
-import TokenBalance from "../components/TokenBalance";
+import {
+  DotContent,
+  DotKey,
+  DotProps,
+  IGameTaskState,
+  IRouterQuery,
+} from "../types";
+import { TokenBalance } from "../components/TokenBalance";
 import { useGameState } from "../hooks/useGameState";
-import GameFinish from "../components/GameFinish";
+import { GameFinish } from "../components/GameFinish";
 import { Account } from "../components/Account";
-import ENSLookup from "../components/ENSLookup";
+import { ENSLookup } from "../components/ENSLookup";
 import { getTrophyColor } from "../lib";
-import { IPolygonData } from "../types";
-
-type DotContent = {
-  id: string;
-  position: number;
-  toolTip: string;
-  link?: string;
-};
-
-enum DotKey {
-  isConnected = "isConnected",
-  hasTokens = "hasTokens",
-  hasUsedFaucet = "hasUsedFaucet",
-  hasSentTokens = "hasSentTokens",
-  hasMintedNFT = "hasMintedNFT",
-  hasBurnedTokens = "hasBurnedTokens",
-  hasSwappedTokens = "hasSwappedTokens",
-  hasVotedInPoll = "hasVotedInPoll",
-  hasDeployedContract = "hasDeployedContract",
-}
+import { useRouter } from "next/router";
 
 const dotContent: Record<DotKey, DotContent> = {
   [DotKey.isConnected]: {
@@ -82,13 +70,6 @@ const orderedDots = Object.keys(dotContent).reduce((list, key) => {
   return list;
 }, []);
 
-type DotProps = DotContent & {
-  completed: boolean;
-  activeDot: number;
-  setActiveDot: (dot: number) => void;
-  hideDot: boolean;
-};
-
 const Dot: React.FC<DotProps> = ({
   toolTip,
   position,
@@ -114,50 +95,50 @@ const Dot: React.FC<DotProps> = ({
 const calcCompletionStates = (
   isConnected: boolean,
   wallet: string,
-  polygonData: IPolygonData
+  gameTaskState: IGameTaskState
 ): number[] => {
   return [
     isConnected || wallet ? 1 : 0,
-    polygonData && polygonData["hasEnoughTokens"] ? 1 : 0,
-    polygonData && polygonData["hasUsedFaucet"] ? 1 : 0,
-    polygonData && polygonData["hasSentTokens"] ? 1 : 0,
-    polygonData && polygonData["hasMintedNFT"] ? 1 : 0,
-    polygonData && polygonData["hasBurnedTokens"] ? 1 : 0,
-    polygonData && polygonData["hasSwappedTokens"] ? 1 : 0,
-    polygonData && polygonData["hasVotedInPoll"] ? 1 : 0,
-    polygonData && polygonData["hasDeployedContract"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasEnoughTokens"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasUsedFaucet"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasSentTokens"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasMintedNFT"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasBurnedTokens"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasSwappedTokens"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasVotedInPoll"] ? 1 : 0,
+    gameTaskState && gameTaskState["hasDeployedContract"] ? 1 : 0,
   ];
 };
 
 export default function Home() {
+  const { query }: { query: IRouterQuery } = useRouter();
   const {
-    query,
     account,
     isConnected,
     trophyId,
     hasWonGame,
     activeDot,
     setActiveDot,
-    polygonData,
+    gameTaskState,
     chainId,
     triedToEagerConnect,
   } = useGameState();
 
-  const gameTileCompletionStates = calcCompletionStates(
+  const gameTileCompletionStates: number[] = calcCompletionStates(
     isConnected,
-    Array.isArray(query.wallet) ? query.wallet[0] : query.wallet,
-    polygonData
+    query.wallet,
+    gameTaskState
   );
 
-  const completedTiles = gameTileCompletionStates.reduce((acc, cur) => {
+  const completedTiles: number = gameTileCompletionStates.reduce((acc, cur) => {
     return (acc += cur);
   }, 0);
 
-  let shareText = "Fweb3";
-  let shareImageUrl = "https://fweb3.xyz/fweb3.png";
+  let shareText: string = "Fweb3";
+  let shareImageUrl: string = "https://fweb3.xyz/fweb3.png";
 
-  if (hasWonGame || trophyId) {
-    const trophyColor = getTrophyColor(trophyId);
+  if (hasWonGame || parseInt(trophyId) >= 1) {
+    const trophyColor: string = getTrophyColor(trophyId);
     shareText = "🏆 I won a " + trophyColor + " trophy in Fweb3!";
     shareImageUrl = "https://fweb3.xyz/fweb_yearone_" + trophyColor + ".png";
   }
@@ -209,7 +190,7 @@ export default function Home() {
 
         {isConnected || query.wallet ? (
           <TokenBalance
-            balance={polygonData && polygonData["tokenBalance"]}
+            balance={gameTaskState && gameTaskState["tokenBalance"]}
             symbol="FWEB3"
           />
         ) : (

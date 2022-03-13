@@ -178,7 +178,7 @@ const ABI = [
   },
 ];
 
-const GameFinish = () => {
+export const GameFinish = () => {
   const [isJudge, setIsJudge] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
@@ -343,5 +343,3 @@ const GameFinish = () => {
     return <></>;
   }
 };
-
-export default GameFinish;

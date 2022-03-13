@@ -1,16 +1,6 @@
-import type { Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
+import type { ITokenBalanceProps } from "../types";
 import { parseBalance } from "../lib/util";
 
-type TokenBalanceProps = {
-  balance: number;
-  symbol: string;
-};
-
-const TokenBalance = ({ balance, symbol }: TokenBalanceProps) => {
-  const { account } = useWeb3React<Web3Provider>();
-
+export const TokenBalance = ({ balance, symbol }: ITokenBalanceProps) => {
   return <p>{`${parseBalance(balance ?? 0)} ${symbol}`}</p>;
 };
-
-export default TokenBalance;
