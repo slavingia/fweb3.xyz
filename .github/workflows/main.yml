@@ -1,6 +1,6 @@
 name: Unit, Lint, and E2E
 
-on: [push, pull_request]
+on: push
 
 jobs:
   test:
