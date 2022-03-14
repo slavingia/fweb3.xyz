@@ -2,7 +2,7 @@ describe("Polygon endpoint tests", () => {
   it("should fail without a wallet", () => {
     cy.request({ url: "/api/polygon", failOnStatusCode: false }).then(
       (response) => {
-        expect(response.status).to.equal(500);
+        expect(response.status).to.equal(400);
       }
     );
   });
