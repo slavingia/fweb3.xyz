@@ -1,9 +1,10 @@
-import type { IPolygonWalletQuery } from "../types";
+import type { IPolygonWalletQuery } from "../../types";
 import {
   TROPHY_NFT_ADDRESS,
   FWEB3_TOKEN_ADDRESS,
   NFT_ADDRESS,
   POLYGON_API_KEY,
+  NEXT_PUBLIC_DEBUG_ENABLE_DOTS,
 } from "../constants";
 
 const POLYGON_BASE_URL = "https://api.polygonscan.com/api";

@@ -67,6 +67,7 @@ describe("external polygon api", () => {
       method: "GET",
       query: {
         wallet_address: MOCK_WALLET_ADDRESS,
+        debug: constantsMock.NEXT_PUBLIC_DEBUG_ENABLE_DOTS,
       },
     });
     fetchDebugGameState.mockReturnValueOnce("foo");

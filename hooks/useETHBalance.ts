@@ -6,7 +6,6 @@ import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive
 function getETHBalance(library: Web3Provider) {
   return async (_: string, address: string) => {
     const balance = await library.getBalance(address);
-
     return balance;
   };
 }

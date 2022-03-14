@@ -1,7 +1,7 @@
 import { Web3ReactContextInterface } from "@web3-react/core/dist/types";
 import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
-import { injected } from "../lib/connectors";
+import { injected } from "../lib";
 
 export default function useEagerConnect(): boolean {
   const { activate, active } = useWeb3React<Web3ReactContextInterface>();

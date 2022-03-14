@@ -1,11 +1,11 @@
 import { Web3ReactContextInterface } from "@web3-react/core/dist/types";
-import { useRouter } from "next/router";
 import { useWeb3React } from "@web3-react/core";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import useSwr from "swr";
 
-import useEagerConnect from "./useEagerConnect";
 import type { IGameTaskState, IRouterQuery } from "../types";
+import useEagerConnect from "./useEagerConnect";
 import { fetcher } from "../lib";
 
 const enabledDots = process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
@@ -31,7 +31,7 @@ export const useGameState = () => {
     setError,
   } = useWeb3React<Web3ReactContextInterface>();
   const {
-    query: { wallet, debug },
+    query: { wallet },
   }: { query: IRouterQuery } = useRouter();
   const [activeDot, setActiveDot] = useState<number>(-1);
   const triedToEagerConnect: boolean = useEagerConnect();
@@ -48,10 +48,10 @@ export const useGameState = () => {
   >(wallet || account ? apiUri : null, fetcher, { revalidateOnFocus: false });
 
   const isConnected: boolean = typeof account === "string" && !!library;
-  const hasWonGame: boolean = gameTaskState && gameTaskState["hasWonGame"];
+  const hasWonGame: boolean = gameTaskState?.["hasWonGame"];
 
   // TrophyId will always exist. It will be 0 / falsy if they dont have one
-  const trophyId: string = gameTaskState && gameTaskState["trophyId"];
+  const trophyId: string = gameTaskState?.["trophyId"];
 
   useEffect(() => {
     if (web3Error || swrError) {
@@ -77,7 +77,8 @@ export const useGameState = () => {
     gameTaskState,
     swrError,
     walletAddress,
-    error: web3Error, // FIXME
+    // loading: // FIXME: global loading state
+    error: web3Error, // FIXME: Proper clientside error handing
     setError,
   };
 };

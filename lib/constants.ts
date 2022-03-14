@@ -9,7 +9,7 @@ export const GENESYS_ADDRESS: string =
 export const BURN_ADDRESS: string = `${GENESYS_ADDRESS}burn`;
 export const FWEB3_FAUCET_ADDRESS: string =
   "0x67806adca0fd8825da9cddc69b9ba8837a64874b"; // FIXME
-export const MATIC_FAUCET_ADDRESSES: string[] = [
+export const FAUCET_ADDRESSES: string[] = [
   "0x67806adca0fd8825da9cddc69b9ba8837a64874b",
   "0xe995b21d94638d81ae5123a65fc369f6aea429bc",
 ];

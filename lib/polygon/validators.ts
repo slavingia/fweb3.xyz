@@ -11,7 +11,7 @@ import type {
   IAPIRequest,
 } from "../../types";
 import {
-  MATIC_FAUCET_ADDRESSES,
+  FAUCET_ADDRESSES,
   DEFAULT_WON_GAME_STATE,
   SWAP_ROUTER_ADDRESS,
   POLYGON_API_KEY,
@@ -144,8 +144,8 @@ const _checkWalletTxCompletedItems = async (
 
 // FIX ME check both matic and fweb3 faucets
 const _checkHasUsedFweb3Faucet = (walletsTxs: IPolygonData[]): boolean => {
-  const faucetAddress1 = MATIC_FAUCET_ADDRESSES[0].toLowerCase();
-  const faucetAddress2 = MATIC_FAUCET_ADDRESSES[1].toLowerCase();
+  const faucetAddress1 = FAUCET_ADDRESSES[0].toLowerCase();
+  const faucetAddress2 = FAUCET_ADDRESSES[1].toLowerCase();
   return (
     walletsTxs?.filter(
       (tx) =>
@@ -159,8 +159,8 @@ const _checkHasUsedMaticFaucet = (walletsTxs: IPolygonData[]): boolean => {
   return (
     walletsTxs?.filter(
       (tx) =>
-        tx.from.toLowerCase() === MATIC_FAUCET_ADDRESSES[0].toLowerCase() ||
-        tx.from === MATIC_FAUCET_ADDRESSES[1].toLowerCase()
+        tx.from.toLowerCase() === FAUCET_ADDRESSES[0].toLowerCase() ||
+        tx.from === FAUCET_ADDRESSES[1].toLowerCase()
     ).length >= 1
   );
 };

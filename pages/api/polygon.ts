@@ -1,7 +1,11 @@
-import { IAPIRequestQueryParams } from "./../../types/core.types";
 import { NextApiRequest, NextApiResponse } from "next";
+
+import type {
+  IRequestValidationResponse,
+  IGameTaskState,
+  IAPIRequestQueryParams,
+} from "../../types";
 import { NEXT_PUBLIC_DEBUG_ENABLE_DOTS } from "../../lib/constants";
-import type { IRequestValidationResponse, IGameTaskState } from "../../types";
 import {
   fetchCurrentGameState,
   fetchDebugGameState,
@@ -21,7 +25,7 @@ export default async function handler(
       return res.status(status).json(error);
     }
 
-    if (NEXT_PUBLIC_DEBUG_ENABLE_DOTS) {
+    if (NEXT_PUBLIC_DEBUG_ENABLE_DOTS && debug) {
       const debugTaskState: IGameTaskState = await fetchDebugGameState(
         NEXT_PUBLIC_DEBUG_ENABLE_DOTS
       );
