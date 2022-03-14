@@ -8,11 +8,11 @@ import useEagerConnect from "./useEagerConnect";
 import type { IGameTaskState, IRouterQuery } from "../types";
 import { fetcher } from "../lib";
 
-const { NODE_ENV } = process.env;
-
+const enabledDots = process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
+const nodeEnv = process.env.NODE_ENV;
 // Debug should not be public facing
-const _allowDebug = (debug: string): boolean => {
-  return debug === "true" && NODE_ENV !== "production";
+const _allowDebug = (): boolean => {
+  return nodeEnv !== "production" && !!enabledDots;
 };
 
 const _getWalletAddress = (wallet, account): string => {
@@ -38,7 +38,7 @@ export const useGameState = () => {
   const walletAddress: string = _getWalletAddress(wallet, account);
 
   const apiUri: string = `/api/polygon?wallet_address=${walletAddress}${
-    _allowDebug(debug) ? `&debug=${debug}` : ""
+    _allowDebug() ? `&debug=${enabledDots}` : ""
   }`;
 
   const { data: gameTaskState, error: swrError } = useSwr<
@@ -48,8 +48,9 @@ export const useGameState = () => {
 
   const isConnected: boolean = typeof account === "string" && !!library;
   const hasWonGame: boolean = gameTaskState && gameTaskState["hasWonGame"];
-  // FIXME
-  const trophyId: string = won ?? (gameTaskState && gameTaskState["trophyId"]);
+
+  // TrophyId will always exist. It will be 0 / falsy if they dont have one
+  const trophyId: string = gameTaskState && gameTaskState["trophyId"];
 
   useEffect(() => {
     if (web3Error || swrError) {

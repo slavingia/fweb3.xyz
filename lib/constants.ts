@@ -7,7 +7,8 @@ export const FWEB3_TOKEN_ADDRESS: string =
 export const GENESYS_ADDRESS: string =
   "0x0000000000000000000000000000000000000000";
 export const BURN_ADDRESS: string = `${GENESYS_ADDRESS}burn`;
-export const FWEB3_FAUCET_ADDRESS: string = "unknown"; // FIXME
+export const FWEB3_FAUCET_ADDRESS: string =
+  "0x67806adca0fd8825da9cddc69b9ba8837a64874b"; // FIXME
 export const MATIC_FAUCET_ADDRESSES: string[] = [
   "0x67806adca0fd8825da9cddc69b9ba8837a64874b",
   "0xe995b21d94638d81ae5123a65fc369f6aea429bc",
@@ -27,8 +28,7 @@ export const COLORS: IAppColors = {
 export const DEFAULT_GAME_STATE: IGameTaskState = {
   tokenBalance: "0",
   hasEnoughTokens: false,
-  hasUsedFweb3Faucet: false,
-  hasUsedMaticFaucet: false,
+  hasUsedFaucet: false,
   hasSwappedTokens: false,
   hasVotedInPoll: false,
   hasDeployedContract: false,
@@ -39,11 +39,10 @@ export const DEFAULT_GAME_STATE: IGameTaskState = {
   trophyId: "0",
 };
 
-export const WON_GAME_STATE: IGameTaskState = {
+export const DEFAULT_WON_GAME_STATE: IGameTaskState = {
   tokenBalance: "0",
   hasEnoughTokens: true,
-  hasUsedFweb3Faucet: true,
-  hasUsedMaticFaucet: true,
+  hasUsedFaucet: true,
   hasSwappedTokens: true,
   hasVotedInPoll: true,
   hasDeployedContract: true,
@@ -56,12 +55,12 @@ export const WON_GAME_STATE: IGameTaskState = {
 export const GAME_TASKS: string[] = [
   null, // Naturalize Index
   "hasEnoughTokens",
-  "hasMintedNFT",
-  "hasUsedFweb3Faucet",
-  "hasUsedMaticFaucet",
-  "hasSwappedTokens",
-  "hasDeployedContract",
-  "hasVotedInPoll",
+  "hasEnoughTokens",
+  "hasUsedFaucet",
   "hasSentTokens",
+  "hasMintedNFT",
   "hasBurnedTokens",
+  "hasSwappedTokens",
+  "hasVotedInPoll",
+  "hasDeployedContract",
 ];

@@ -1,5 +1,5 @@
-import type { BigNumberish } from "@ethersproject/bignumber";
-import { formatUnits, commify } from "@ethersproject/units";
+import { BigNumber, BigNumberish } from "@ethersproject/bignumber";
+import { formatUnits, commify, parseEther } from "@ethersproject/units";
 
 export const fetcher = async (uri: string, config = null): Promise<any> => {
   const res = await fetch(uri, config);
@@ -7,14 +7,17 @@ export const fetcher = async (uri: string, config = null): Promise<any> => {
 };
 
 export const parseBalance = (
-  value: BigNumberish,
+  value: string,
   decimals = 18,
   decimalsToDisplay = 0
-): string =>
-  commify(parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay));
+): string => {
+  return commify(
+    parseFloat(formatUnits(value, decimals)).toFixed(decimalsToDisplay)
+  );
+};
 
 export const parseBalanceToNum = (
-  value: BigNumberish,
+  value: string,
   decimals = 18,
   decimalsToDisplay = 0
 ): number =>

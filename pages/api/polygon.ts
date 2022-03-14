@@ -1,3 +1,4 @@
+import { IAPIQuery } from "./../../types/core.types";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import {
@@ -12,13 +13,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const { debug, wallet_address: walletAddress } = req.query;
+    const enabledDots: string = process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
+    const { debug, wallet_address: walletAddress }: IAPIQuery = req.query;
     // Throws if invalid
     validateRequest(req);
 
-    if (debug) {
-      const debugStr: string = Array.isArray(debug) ? debug[0] : debug;
-      return res.json(fetchDebugGameState(debugStr));
+    if (enabledDots && debug) {
+      const fetchedfetchedGameState = await fetchDebugGameState(enabledDots);
+      return res.json(fetchedfetchedGameState);
     }
 
     const strWallet: string = Array.isArray(walletAddress)
@@ -28,6 +30,7 @@ export default async function handler(
     const currentGameState: IGameTaskState = await fetchCurrentGameState(
       strWallet
     );
+
     return res.json(currentGameState);
   } catch (e) {
     console.error(e);

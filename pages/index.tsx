@@ -99,14 +99,14 @@ const calcCompletionStates = (
 ): number[] => {
   return [
     isConnected || wallet ? 1 : 0,
-    gameTaskState && gameTaskState["hasEnoughTokens"] ? 1 : 0,
-    gameTaskState && gameTaskState["hasUsedFaucet"] ? 1 : 0,
-    gameTaskState && gameTaskState["hasSentTokens"] ? 1 : 0,
-    gameTaskState && gameTaskState["hasMintedNFT"] ? 1 : 0,
-    gameTaskState && gameTaskState["hasBurnedTokens"] ? 1 : 0,
-    gameTaskState && gameTaskState["hasSwappedTokens"] ? 1 : 0,
-    gameTaskState && gameTaskState["hasVotedInPoll"] ? 1 : 0,
-    gameTaskState && gameTaskState["hasDeployedContract"] ? 1 : 0,
+    gameTaskState?.["hasEnoughTokens"] ? 1 : 0,
+    gameTaskState?.["hasUsedFaucet"] ? 1 : 0,
+    gameTaskState?.["hasSentTokens"] ? 1 : 0,
+    gameTaskState?.["hasMintedNFT"] ? 1 : 0,
+    gameTaskState?.["hasBurnedTokens"] ? 1 : 0,
+    gameTaskState?.["hasSwappedTokens"] ? 1 : 0,
+    gameTaskState?.["hasVotedInPoll"] ? 1 : 0,
+    gameTaskState?.["hasDeployedContract"] ? 1 : 0,
   ];
 };
 
@@ -142,7 +142,6 @@ export default function Home() {
     shareText = "🏆 I won a " + trophyColor + " trophy in Fweb3!";
     shareImageUrl = "https://fweb3.xyz/fweb_yearone_" + trophyColor + ".png";
   }
-
   return (
     <div>
       <Head>
@@ -190,7 +189,7 @@ export default function Home() {
 
         {isConnected || query.wallet ? (
           <TokenBalance
-            balance={gameTaskState && gameTaskState["tokenBalance"]}
+            balance={gameTaskState?.["tokenBalance"]}
             symbol="FWEB3"
           />
         ) : (

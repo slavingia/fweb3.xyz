@@ -14,8 +14,8 @@ export interface IERC20GameTasks {
 }
 
 export interface IWalletTXGameTasks {
-  hasUsedFweb3Faucet: boolean;
-  hasUsedMaticFaucet: boolean;
+  hasEnoughTokens: boolean;
+  hasUsedFaucet: boolean;
   hasSwappedTokens: boolean;
   hasDeployedContract: boolean;
   hasVotedInPoll: boolean;
@@ -28,13 +28,14 @@ interface IGameWinState {
 
 export interface IAPIQuery {
   debug?: string;
-  wallet?: string;
+  wallet_address?: string;
   account?: string;
 }
 
 interface IPolygonResponseBase {
   status: string;
   message: string;
+  apiCall?: string;
 }
 export interface IPolygonDataResponse extends IPolygonResponseBase {
   result: IPolygonData[];
