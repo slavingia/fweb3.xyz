@@ -1,29 +1,27 @@
-import type { IPolygonWalletQuery } from "../../types";
 import {
   TROPHY_NFT_ADDRESS,
   FWEB3_TOKEN_ADDRESS,
   NFT_ADDRESS,
   POLYGON_API_KEY,
-  NEXT_PUBLIC_DEBUG_ENABLE_DOTS,
 } from "../constants";
 
 const POLYGON_BASE_URL = "https://api.polygonscan.com/api";
 
 // Internal Endpoints
 
-const _isDebugEnabled = ({ debug }: IPolygonWalletQuery): boolean =>
-  debug && debug !== "undefined" && debug !== undefined;
+// const _isDebugEnabled = ({ debug }: IPolygonWalletQuery): boolean =>
+//   debug && debug !== "undefined" && debug !== undefined;
 
-const _selectAddressToUse = ({ account, wallet }: IPolygonWalletQuery) =>
-  wallet ? wallet : account;
+// const _selectAddressToUse = ({ account, wallet }: IPolygonWalletQuery) =>
+//   wallet ? wallet : account;
 
-export const polygonWalletURI = (query: IPolygonWalletQuery): string => {
-  const walletToUse = _selectAddressToUse(query);
-  if (!walletToUse) throw new Error("no wallet or address specified");
-  return `/api/polygon?wallet_address=${walletToUse}${
-    _isDebugEnabled(query) ? `&debug=${query.debug}` : ""
-  }`;
-};
+// export const polygonWalletURI = (query: IPolygonWalletQuery): string => {
+//   const walletToUse = _selectAddressToUse(query);
+//   if (!walletToUse) throw new Error("no wallet or address specified");
+//   return `/api/polygon?wallet_address=${walletToUse}${
+//     _isDebugEnabled(query) ? `&debug=${query.debug}` : ""
+//   }`;
+// };
 
 // External Endpoints
 

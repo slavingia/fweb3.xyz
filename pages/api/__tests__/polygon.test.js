@@ -12,6 +12,7 @@ const constantsMock = jest.requireMock("../../../lib/constants");
 jest.mock("../../../lib/constants", () => ({
   POLYGON_API_KEY: "foo",
   NEXT_PUBLIC_DEBUG_ENABLE_DOTS: 0,
+  NODE_ENV: "kerplunk",
 }));
 
 jest.mock("../../../lib/polygon/game");

@@ -5,7 +5,7 @@ import type {
   IGameTaskState,
   IAPIRequestQueryParams,
 } from "../../types";
-import { NEXT_PUBLIC_DEBUG_ENABLE_DOTS } from "../../lib/constants";
+import { NEXT_PUBLIC_DEBUG_ENABLE_DOTS, NODE_ENV } from "../../lib/constants";
 import {
   fetchCurrentGameState,
   fetchDebugGameState,
@@ -25,7 +25,7 @@ export default async function handler(
       return res.status(status).json(error);
     }
 
-    if (NEXT_PUBLIC_DEBUG_ENABLE_DOTS && debug) {
+    if (NODE_ENV !== "production" && NEXT_PUBLIC_DEBUG_ENABLE_DOTS && debug) {
       const debugTaskState: IGameTaskState = await fetchDebugGameState(
         NEXT_PUBLIC_DEBUG_ENABLE_DOTS
       );

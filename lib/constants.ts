@@ -22,6 +22,7 @@ export const NFT_ADDRESS: string = "0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B";
 export const NEXT_PUBLIC_DEBUG_ENABLE_DOTS =
   process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
 export const POLYGON_API_KEY = process.env.POLYGON_API_KEY;
+export const NODE_ENV = process.env.NODE_ENV;
 
 export const COLORS: IAppColors = {
   pinkish: "#ff95ee",
