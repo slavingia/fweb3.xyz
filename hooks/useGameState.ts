@@ -25,7 +25,7 @@ export const useGameState = () => {
     activate,
     setError,
   } = useWeb3React<Web3ReactContextInterface>();
-  const [activeDot, setActiveDot] = useState<number>(0);
+  const [activeDot, setActiveDot] = useState<number>(-1);
   const triedToEagerConnect: boolean = useEagerConnect();
   const { query }: NextRouter = useRouter();
 
