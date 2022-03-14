@@ -32,6 +32,7 @@ export interface IAPIRequest {
 export interface IAPIRequestQueryParams {
   debug?: string;
   wallet_address?: string;
+  wallet?: string;
 }
 
 interface IPolygonResponseBase {

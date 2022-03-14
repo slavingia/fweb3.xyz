@@ -17,8 +17,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const { debug, wallet_address: walletAddress }: IAPIRequestQueryParams =
-      req.query;
+    const {
+      wallet: debugWallet,
+      debug,
+      wallet_address: walletAddress,
+    }: IAPIRequestQueryParams = req.query;
     const { status, error }: IRequestValidationResponse = validateRequest(req);
 
     if (status !== 200) {
@@ -32,7 +35,7 @@ export default async function handler(
       return res.json(debugTaskState);
     }
     const gameTaskState: IGameTaskState = await fetchCurrentGameState(
-      walletAddress
+      debugWallet ?? walletAddress
     );
     return res.json(gameTaskState);
   } catch (e) {
