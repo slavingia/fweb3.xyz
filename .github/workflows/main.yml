@@ -1,6 +1,6 @@
 name: Unit, Lint, and E2E
 
-on: [push, pull_request]
+on: push
 
 jobs:
   test:
@@ -34,7 +34,6 @@ jobs:
 
   cypress:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
       - name: Cypress
