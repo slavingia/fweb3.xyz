@@ -12,7 +12,6 @@ export interface IERC20GameTasks {
   hasSentTokens: boolean;
   hasBurnedTokens: boolean;
 }
-
 export interface IWalletTXGameTasks {
   hasEnoughTokens: boolean;
   hasUsedFaucet: boolean;
@@ -26,10 +25,13 @@ interface IGameWinState {
   trophyId: string;
 }
 
-export interface IAPIQuery {
+export interface IAPIRequest {
+  query: IAPIRequestQueryParams;
+  method?: string;
+}
+export interface IAPIRequestQueryParams {
   debug?: string;
   wallet_address?: string;
-  account?: string;
 }
 
 interface IPolygonResponseBase {
@@ -44,7 +46,6 @@ export interface IPolygonDataResponse extends IPolygonResponseBase {
 export interface IPolygonBalanceResponse extends IPolygonResponseBase {
   result: string;
 }
-
 export interface IPolygonData {
   blockNumber: string;
   timeStamp: string;
@@ -70,9 +71,11 @@ export interface IPolygonData {
 export interface IAppColors {
   [key: string]: string;
 }
-
 export interface IRouterQuery {
-  won?: string;
   debug?: string;
   wallet?: string;
+}
+export interface IRequestValidationResponse {
+  error?: string;
+  status: number;
 }

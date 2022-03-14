@@ -31,7 +31,7 @@ describe("Polygon endpoint tests", () => {
       url: "/api/polygon/?wallet_address=invalid",
       failOnStatusCode: false,
     }).then((response) => {
-      expect(response.status).to.equal(500);
+      expect(response.status).to.equal(400);
     });
   });
 });

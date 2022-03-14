@@ -18,8 +18,10 @@ export const SWAP_ROUTER_ADDRESS: string =
 export const POLL_ADDRESS: string =
   "0x718ad63821a6a3611Ceb706f15971ee029812365";
 export const NFT_ADDRESS: string = "0x9a323979dD8AebC6ecc156d965C417D39Eb61a5B";
-// TODO: What type is this?
-export const { POLYGON_API_KEY } = process.env;
+
+export const NEXT_PUBLIC_DEBUG_ENABLE_DOTS =
+  process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
+export const POLYGON_API_KEY = process.env.POLYGON_API_KEY;
 
 export const COLORS: IAppColors = {
   pinkish: "#ff95ee",

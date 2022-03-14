@@ -1,40 +1,68 @@
-import { NextApiRequest } from "next";
+import { getAddress } from "ethers/lib/utils";
+
 import type {
+  IRequestValidationResponse,
   IPolygonBalanceResponse,
   IPolygonDataResponse,
   IWalletTXGameTasks,
   IERC20GameTasks,
   IGameTaskState,
   IPolygonData,
+  IAPIRequest,
 } from "../../types";
 import {
+  MATIC_FAUCET_ADDRESSES,
+  DEFAULT_WON_GAME_STATE,
+  SWAP_ROUTER_ADDRESS,
   POLYGON_API_KEY,
   GENESYS_ADDRESS,
-  MATIC_FAUCET_ADDRESSES,
-  SWAP_ROUTER_ADDRESS,
   POLL_ADDRESS,
   BURN_ADDRESS,
-  DEFAULT_WON_GAME_STATE,
 } from "../constants";
 import {
+  fetchTrophyTransactions,
+  fetchWalletTokenBalance,
+  fetchWalletsTxs,
   fetchERC20Txs,
   fetchNftsTxs,
-  fetchTrophyTransactions,
-  fetchWalletsTxs,
-  fetchWalletTokenBalance,
 } from "./api";
 
-export const validateRequest = (req: NextApiRequest): boolean => {
-  if (!req) {
-    throw new Error("No request to validate");
-  } else if (req.method !== "GET") {
-    throw new Error("Unsupported request method");
-  } else if (!req?.query?.wallet_address) {
-    throw new Error("Missing request params");
-  } else if (!POLYGON_API_KEY) {
-    throw new Error("missing api key");
+export const validateRequest = (
+  req: IAPIRequest
+): IRequestValidationResponse => {
+  try {
+    const { wallet_address: walletAddress, debug } = req.query;
+    if (req.method !== "GET") {
+      return {
+        error: "Bad request type",
+        status: 400,
+      };
+    } else if (!POLYGON_API_KEY) {
+      return {
+        error: "Missing required environment vars",
+        status: 500,
+      };
+    } else if (!debug && !walletAddress) {
+      return {
+        error: "Missing query params",
+        status: 400,
+      };
+    }
+    // ethers.utils throws if bad address
+    getAddress(walletAddress);
+    return {
+      status: 200,
+      error: null,
+    };
+  } catch (e) {
+    const error = e.message.includes("invalid address")
+      ? "Malformatted address"
+      : "An unknown error occured";
+    return {
+      status: 400,
+      error,
+    };
   }
-  return true;
 };
 
 export const checkHasWonGame = async (

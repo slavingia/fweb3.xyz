@@ -1,39 +1,38 @@
-import { IAPIQuery } from "./../../types/core.types";
+import { IAPIRequestQueryParams } from "./../../types/core.types";
 import { NextApiRequest, NextApiResponse } from "next";
-
+import { NEXT_PUBLIC_DEBUG_ENABLE_DOTS } from "../../lib/constants";
+import type { IRequestValidationResponse, IGameTaskState } from "../../types";
 import {
-  validateRequest,
-  fetchDebugGameState,
   fetchCurrentGameState,
+  fetchDebugGameState,
+  validateRequest,
 } from "../../lib";
-import type { IGameTaskState } from "../../types";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const enabledDots: string = process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
-    const { debug, wallet_address: walletAddress }: IAPIQuery = req.query;
-    // Throws if invalid
-    validateRequest(req);
+    const { debug, wallet_address: walletAddress }: IAPIRequestQueryParams =
+      req.query;
+    const { status, error }: IRequestValidationResponse = validateRequest(req);
 
-    if (enabledDots && debug) {
-      const fetchedfetchedGameState = await fetchDebugGameState(enabledDots);
-      return res.json(fetchedfetchedGameState);
+    if (status !== 200) {
+      return res.status(status).json(error);
     }
 
-    const strWallet: string = Array.isArray(walletAddress)
-      ? walletAddress[0]
-      : walletAddress;
-
-    const currentGameState: IGameTaskState = await fetchCurrentGameState(
-      strWallet
+    if (NEXT_PUBLIC_DEBUG_ENABLE_DOTS) {
+      const debugTaskState: IGameTaskState = await fetchDebugGameState(
+        NEXT_PUBLIC_DEBUG_ENABLE_DOTS
+      );
+      return res.json(debugTaskState);
+    }
+    const gameTaskState: IGameTaskState = await fetchCurrentGameState(
+      walletAddress
     );
-
-    return res.json(currentGameState);
+    return res.json(gameTaskState);
   } catch (e) {
     console.error(e);
-    return res.status(500).send("Something went wrong");
+    return res.status(500).send("Internal server error");
   }
 }

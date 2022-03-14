@@ -1,5 +1,5 @@
 import { Web3ReactContextInterface } from "@web3-react/core/dist/types";
-import { useRouter, NextRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useWeb3React } from "@web3-react/core";
 import { useState, useEffect } from "react";
 import useSwr from "swr";
@@ -10,6 +10,7 @@ import { fetcher } from "../lib";
 
 const enabledDots = process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
 const nodeEnv = process.env.NODE_ENV;
+
 // Debug should not be public facing
 const _allowDebug = (): boolean => {
   return nodeEnv !== "production" && !!enabledDots;
@@ -30,7 +31,7 @@ export const useGameState = () => {
     setError,
   } = useWeb3React<Web3ReactContextInterface>();
   const {
-    query: { wallet, debug, won },
+    query: { wallet, debug },
   }: { query: IRouterQuery } = useRouter();
   const [activeDot, setActiveDot] = useState<number>(-1);
   const triedToEagerConnect: boolean = useEagerConnect();
