@@ -45,7 +45,7 @@ See official Next.js docs: https://nextjs.org/docs/advanced-features/debugging
 
 #### Debugging with variables
 
-You can set `DEBUG` to console.debug request responses and override the production blocking for the dot switch described below.
+You can set `DEBUG_ENABLE` to console.debug request responses and override the production blocking for the dot switch described below.
 
 You can use `?wallet=` to test using a specific wallet address
 
