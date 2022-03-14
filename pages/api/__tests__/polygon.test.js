@@ -64,6 +64,7 @@ describe("external polygon api", () => {
   it("calls to fetch debug game state", async () => {
     constantsMock.POLYGON_API_KEY = "foo";
     constantsMock.NEXT_PUBLIC_DEBUG_ENABLE_DOTS = 111;
+    constantsMock.NODE_ENV = "bar";
     const { req, res } = createMocks({
       method: "GET",
       query: {
