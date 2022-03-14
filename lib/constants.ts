@@ -23,6 +23,7 @@ export const NEXT_PUBLIC_DEBUG_ENABLE_DOTS =
   process.env.NEXT_PUBLIC_DEBUG_ENABLE_DOTS;
 export const POLYGON_API_KEY = process.env.POLYGON_API_KEY;
 export const NODE_ENV = process.env.NODE_ENV;
+export const DEBUG_ENABLE = process.env.DEBUG_ENABLE;
 
 export const COLORS: IAppColors = {
   pinkish: "#ff95ee",

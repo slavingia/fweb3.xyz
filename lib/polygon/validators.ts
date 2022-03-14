@@ -18,6 +18,7 @@ import {
   GENESYS_ADDRESS,
   POLL_ADDRESS,
   BURN_ADDRESS,
+  DEBUG_ENABLE,
 } from "../constants";
 import {
   fetchTrophyTransactions,
@@ -231,7 +232,7 @@ const _checkStatus = ({
   result,
   apiCall,
 }: IPolygonDataResponse | IPolygonBalanceResponse) => {
-  if (process.env.DEBUG && (!status || status !== "1")) {
+  if (DEBUG_ENABLE && (!status || status !== "1")) {
     const json = JSON.stringify({ status, message, result }, null, 2);
     console.debug(`Bad Polygon API Response: ${apiCall}\n${json}`);
   }
