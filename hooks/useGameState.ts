@@ -33,17 +33,17 @@ export const useGameState = () => {
     ? query.wallet
     : account;
   const apiUri: string = `/api/polygon?wallet_address=${walletAddressToUse}${
-    query.debug ?? `&debug=${query.debug}`
+    query.debug ? `&debug=${query.debug}` : ""
   }`;
-
+  // FIXME; What to do if polygon api is down?
   const { data: polygonData, error: swrError } = useSwr<IPolygonData, Error>(
     query.wallet || account ? apiUri : null,
     fetcher,
     { revalidateOnFocus: false }
   );
-
   const isConnected: boolean = typeof account === "string" && !!library;
   const hasWonGame: boolean = polygonData && polygonData["hasWonGame"];
+
   // FIXME
   const trophyId: any = query.won
     ? query.won

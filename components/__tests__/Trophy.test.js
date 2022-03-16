@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Trophy } from "./Trophy";
+import { Trophy } from "../Trophy";
 
 const renderComponent = (props) => render(<Trophy {...props} />);
 
