@@ -1,9 +1,6 @@
 {
   "name": "fweb3.xyz",
   "private": true,
-  "engines": {
-    "node": ">=14"
-  },
   "scripts": {
     "dev": "next dev",
     "browser-debug": "NODE_OPTIONS='--inspect' next dev",
