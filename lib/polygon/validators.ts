@@ -147,21 +147,25 @@ const _checkWalletTxCompletedItems = async (
 const _checkHasUsedFweb3Faucet = (walletsTxs: IPolygonData[]): boolean => {
   const faucetAddress1 = FAUCET_ADDRESSES[0].toLowerCase();
   const faucetAddress2 = FAUCET_ADDRESSES[1].toLowerCase();
+  const newFweb3Faucet = "0x4B9C8d77228C2d1A9f52a18812e73940270e250d";
   return (
     walletsTxs?.filter(
       (tx) =>
-        tx.to.toLowerCase() === faucetAddress1 ||
-        tx.to.toLowerCase() === faucetAddress2
+        tx.to.toLowerCase() === faucetAddress1.toLowerCase() ||
+        tx.to.toLowerCase() === faucetAddress2.toLowerCase() ||
+        tx.to.toLowerCase() === newFweb3Faucet.toLowerCase()
     ).length >= 1
   );
 };
 
 const _checkHasUsedMaticFaucet = (walletsTxs: IPolygonData[]): boolean => {
+  const newMaticFaucet = "0xF2d86AEe11351D4396eE2Bd663977C91eE2b0F9b";
   return (
     walletsTxs?.filter(
       (tx) =>
         tx.from.toLowerCase() === FAUCET_ADDRESSES[0].toLowerCase() ||
-        tx.from === FAUCET_ADDRESSES[1].toLowerCase()
+        tx.from === FAUCET_ADDRESSES[1].toLowerCase() ||
+        tx.from === newMaticFaucet.toLowerCase()
     ).length >= 1
   );
 };
