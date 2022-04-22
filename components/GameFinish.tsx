@@ -178,7 +178,7 @@ const ABI = [
   },
 ];
 
-const GameFinish = () => {
+export const GameFinish = () => {
   const [isJudge, setIsJudge] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
@@ -203,7 +203,7 @@ const GameFinish = () => {
         console.log("Ethereum object doesn't exist!");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -343,5 +343,3 @@ const GameFinish = () => {
     return <></>;
   }
 };
-
-export default GameFinish;

@@ -45,4 +45,12 @@ See official Next.js docs: https://nextjs.org/docs/advanced-features/debugging
 
 #### Debugging with variables
 
-You can use `?wallet=` to test using a specific wallet address, and `?debug=0,1,1,1,1,` to test with sample data.
+You can set `DEBUG_ENABLE` to console.debug request responses and override the production blocking for the dot switch described below.
+
+You can use `?wallet=` to test using a specific wallet address
+
+To enable individual dots (bypasses any external polygon api calls)
+set `NEXT_PUBLIC_DEBUG_ENABLE_DOTS=`
+To enable dots one at a time or multiple dots. Use a string of 1/0 switches to enable/disable
+ex: NEXT_PUBLIC_DEBUG_ENABLE_DOTS=1111111
+This would enable the first 7 game tasks. Not avail in production

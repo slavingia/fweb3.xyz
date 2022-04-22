@@ -1,11 +1,11 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { Account } from "../Account";
-import { useGameState } from "../../hooks/useGameState";
-import useMetaMaskOnboarding from "../../hooks/useMetaMaskOnboarding";
 
-jest.mock("../../hooks/useGameState");
+import useMetaMaskOnboarding from "../../hooks/useMetaMaskOnboarding";
+import { useGameState } from "../../hooks/useGameState";
+import { Account } from "../Account";
 
 jest.mock("../../hooks/useMetaMaskOnboarding");
+jest.mock("../../hooks/useGameState");
 
 const renderComponent = (props) => render(<Account {...props} />);
 

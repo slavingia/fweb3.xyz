@@ -1,11 +1,6 @@
 import useENSName from "../hooks/useENSName";
+import type { IAddressProp } from "../types";
 
-type Address = {
-  address: string | string[];
-};
-
-const ENSLookup = ({ address }: Address) => {
+export const ENSLookup = ({ address }: IAddressProp) => {
   return <>{useENSName(address)}</>;
 };
-
-export default ENSLookup;

@@ -1,15 +1,15 @@
 import { ReactElement } from "react";
 import Image from "next/image";
 
-import { TROPHY_NFT_ADDRESS } from "../constants";
-import { getTrophyColor } from "../util";
-import { TrophyProps } from "./types";
+import { TROPHY_NFT_ADDRESS } from "../lib/constants";
+import { getTrophyColor } from "../lib/util";
+import type { TrophyProps } from "../types";
 
 export const Trophy: React.FC<TrophyProps> = ({ trophyId }): ReactElement => {
   const contractUrl = `https://polygonscan.com/address/${TROPHY_NFT_ADDRESS}#writeContract`;
   const openSeaUrl = `https://opensea.io/assets/matic/${TROPHY_NFT_ADDRESS}/`;
 
-  if (trophyId == 0) {
+  if (parseInt(trophyId) == 0) {
     return (
       <>
         <p>
