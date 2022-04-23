@@ -148,24 +148,30 @@ const _checkHasUsedFweb3Faucet = (walletsTxs: IPolygonData[]): boolean => {
   const faucetAddress1 = FAUCET_ADDRESSES[0].toLowerCase();
   const faucetAddress2 = FAUCET_ADDRESSES[1].toLowerCase();
   const newFweb3Faucet = "0x32Ba4765d6538944ef4324E55B94797a422C72F9";
+  const newMaticFaucet = "0x351050Ac0AdC9bff0622c1c0525b3322C328517f";
+
   return (
     walletsTxs?.filter(
       (tx) =>
         tx.to.toLowerCase() === faucetAddress1.toLowerCase() ||
         tx.to.toLowerCase() === faucetAddress2.toLowerCase() ||
-        tx.to.toLowerCase() === newFweb3Faucet.toLowerCase()
+        tx.to.toLowerCase() === newFweb3Faucet.toLowerCase() ||
+        tx.to.toLowerCase() === newMaticFaucet.toLowerCase()
     ).length >= 1
   );
 };
 
 const _checkHasUsedMaticFaucet = (walletsTxs: IPolygonData[]): boolean => {
+  const newFweb3Faucet = "0x32Ba4765d6538944ef4324E55B94797a422C72F9";
   const newMaticFaucet = "0x351050Ac0AdC9bff0622c1c0525b3322C328517f";
+
   return (
     walletsTxs?.filter(
       (tx) =>
         tx.from.toLowerCase() === FAUCET_ADDRESSES[0].toLowerCase() ||
         tx.from === FAUCET_ADDRESSES[1].toLowerCase() ||
-        tx.from === newMaticFaucet.toLowerCase()
+        tx.from === newMaticFaucet.toLowerCase() ||
+        tx.from === newFweb3Faucet.toLowerCase()
     ).length >= 1
   );
 };
