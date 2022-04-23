@@ -147,7 +147,7 @@ const _checkWalletTxCompletedItems = async (
 const _checkHasUsedFweb3Faucet = (walletsTxs: IPolygonData[]): boolean => {
   const faucetAddress1 = FAUCET_ADDRESSES[0].toLowerCase();
   const faucetAddress2 = FAUCET_ADDRESSES[1].toLowerCase();
-  const newFweb3Faucet = "0x4B9C8d77228C2d1A9f52a18812e73940270e250d";
+  const newFweb3Faucet = "0x32Ba4765d6538944ef4324E55B94797a422C72F9";
   return (
     walletsTxs?.filter(
       (tx) =>
@@ -159,7 +159,7 @@ const _checkHasUsedFweb3Faucet = (walletsTxs: IPolygonData[]): boolean => {
 };
 
 const _checkHasUsedMaticFaucet = (walletsTxs: IPolygonData[]): boolean => {
-  const newMaticFaucet = "0xF2d86AEe11351D4396eE2Bd663977C91eE2b0F9b";
+  const newMaticFaucet = "0x351050Ac0AdC9bff0622c1c0525b3322C328517f";
   return (
     walletsTxs?.filter(
       (tx) =>
