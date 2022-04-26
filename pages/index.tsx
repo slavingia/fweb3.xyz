@@ -25,12 +25,12 @@ const dotContent: Record<DotKey, DotContent> = {
   [DotKey.hasTokens]: {
     id: DotKey.hasTokens,
     position: 1,
-    toolTip: "Use the faucet to get 100 $FWEB3 tokens",
+    toolTip: "Use the faucet to get 300 $FWEB3 tokens",
   },
   [DotKey.hasUsedFaucet]: {
     id: DotKey.hasUsedFaucet,
     position: 2,
-    toolTip: "Use the faucet to get .1 $MATIC",
+    toolTip: "Use the faucet to get 0.042 $MATIC",
   },
   [DotKey.hasSentTokens]: {
     id: DotKey.hasSentTokens,
