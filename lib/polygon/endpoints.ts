@@ -21,6 +21,10 @@ export const walletsTxsURI = (walletAddress: string): string => {
   return `${POLYGON_BASE_API_URL}?module=account&action=txlist&address=${walletAddress}&startblock=0&endblock=99999999&sort=asc&apikey=${POLYGON_API_KEY}`;
 };
 
+export const walletsInternalTxsURI = (walletAddress: string): string => {
+  return `${POLYGON_BASE_API_URL}?module=account&action=txlistinternal&address=${walletAddress}&startblock=0&endblock=99999999&sort=asc&apikey=${POLYGON_API_KEY}`;
+};
+
 export const erc20TxsURI = (walletAddress: string): string => {
   return `${POLYGON_BASE_API_URL}?module=account&action=tokentx&contractaddress=${FWEB3_TOKEN_ADDRESS}&address=${walletAddress}&startblock=0&endblock=99999999&sort=asc&apikey=${POLYGON_API_KEY}`;
 };

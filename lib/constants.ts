@@ -6,7 +6,8 @@ export const FWEB3_TOKEN_ADDRESS: string =
   "0x4a14ac36667b574b08443a15093e417db909d7a3";
 export const GENESYS_ADDRESS: string =
   "0x0000000000000000000000000000000000000000";
-export const BURN_ADDRESS: string = `${GENESYS_ADDRESS}burn`;
+export const BURN_ADDRESS: string =
+  "0x000000000000000000000000000000000000dead";
 export const FWEB3_FAUCET_ADDRESS: string =
   "0x67806adca0fd8825da9cddc69b9ba8837a64874b"; // FIXME
 export const FAUCET_ADDRESSES: string[] = [
