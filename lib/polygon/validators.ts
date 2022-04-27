@@ -24,6 +24,7 @@ import {
   fetchTrophyTransactions,
   fetchWalletTokenBalance,
   fetchWalletsTxs,
+  fetchWalletsInternalTxs,
   fetchERC20Txs,
   fetchNftsTxs,
 } from "./api";
@@ -133,10 +134,15 @@ const _checkWalletTxCompletedItems = async (
 ): Promise<IWalletTXGameTasks> => {
   const rawResult: IPolygonDataResponse = await fetchWalletsTxs(walletAddress);
   _checkStatus({ ...rawResult, apiCall: "walletTxs" });
+  const rawResult2: IPolygonDataResponse = await fetchWalletsInternalTxs(
+    walletAddress
+  );
+  _checkStatus({ ...rawResult2, apiCall: "walletInternalTxs" });
   const { result: walletsTxs }: { result: IPolygonData[] } = rawResult;
+  const { result: walletsInternalTxs }: { result: IPolygonData[] } = rawResult2;
   return {
     hasEnoughTokens: _checkHasUsedFweb3Faucet(walletsTxs),
-    hasUsedFaucet: _checkHasUsedMaticFaucet(walletsTxs),
+    hasUsedFaucet: _checkHasUsedMaticFaucet(walletsInternalTxs),
     hasSwappedTokens: _checkHasSwappedTokens(walletsTxs),
     hasDeployedContract: _checkHasDeployedContract(walletsTxs),
     hasVotedInPoll: _checkHasVotedInPoll(walletsTxs),
@@ -214,7 +220,7 @@ const _validateHasSentTokens = (
   const found: IPolygonData[] = txs?.filter((tx) => {
     return (
       tx.value &&
-      tx.from.toLowerCase() === walletAddress &&
+      tx.from.toLowerCase() === walletAddress.toLowerCase() &&
       parseInt(tx.value) >= 100 * 10 ** 18
     );
   });
@@ -228,7 +234,7 @@ const _validateHasBurnedTokens = (
   const found: IPolygonData[] = txs?.filter((tx) => {
     return (
       tx.value &&
-      tx.from.toLowerCase() === walletAddress &&
+      tx.from.toLowerCase() === walletAddress.toLowerCase() &&
       tx.to.toLowerCase() === BURN_ADDRESS.toLowerCase() &&
       parseInt(tx.value) > 0
     );

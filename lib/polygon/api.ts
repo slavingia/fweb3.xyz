@@ -7,6 +7,7 @@ import {
   walletsTokenBalanceURI,
   trophyCheckURI,
   walletsTxsURI,
+  walletsInternalTxsURI,
   erc20TxsURI,
   nftTxsURI,
 } from "./endpoints";
@@ -33,6 +34,13 @@ export const fetchWalletsTxs = async (
 ): Promise<IPolygonDataResponse> => {
   sleep(200);
   return fetcher(walletsTxsURI(walletAddress));
+};
+
+export const fetchWalletsInternalTxs = async (
+  walletAddress: string
+): Promise<IPolygonDataResponse> => {
+  sleep(200);
+  return fetcher(walletsInternalTxsURI(walletAddress));
 };
 
 export const fetchERC20Txs = async (
